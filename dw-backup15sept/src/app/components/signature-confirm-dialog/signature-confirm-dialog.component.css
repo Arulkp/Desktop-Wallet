@@ -1,0 +1,56 @@
+.header {
+	text-align: center;
+	padding: 10px;
+	color: white;
+	background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+}
+
+table {
+	width: 100%;
+}
+th {
+  padding: 10px;
+  width: 50%;
+  font-size: 15px;
+  /*font-family: helvetica-bold;*/
+}
+
+td {
+	padding: 10px;
+  text-align: center;
+}
+
+.address {
+	word-break: break-all;
+}
+
+.buttons {
+	margin-top: 15px;
+}
+.title {
+	margin: 15px 0 10px;
+  /*font-family: helvetica-bold;*/
+  display: block;
+}
+.message {
+  display: block;
+  height: 100px;
+  background: #ececec;
+  padding: 10px;
+  box-shadow: inset 1px 1px 3px 0px grey;
+  word-wrap: break-word;
+}
+
+.buttons button {
+	width: 49%;
+	padding: 15px;
+	border: 1px solid #ccc;
+}
+
+.cancel {
+	background: white;
+}
+.confirm {
+	background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+	color: white;
+}

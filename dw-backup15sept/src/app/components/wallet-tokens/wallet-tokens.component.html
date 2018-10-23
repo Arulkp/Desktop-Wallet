@@ -1,0 +1,28 @@
+<!-- <p>
+  wallet-tokens works!
+</p> -->
+<div class="container1">
+  <div *ngIf="walletToken.length!=0">
+    <p>
+      <strong>Tokens </strong>Listed
+    </p>
+    <table class="table table-dark">
+      <thead>
+      <tr>
+      <td ><strong>Token Name</strong></td>
+      <td ><strong>Token Count</strong></td>
+      </tr>
+      </thead>
+      <tbody >
+      <tr *ngFor="let token of walletToken">
+        <td>{{token.asset}}</td>
+        <td>{{token.amount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="walletToken.length===0">
+    <p style="text-align: center">No Tokens available</p>
+  </div>
+</div>
+<!-- Address : {{wallet.getAddress()}} -->

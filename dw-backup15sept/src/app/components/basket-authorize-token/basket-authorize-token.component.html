@@ -1,0 +1,56 @@
+
+<div class="WalletBodyHolder darkThemeWalletBodyHolder" >
+  <div class="loader" style="width: 100%!important;" *ngIf="showLoader">
+    <div class="loader">
+      <img class="img img-responsive" src="assets/wandex-loading.png" alt=""
+           style="width:100px;margin-left:45%;margin-top:40px;">
+    </div>
+  </div>
+  <section *ngIf="tokenWithbalance.length>0 && !showLoader" style="max-height: 200px;">
+    <h3  style="width: 27%;" matTooltip="Since this is decentralised, authorisation is required from the user for each Token contract" [matTooltipPosition]="'above'">Step 2. Authorize Token</h3>
+    <div class="wallet-holder">
+      <div class="headContent">
+        <div class="heading1 headingColor">
+          <p matTooltip="Shows list of Tokens" [matTooltipPosition]="'above'">Token</p>
+        </div>
+        <div class="heading3 headingColor">
+          <p matTooltip="Shows the balance of the Tokens in your wallet" [matTooltipPosition]="'above'">Quantity</p>
+        </div>
+        <div class="heading3 headingColor">
+          <p  >Already Authorized</p>
+        </div>
+        <div class="heading4 headingColor">
+          <p >Authorize Tokens</p>
+        </div>
+      </div>
+      <div class="headContentValue" *ngIf="tokenWithbalance.length>0">
+        <div class="headContent" *ngFor="let tokenStatus of tokenWithbalance">
+          <div class="heading1">
+            <div class="walletValue">
+              <p>{{tokenStatus.symbol}}</p>
+            </div>
+          </div>
+          <div class="heading3">
+            <div class="walletValue">
+              <p>{{tokenStatus.value}}</p>
+            </div>
+          </div>
+          <div class="heading3">
+            <div class="walletValue">
+              <p>{{tokenStatus.allowance}}</p>
+            </div>
+          </div>
+          <div class="heading4" *ngIf="tokenStatus.data">
+            <div class="wallet-value" style="color: black!important;">
+              <input type="number" value="{{tokenStatus.AuthorizationAmount}}" [(ngModel)]="tokenStatus.AuthorizationAmount" />
+              <button *ngIf="tokenStatus.allowance >= tokenStatus.value"  [disabled]="tokenStatus.allowance > tokenStatus.value" class="buy">Authorized</button>
+              <button *ngIf="tokenStatus.allowance < tokenStatus.value" (click)="authorize(tokenStatus,tokenStatus.value)" [disabled]="tokenStatus.allowance > tokenStatus.value" class="buy">Authorize</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <button class="sign-publish-portfolio-button pull-left" [disabled]="tractButton()" (click)="next()">Next</button>
+    </div>
+  </section>
+</div>

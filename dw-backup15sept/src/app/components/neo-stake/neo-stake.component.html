@@ -1,0 +1,66 @@
+<div class="neoStake">
+  <div class="stake">
+    <div class="container">
+      <!-- <div class="row"> -->
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" style="margin-bottom: 10px;">
+          <h2>WANDNEO Stake</h2>
+          <div *ngIf="mystake.length>0">
+            <!-- <h4>My Stake</h4> -->
+            <table class="table  table-bordered">
+              <tr>
+                <th>No</th>
+                <th>Event</th>
+                <th>Amount</th>
+              </tr>
+              <tr *ngFor="let stake of mystake">
+                <td>{{stake.payload.block}}</td>
+                <td>{{stake.payload.eventName}}</td>
+                <td>{{stake.payload.amount /100000000 }}</td>
+              </tr>
+            </table>
+          </div>
+          <div *ngIf="mystake.length===0">
+            <h5 style="color: red;">No Tokens staked</h5>
+          </div>
+          <button *ngIf="mystake.length>0" class="btn btn-primary" (click)="claimProfit()">Claim Stake</button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <p>WANDNEO BALANCE <span>{{tokenBalance}}</span></p>
+          <div>
+            <p>Stake WANDNEO Token </p>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control input-sm" id="amount" placeholder="amount" name="amount"
+                       [(ngModel)]="amount">
+                <p *ngIf="err===true" style="color: red">Amount must be greater than zero</p>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary" (click)="deposit()" [disabled]="depositTransactionTracking">Stake</button>
+                <!-- <input type="number" class="form-control input-sm" id="amount" placeholder="amount" name="amount" [(ngModel)]="amount">
+                <span *ngIf="depositIssue"></span> -->
+              </div>
+              <!-- <div class="col-md-6">
+                <button class="btn btn-primary" (click)="deposit()" [disabled]="tokenBalance===0">Stake</button>
+              </div> -->
+            </div>
+          </div>
+          <br/>
+          <div *ngIf="mystake.length>0">
+            <p>Withdraw Token</p>
+            <div class="row">
+              <div class="col-md-6">
+                <input type="number" [(ngModel)]="withDrawAmount" placeholder="amount" class="form-control"
+                       id="withDrwal" name="withDrwal">
+                <p *ngIf="withdrawError===true" style="color: red">Amount must be greater than zero</p>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-primary" (click)="withDraw()" [disabled]="withTransactionTracking">WithDraw from Stake</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div class="create-container-wrapper darkTheameBoxbackground">
+  <div class="create-container-header">
+    <div class="wandx-container">
+      <div class="create-header">
+        <img src="assets/plus.png" class="img img-responsive">
+        <p *ngIf="!updatebasket">Create New Basket</p>
+        <p *ngIf="updatebasket">Update Basket</p>
+      </div>
+      <!-- <div class="create-button-panel">
+              <button class="cancel-button" routerLink="/portfolio">Cancel</button>
+
+          </div> -->
+    </div>
+  </div>
+
+  <div class="create-container wandx-container">
+    <div *ngIf="showSpinner==false">
+      <div class="create-portfolio-form">
+        <input type="text" placeholder="Portfolio Title *" id="create-portfolio-name" [(ngModel)]="basketName"
+               [readonly]="updatebasket"/>
+        <br>
+        <div class="multipleToken">
+          <p *ngIf="!updatebasket">Choose Token(Please select at least two tokens)*</p>
+          <div class="multiselect-holder" *ngIf="republishStatus==='edit'|| republishStatus==='create'">
+            <angular2-multiselect [data]="tokenList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+                                  (onSelect)="onItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="create-portfolio-assets" *ngIf="selectedItems.length > 0">
+          <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Elements</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Available Tokens</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Deposit Tokens </p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-4">
+              <div class="tokenHeadings text-center">
+                <p>Quantity</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings text-center">
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-asset-row" title="{{asset.Title}}" *ngFor="let asset of selectedItems; let i = index">
+            <div class="row">
+              <div class="col-md-2 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span>{{asset.symbol}}</span>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span>{{asset.Available}}</span>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span>{{asset.Deposit}}</span>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-4 col-xs-4">
+                <div class="tokenHeadings text-center">
+                  <input type="number" class="create-portfolio-number-input" [(ngModel)]="selectedItems[i].quantity"
+                         [disabled]="republishStatus==='publish'"
+                         (input)="trackWithTokenBalance(asset.id,asset.address,selectedItems[i].quantity,selectedItems[i].Deposit,selectedItems[i].Available)"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="create-portfolio-buttons" *ngIf="selectedItems.length > 0">
+          <div class="left-buttons">
+            <label class="create-portfolio-form-label">Asking price (in GAS)</label>
+            <br/>
+            <input type="number" class="create-portfolio-input" [(ngModel)]="askingPrice"  [disabled]="republishStatus==='edit'"/>
+          </div>
+          <div class="clearfix"></div>
+          <div>
+            <button class="analyze-button" (click)="generatePieChartAtCreatePortFolio()"
+                    [disabled]="!isPortfolioValid()">Analyze
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-analysis">
+        <div class="analysis-result" *ngIf="showChart==true">
+          <div class="portfolioAnalysis">
+            <div class="portfolioHeading">
+              <p>Portfolio Analysis</p>
+            </div>
+            <div class="graph">
+              <div class="row mar0">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="charts">
+                    <div id="piechartdiv" [style.width.%]="100" [style.height.px]="200"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="signPublish">
+            <button class="sign-publish-portfolio-button" *ngIf="!updatebasket" (click)="createBasket()">Sign &
+              Publish
+            </button>
+            <button class="sign-publish-portfolio-button" *ngIf="updatebasket" (click)="placeOrder()">Sign &
+              Publish
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="popup_content" *ngIf="showSpinner==true">
+        <div class="popup_sub">
+          <img class="img img-responsive gif-img" src="assets/wandex-loading.png" alt=""
+               style="max-width: 15%;">
+          <div style="font-size: 1.5rem;color: white;">Please wait while the transaction confirms on the Blockchain
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .analyze-buttoncstm {
+    font-size: 10px;
+    padding: 8px 25px;
+    background-color: #3A2573;
+    outline: none;
+    margin-bottom: 0;
+    color: #fff;
+    border-radius: 5px;
+  }
+</style>

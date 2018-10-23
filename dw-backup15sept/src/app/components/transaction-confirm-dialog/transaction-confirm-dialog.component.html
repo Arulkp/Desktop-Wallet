@@ -1,0 +1,31 @@
+<div>
+	<h4 class="header">Confirm Transaction</h4>
+	<div  class="loader-container" *ngIf="isLoading">
+		<app-loading-spinner [loaderClass]="'dark vhalign'"></app-loading-spinner>
+	</div>
+	<table border="1" *ngIf="!isLoading">
+		<tbody>
+			<tr>
+				<th>From</th>	<td class="address">{{from}}</td>
+			</tr>
+			<tr>
+				<th>To</th>	<td class="address">{{to}}</td>
+			</tr>
+			<tr>
+				<th>Amount</th>	<td>{{value.toString()}} {{symbol}}</td>
+			</tr>
+			<tr>
+				<th>Gas</th>	<td><span *ngIf="showGasEdit == false">{{gasTotal.toString()}} {{symbol}}</span><span *ngIf="showGasEdit == true"><input  [(ngModel)]="newGasPrice"/> GWei</span> <button *ngIf="showGasEdit == false" (click)="editGas()">Edit</button></td>
+			</tr>
+			<tr>
+				<th>Total (Amount + Gas)</th>	<td>{{totalValue.toString()}} {{symbol}}</td>
+			</tr>	
+		</tbody>
+	</table>
+	<div class="buttons">
+		<button (click)="confirm()" class="confirm">Confirm</button> <button (click)="cancel()" class="cancel">Cancel</button>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,139 @@
+<div class="container5 container1">
+	<table class="table table-borderless">
+	  <thead>
+	    <tr class="orderhistory1">
+	      <th colspan="3" scope="col" class="orderhistory2">Order Book</th>
+	    </tr>
+	  </thead>
+	  <div>
+		  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+	  </div>
+	  <thead *ngIf="showSpinner==false">
+	    <tr class="tr">
+	      <th scope="col" class="headerinfo">Offering Price {{selectedToken?.symbol}}</th>
+	      <th scope="col" class="headerinfo">Ask Price {{selectedOfferToken?.name}}</th>
+	    </tr>
+	  </thead>
+	  <tbody class="tbody" *ngIf="showSpinner==false">
+	  	<tr class="trh" *ngIf="!buyOrders || !buyOrders.length">
+	      <th scope="row" class="yellowtext" colspan="2">No Buy Orders</th>
+	    </tr>
+	    <tr class="trh" *ngFor="let b of buyOrders" (click)="fullFilOrder('buy',b)">
+	    	<td class="redtext">{{b.offerAmount | number:'1.1-4'}}</td>
+	      <td class="whitetext">{{b.wantAmount | number:'1.1-4'}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+<div class="container5">
+	<table class="table table-borderless">
+		<thead *ngIf="showSpinner==false">
+			<tr class="middlebar">
+	    	<td><strong>0.00047985</strong></td>
+	    	<td class="greentext"><strong>0.00047985</strong></td>
+	    </tr>
+		</thead>
+		<div>
+		  	<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+	  	</div>
+	  <tbody class="tbody" *ngIf="showSpinner==false">
+	    <tr class="trh1" *ngIf="!sellOrders || !sellOrders.length">
+	      <th scope="row" class="yellowtext" colspan="2">No Sell Orders</th>
+	    </tr>
+	    <tr class="trh" *ngFor="let s of sellOrders" (click)="fullFilOrder('sell',s)">
+	      	<td class="greentext1">{{s.wantAmount | number:'1.1-4'}}</td>
+        <td class="whitetext">{{s.offerAmount | number:'1.1-4'}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+<!-- <div id="myModal2" class="summary-modal" *ngIf="fullFil" style="z-index: 10000000;width: 100vw;position: fixed;top: 0;left: 0;height: 100vh;background: rgba(0, 0, 0, 0.6);">
+  <div class='modal-content darkTheameBoxbackground'
+       style="width: 46%!important;
+    min-height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid #fff;
+    transform: translate(-50%, -50%);
+    padding: 29px;
+    background: white;
+    color: black;">
+    <h4 class="pull-left">Summary</h4>
+    <p class="pull-right"><b>Balance</b> of {{fillOrderDetail.wantTokenName}} is {{fillOrderDetail.wantBalance}}</p>
+    <div class="col-md-12">
+      <div class="row" style="border-top: 1px solid #ddd;">
+        <div class="col-md-5"><p><b>Owner</b></p></div>
+        <div class="col-md-5"><p>{{neoService.getCurrentUserScripthash()}}</p></div>
+      </div>
+      <div class="row" style="border-top: 1px solid #ddd;">
+        <div class="col-md-5"><p><b>Available</b></p></div>
+        <div class="col-md-5"><p>{{fillOrderDetail.availableAmount}}</p></div>
+      </div>
+      <div class="row" style="border-top: 1px solid #ddd;">
+        <div class="col-md-5"><p><b>Want ({{fillOrderDetail.wantTokenName}})</b></p></div>
+        <div class="col-md-5"><p>{{fillOrderDetail.wantAmount}}</p></div>
+      </div>
+      <div class="row" style="border-top: 1px solid #ddd;">
+        <div class="col-md-5"><p><b>Offer ({{fillOrderDetail.offerTokenName}})</b></p></div>
+        <div class="col-md-5"><p>{{fillOrderDetail.offerAmount}}</p></div>
+      </div>
+      <p *ngIf="fillOrderDetail.wantBalance<fillOrderDetail.wantAmount" style="color: red">You don't have enough
+        {{fillOrderDetail.wantTokenName}} token balance to full fill this order</p>
+      <button class="btn btn-danger" [disabled]="fillOrderDetail.wantBalance<fillOrderDetail.wantAmount"
+              (click)="fullfill(fillOrderDetail)">Fulfil Order
+      </button>
+      <button class="btn btn-danger" (click)="closeFullFill()">Close</button>
+    </div>
+  </div >
+</div> -->
+<div id="myModal" class="popup-box summary-modal" *ngIf="fullFil">
+	<div class="popup-gif modal-content">
+	  <div class="popup_header">
+	    <p>Summary</p>
+	  </div>
+	  <div class="gif_footer">
+	  	<p class="pull-right"><b>Balance</b> of {{fillOrderDetail.wantTokenName}} is {{fillOrderDetail.wantBalance}}</p>
+	    <div class="row">
+	      <div class="col-md-4">
+	        <div class="details">
+	          <p>Available</p>
+	          <p>Buy ({{fillOrderDetail.offerTokenName}}) </p>
+	          <p>Sell ({{fillOrderDetail.wantTokenName}})</p>
+	        </div>
+	      </div>
+	      <div class="col-md-8">
+	        <div class="value">
+	          <p>{{fillOrderDetail.availableAmount}}</p>
+            <div *ngIf="flag==='buy' ">
+              <p>{{fillOrderDetail.offerAmount}}</p>
+              <p>{{fillOrderDetail.wantAmount}}</p>
+            </div>
+            <div *ngIf="flag==='sell' ">
+              <p>{{fillOrderDetail.offerAmount}}</p>
+              <p>{{fillOrderDetail.wantAmount}}</p>
+            </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="reduceExchangeFee">
+	      <div class="row">
+	        <div class="col-md-12">
+	          <p *ngIf="fillOrderDetail.wantBalance<fillOrderDetail.wantAmount" style="color: red">Insufficient {{fillOrderDetail.wantTokenName}} Token Balance</p>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="executeBtn" style="text-align: center;">
+	      <div class="row">
+	        <div class="col-md-6">
+	          <button class="sign-publish-portfolio-button" [disabled]="fillOrderDetail.wantBalance<fillOrderDetail.wantAmount"
+              (click)="fullfill(fillOrderDetail)">Fulfill Order</button>
+	        </div>
+	        <div class="col-md-6">
+	          <button class="sign-publish-portfolio-button" (click)="closeFullFill()">Close</button>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>

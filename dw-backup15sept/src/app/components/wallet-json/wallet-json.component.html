@@ -1,0 +1,30 @@
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<form [formGroup]="jsonForm" (ngSubmit)="onSubmitAddFromJSON()" *ngIf="!showSpinner">
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Upload your JSON File here</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1"  (change)="onJSONFileChanged($event)">
+  </div>
+  <div class="form-group">
+    <label for="exampleWalletName2">Wallet Name</label>
+    <input type="name" class="form-control" id="exampleWalletName2" aria-describedby="password" placeholder="Enter Wallet Name" formControlName="walletName" required>
+    <small class="form-text text-muted">This is the name given to your wallet.</small>
+    <small style="color:red;" *ngIf="jsonForm.get('walletName').dirty == true && jsonForm.get('walletName').errors && jsonForm.get('walletName').errors.required == true">Wallet Name is required</small>
+    <small style="color:red;" *ngIf="jsonForm.get('walletName').dirty == true && jsonForm.get('walletName').errors && jsonForm.get('walletName').errors.duplicate == true">Wallet Name already exists. Please choose different name</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleWalletName3">Password</label>
+    <input type="password" class="form-control" id="exampleWalletName3" aria-describedby="password" placeholder="Enter Password" formControlName="password" required matTooltip="Password used when the keystore was generated">
+    <small class="form-text text-muted">Password used when the keystore was generated.</small>
+    <small style="color:red;" *ngIf="jsonForm.get('password').dirty == true && jsonForm.get('password').errors && jsonForm.get('password').errors.required == true">Password is required</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword2">Confirm Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" formControlName="confirmPassword" required>
+    <small style="color:red;" *ngIf="jsonForm.get('confirmPassword').dirty == true && jsonForm.get('confirmPassword').errors && jsonForm.get('confirmPassword').errors.required == true">Confirm Password is required</small>
+    <small style="color:red;" *ngIf="jsonForm.get('confirmPassword').dirty == true && jsonForm.get('confirmPassword').errors && jsonForm.get('confirmPassword').errors.notmatch == true">Password does not match the confirm password.
+    </small>
+
+  </div>
+  <div><small style="color:red;" *ngIf="walletError">{{walletError}}</small></div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

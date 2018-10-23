@@ -1,0 +1,24 @@
+<div>
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+</div>
+<div class="background" *ngIf="showSpinner==false">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr class="trback">
+        <th scope="col">Offering Price ({{selectedToken?.symbol}})</th>
+        <th scope="col">Ask Price ({{selectedOfferToken?.symbol}})</th>
+        <th scope="col">Order Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="!orders || !orders.length">
+        <th scope="row" colspan="5" style="text-align: center;color: yellow;">No History of Orders yet</th>
+      </tr>
+      <tr *ngFor="let o of orders">
+        <td class="whitetext">{{o.offerAmount | number:'1.1-6'}}</td>
+        <td class="whitetext">{{o.wantAmount | number:'1.1-6'}}</td>
+        <td class="greentext">{{o.type ? o.type : 'Sell'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

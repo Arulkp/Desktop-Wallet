@@ -1,0 +1,35 @@
+<div class="container5">
+	<!-- <h1 style="background: #28262e;font-family: 'Source Sans Pro', sans-serif;color: white;margin: 0;padding: 10px;text-align: left;font-weight: 100;font-size: 20px;">Trade History</h1> -->
+	<!-- exchange-tradehistory-sidepane works! -->
+	<!-- First Table -->
+	<table class="table table-borderless">
+	  <thead>
+	    <tr class="tradehistory1">
+	      <th colspan="3" scope="col" class="tradehistory2">Trade History</th>
+	    </tr>
+	  </thead>
+	  <div>
+		  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+	  </div>
+	  <thead *ngIf="showSpinner==false">
+	    <tr class="tr">
+	      <th scope="col" class="headerinfo">Price (ETH)</th>
+	      <th scope="col" class="headerinfo">Quantity</th>
+	      <th scope="col" class="headerinfo">Total (ETH)</th>
+	    </tr>
+	  </thead>
+	  <tbody class="tbody" *ngIf="showSpinner==false">
+	  	<tr class="trh" *ngIf="!orderTransactions || !orderTransactions.length">
+	      <th scope="row" class="yellowtext" colspan="3">No Trade History</th>
+	    </tr>
+	    <tr class="trh" *ngFor="let t of orderTransactions">
+	    	<td class="whitetext">{{t.BuyOrder?.TargetVolume || t.SellOrder?.TargetVolume}}</td>
+	      	<td class="redtext">{{t.BuyOrder?.BuyingVolume || t.SellOrder?.SellingVolume}}</td>
+	      	<td class="whitetext">{{(t.BuyOrder?.BuyingVolume 
+	      												|| t.SellOrder?.SellingVolume) * 
+                                    (t.BuyOrder?.TargetVolume || t.SellOrder?.TargetVolume ) 
+                                | number:'1.1-4'}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>

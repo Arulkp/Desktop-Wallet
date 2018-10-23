@@ -1,0 +1,46 @@
+.exchange-wallet {
+	padding: 10px;
+	background: #323640;
+  /*min-height: 600px;
+  max-height: 600px;*/
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 30px;
+}
+
+button{
+	width: 100%;
+	border-radius: 25px;
+	/*background: #417c9f;border-color: #417c9f;*/
+	padding: 10px;
+}
+
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 7px 9px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #7858e4;
+  outline: none;
+  color: white;
+  min-width: 50%;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}

@@ -1,0 +1,63 @@
+<!-- <p>
+  wallet-detail works!
+</p> -->
+<div class="container1">
+  <p>
+    <strong>Wallet </strong>Details
+  </p>
+  <table class="table table-dark">
+    <!-- <thead>
+        <tr class="trback">
+          <th scope="col">Blockchain</th>
+          <th scope="col">Wallet Name</th>
+          <th scope="col">Address</th>
+        </tr>
+      </thead> -->
+    <tbody *ngIf="!wallet">
+    Wallet not found
+    </tbody>
+    <tbody *ngIf="wallet">
+    <tr>
+      <td>
+        <strong>Wallet Address - </strong>{{wallet.getAddress()}}
+        <p style="font-size: 15px;position: relative;top: 15px;color: red;left: -16px;">Please record the password and private key offline. Incase you forget, your account cannot be recovered.</p>
+      </td>
+      <td>
+        <strong>Wallet Address (QR Code)</strong><br/>
+        <qr-code [value]="wallet.getAddress()" [size]="150"></qr-code>
+      </td>
+      <!-- <td class="whitetext"><strong>Private Key (unencrypted) - </strong>{{wallet.getPrivateKeyHex()}}</td> -->
+    </tr>
+    <!-- <tr>
+        <td class="whitetext"><strong>Private Key (unencrypted) - </strong>{{wallet.getPrivateKeyHex()}}</td>
+      </tr> -->
+    <tr>
+      <!-- <td>
+              <strong>Wallet Address (QR Code)</strong><br />
+              <qr-code [value]="'0x' + wallet.getAddress()" [size]="150"></qr-code>
+          </td> -->
+      <!--<td class="whitetext"><strong>Private Key (unencrypted) - </strong>{{wallet.getPrivateKeyHex()}}</td>-->
+      <td class="whitetext"><strong>Private Key (unencrypted) - </strong>
+        <div class="input-group">
+          <input [type]="_pwdType" class="form-control" value="{{wallet.getPrivateKeyHex()}}">
+          <span class="input-group-addon" id="basic-addon2" (click)="toggleShow()">
+            <img src="assets/images/eye-open.png" *ngIf="_show===false" style="position: relative;left: -29%; max-width: 40%;">
+            <img src="assets/images/eye_close.png" *ngIf="_show===true" style="position: relative;left: -29%; max-width: 40%;"></span>
+        </div>
+        <p style="font-size: 15px;position: relative;top: 15px;color: red;left: -16px;">This is your Private key. DO NOT SHARE IT WITH ANYONE. If you lose this, your Tokens CANNOT BE RECOVERED.</p>
+      </td>
+      <td >
+        <strong *ngIf="_show===true">Private key (QR Code)</strong><br/>
+        <div style="height: 150px" *ngIf="_show===false"></div>
+        <qr-code *ngIf="_show===true" [value]="'0x' + wallet.getPrivateKeyHex()" [size]="150"></qr-code>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="whitetext">
+        <label>Keystore File (UTC / JSON Encrypted file)</label>
+        <button class="login-button" (click)="downloadFile()">Go To Wallet Keystore</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

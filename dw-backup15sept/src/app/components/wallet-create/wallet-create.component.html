@@ -1,0 +1,80 @@
+<div class="container1">
+	<h4>
+		<strong>Create/Import </strong>
+		<span>{{getExchangeName()}}</span> Wallet
+	</h4>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6 container2">
+				<ul>
+		          <li>
+		            <button type="button" class="btn btn-secondary btn-sm button1" (click)="setVisiable('create')">Generate new wallet</button>
+		          </li>
+		          <li>
+		            <button type="button" class="btn btn-secondary btn-sm button1" (click)="setVisiable('Keystore')">Keystore File (UTC/JSON)</button>
+		          </li>
+		          <li>
+		            <button type="button" class="btn btn-secondary btn-sm button1" (click)="setVisiable('Private')">Private key</button>
+		          </li>
+		        </ul>
+			</div>
+			<!-- <div class="col-md-6 container2">
+				<ul>
+		          <li (click)="setVisiable('create')">
+		            <input type="radio" name="create" id="create">
+		            <label for="create">Generate new wallet</label>
+		          </li>
+		          <li (click)="setVisiable('Keystore')">
+		            <input type="radio" name="create" id="Keystore">
+		            <label for="Keystore">Keystore File (UTC/JSON)</label>
+		          </li>
+		          <li (click)="setVisiable('Private')">
+		            <input type="radio" name="create" id="Private">
+		            <label for="Private">Private key</label>
+		          </li>
+		        </ul>
+			</div> -->
+			<div class="col-md-6 container2">
+				<div *ngIf="activeTab=== 'create'">
+	        <div *ngIf="!newWalletInfo">
+		        <h1 *ngIf="!showSpinner">Generate New Wallet</h1>
+		        <h1 *ngIf="showSpinner">Generating New Wallet</h1>
+		        <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+			      <form [formGroup]="walletCreateForm" (ngSubmit)="onSubmitCreateWallet()" *ngIf="!showSpinner">
+						  <div class="form-group">
+						    <label for="exampleWalletName1">Wallet Name</label>
+						    <input type="name" class="form-control" id="exampleWalletName1" aria-describedby="walletName" placeholder="Enter Wallet Name" formControlName="walletName" required>
+						    <small id="walletName" class="form-text text-muted">This is the name given to your wallet.</small>
+						    <small style="color:red;" *ngIf="walletCreateForm.get('walletName').dirty == true && walletCreateForm.get('walletName').errors && walletCreateForm.get('walletName').errors.required == true">Wallet Name is required</small>
+						    <small style="color:red;" *ngIf="walletCreateForm.get('walletName').dirty == true && walletCreateForm.get('walletName').errors && walletCreateForm.get('walletName').errors.duplicate == true">Wallet Name already exists. Please choose different name</small>
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1">Password</label>
+						    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password" required>
+						    <small style="color:red;" *ngIf="walletCreateForm.get('password').dirty == true && walletCreateForm.get('password').errors && walletCreateForm.get('password').errors.required == true">Password is required</small>
+						  </div>
+              <div class="form-group">
+						    <label for="exampleInputPassword1">Confirm Password</label>
+						    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" formControlName="confirmPassword" required>
+						    <small style="color:red;" *ngIf="walletCreateForm.get('confirmPassword').dirty == true && walletCreateForm.get('confirmPassword').errors && walletCreateForm.get('confirmPassword').errors.required == true">Confirm Password is required</small>
+                <small style="color:red;" *ngIf="walletCreateForm.get('confirmPassword').dirty == true && walletCreateForm.get('confirmPassword').errors && walletCreateForm.get('confirmPassword').errors.notmatch == true">Password does not match the confirm password.
+
+                </small>
+
+              </div>
+						  <button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+					</div>
+		    </div>
+				<div *ngIf="activeTab=== 'Keystore' ">
+				  <h1>Keystore File (UTC/JSON)</h1>
+				  <wallet-json [walletBaseCurrency]="walletBaseCurrency" [redirectToInfo]="redirectToInfo"></wallet-json>
+				</div>
+				<div *ngIf="activeTab=== 'Private' ">
+				 	<h1>Private key</h1>
+				  <wallet-privatekey [walletBaseCurrency]="walletBaseCurrency" [redirectToInfo]="redirectToInfo"></wallet-privatekey>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

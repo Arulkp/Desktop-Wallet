@@ -1,0 +1,6 @@
+<div>
+<select class="btn1 btn-success1 dropdown-toggle" (change)="handleTokenSelect()" [(ngModel)]="selectedToken">
+	<option class="options" value="" disabled="">Select Token</option>
+	<option class="options" *ngFor="let p of tokenList; let i = index" [ngValue]="p">{{p.fullName}}</option>	
+</select>
+</div>

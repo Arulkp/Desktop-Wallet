@@ -1,0 +1,713 @@
+<div class="container col-12 portfolioPage ">
+  <div class="tabcontent darkTheamebackgroundColor">
+    <div id="tab2" class="tab active">
+      <nav>
+        <ul class="nav-tablinks darkTheamebackgroundColor">
+          <li class="nav-tab active" (click)="setVisibleTabs('buy');getAllBasketOrder()"
+              [ngClass]="{'active': isTabVisible('buy')}">
+            <span>Token Baskets</span>
+            <div class="border-animation "></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTabs('sell');"
+              [ngClass]="{'active': isTabVisible('sell')}">
+            <span>My Token Baskets</span>
+            <div class="border-animation "></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTabs('create-portfolio');cleardata()"
+              [ngClass]="{'active': isTabVisible('create-portfolio')}">
+            <span>Create Token Baskets</span>
+            <div class="border-animation"></div>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <div class="portfolio-holder darkTheamebackgroundColor">
+          <div class="portfolio darkTheameBoxbackground" *ngIf="visibleTab === 'buy'">
+            <div class="search">
+              <i class="fa fa-search"></i>
+              <input type="text" placeholder="Search Tokens contained in Token Baskets" [ngModel]="searchText"
+                     (ngModelChange)="search($event)" title="Type and press enter to search"/>
+            </div>
+            <div class="container-fluid">
+              <div class="row" *ngIf="showBuyLoader">
+                <div class="col-lg-12">
+                  <div class="loader-portfolio">
+                    <div class="loader">
+                      <img class="img img-responsive" src="assets/wandex-loading.png" alt=""
+                           style="width:100px;margin-left:45%;margin-top:40px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="!showBuyLoader">
+                <div class="row col-lg-12" *ngIf="sellBasketOrdersFilered.length === 0">
+                  <div class="no-portfolio">
+                    No Baskets
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="sellBasketOrdersFilered.length >0" class="row col-lg-12">
+                <div class="col-lg-4 col-md-6 col-sm-6 margin-botton22"
+                     *ngFor="let buyAblePortfolio of sellBasketOrdersFilered; let i = index">
+                  <div class="portfolio-item darkTheamebackgroundColor">
+                    <div class="portfolio-item-heading">
+                     <!-- (click)="showBuyPortfolioModal(i, buyAblePortfolio)"-->
+                      <div class="compleateName" >
+                        <div class="name"
+                             *ngFor="let asset of buyAblePortfolio.tokens | slice:0:2; let i = index">
+                                                     <span class="">{{asset.value}} {{asset.name}}
+                                                      <span *ngIf="buyAblePortfolio.tokens.length===1 && i!==0">+</span>
+                                                    <span *ngIf="i!==1 && buyAblePortfolio.tokens.length!==1">+</span>
+                                                    <span *ngIf="i===2 ">+..</span>
+                                                    </span>
+                        </div>
+                      </div>
+                      <div class="currentPrice">
+                        <span
+                          class="current-price">{{buyAblePortfolio.askingPrice}} {{buyAblePortfolio.askingToken}}</span>
+                        <div class="sub-text">ASKING PRICE</div>
+                      </div>
+                    </div>
+                    <div class="portfolio-item-body">
+                      <!--<ngx-charts-line-chart [view]="view" [results]="ChartData" [scheme]="colorScheme"-->
+                      <!--[legend]="false" [gradient]="gradient" [xAxis]="false" [yAxis]="false"-->
+                      <!--[autoScale]="true" [timeline]="false" [showGridLines]="false"-->
+                      <!--[tooltipDisabled]="false">-->
+                      <!--</ngx-charts-line-chart>-->
+                    </div>
+                    <div class="portfolio-item-footer">
+                      <div>
+                        <!--<button class="btn btn-custom btn-justify" (click)="buy(buyAblePortfolio)">Buy</button>-->
+                        <button class="sign-publish-portfolio-button" (click)="bashketDetail(buyAblePortfolio)">Buy
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="myportfolio darkTheameBoxbackground" *ngIf="visibleTab === 'sell'">
+            <div class="row" style="margin-top: 0px; margin-bottom: 35px; margin-left: 42%;">
+              <button
+                style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;"
+                class="btn btn-primary" (click)="activeTabBtn('Active');getBasketOrder(1)"
+                [ngClass]="{'active-btn': activeTabs==='Active'}">Active
+              </button>
+              <button
+                style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;"
+                class="btn btn-primary" (click)="activeTabBtn('canceled');getBasketOrder(2)"
+                [ngClass]="{'active-btn': activeTabs==='canceled'}">Inactive
+              </button>
+            </div>
+            <div class="table-responsive" *ngIf="activeTab !== 'quick-buy'">
+              <table class="table table-striped table-dark" border="1" *ngIf="activeTabs==='Active'">
+                <thead>
+                  <tr>
+                    <th scope="col" matTooltip="These are portfolios of ERC20 Tokens in your portfolio" [matTooltipPosition]="'above'">Title</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col" matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sellAblePortfolio of basketOrders; let i = index">
+                    <ng-template [ngIf]="sellAblePortfolio.ownerAddress===accountAddress">
+                      <td class="onhover">
+                        {{sellAblePortfolio.basketName}}
+                      </td>
+                      <td>
+                        {{sellAblePortfolio.askingPrice | number:'1.0-4'}} {{sellAblePortfolio.askingToken}}
+                      </td>
+                      <td>
+                        <a class="link" target="_blank">{{sellAblePortfolio.ownerAddress}}</a>
+                      </td>
+                      <td>
+                        <button class="sign-publish-portfolio-button" (click)="cancel(sellAblePortfolio)">Cancel &amp; Liquidate
+                        </button>
+                      </td>
+                    </ng-template>
+                  </tr>
+
+                  <tr *ngIf="basketOrders.length === 0  && activeTabs==='Active'">
+                    <td colspan="4" style="text-align: center;">No Baskets</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-striped table-dark" border="1" *ngIf="activeTabs==='canceled'">
+                <thead>
+                  <tr>
+                    <th scope="col" matTooltip="These are portfolios of ERC20 Tokens in your portfolio" [matTooltipPosition]="'above'">Title</th>
+                    <th scope="col">Current Price</th>
+                    <th scope="col" matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</th>
+                    <th scope="col" colspan="3">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sellAblePortfolio of canceledBasketOrders; let i = index">
+                    <ng-template [ngIf]="sellAblePortfolio.ownerAddress===accountAddress">
+                      <td class="onhover">
+                        {{sellAblePortfolio.basketName}}
+                      </td>
+                      <td>
+                        {{sellAblePortfolio.askingPrice | number:'1.0-4'}} {{sellAblePortfolio.askingToken}}
+                      </td>
+                      <td>
+                        <a class="link" target="_blank">{{sellAblePortfolio.ownerAddress}}</a>
+                      </td>
+                      <td>
+                        <button class="btn-block sign-publish-portfolio-button" (click)="bashketDetailLiquidate(sellAblePortfolio)">
+                          Liquidate
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn-block sign-publish-portfolio-button" (click)="rebublish(sellAblePortfolio,'edit')">
+                          Edit
+                        </button>
+                      </td>
+                      <td>
+                        <button class="btn-block sign-publish-portfolio-button" (click)="rebublish(sellAblePortfolio,'publish')">
+                          Republish
+                        </button>
+                      </td>
+                    </ng-template>
+                  </tr>
+
+                  <tr *ngIf="canceledBasketOrders.length === 0 &&  activeTabs==='canceled'">
+                    <td colspan="6" style="text-align: center;">No Baskets</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- <div class="row col-12 portfolio-heading hidden-xs" *ngIf="activeTab !== 'quick-buy'"
+                 style="text-align: center;">
+              <div class="col-sm">
+                <div class="heading">
+                  <p matTooltip="These are portfolios of ERC20 Tokens in your portfolio" [matTooltipPosition]="'above'">
+                    Title</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p>Current Price</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p>Status</p>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="portfolio-body"> -->
+              <!-- <div class="portfolio-content hidden-xs"
+                   *ngIf="basketOrders.length === 0  && activeTabs==='Active'">
+                <div class="content">
+                  <p> No Baskets</p>
+                </div>
+              </div>
+              <div class="portfolio-content hidden-xs"
+                   *ngIf="canceledBasketOrders.length === 0 &&  activeTabs==='canceled'">
+                <div class="content">
+                  <p> No Baskets</p>
+                </div>
+              </div> -->
+              <!--<div class="portfolio-content hidden-xs" *ngIf="portfolioCancelList.length === 0 && showBuyLoader==false && activeTab==='canceled'">-->
+              <!--<div class="content">-->
+              <!--<p>  No Baskets</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="loader-portfolio" *ngIf="showBuyLoader">-->
+              <!--<div class="loader">-->
+              <!--<img class="img img-responsive" src="assets/wandex-loading.png" alt=""-->
+              <!--style="width:100px;margin-left:45%;margin-top:40px;">-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="portfolio-heading-responsive hidden-lg hidden-md hidden-sm"-->
+              <!--*ngFor="let sellAblePortfolio of portfolioDataFileredsellable; let i = index">-->
+              <!--<div class="responsiveBox">-->
+              <!--<div class="row">-->
+              <!--<div class="col-xs-7 bdrryt">-->
+              <!--<div class="heading">-->
+              <!--<p matTooltip="These are portfolios of ERC20 Tokens in your portfolio"-->
+              <!--[matTooltipPosition]="'above'">Title</p>-->
+              <!--</div>-->
+              <!--<div class="heading">-->
+              <!--<p matTooltip="Change in price of the portfolio in the last one wee"-->
+              <!--[matTooltipPosition]="'above'">Current Price (in ETH)</p>-->
+              <!--</div>-->
+              <!--<div class="heading">-->
+              <!--<p matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</p>-->
+              <!--</div>-->
+              <!--<div class="heading" style="padding-left: 193px;width: 48%!important;text-align: center;">-->
+              <!--<p>Status</p>-->
+              <!--</div>-->
+
+              <!--</div>-->
+              <!--<div class="portfolio-content"-->
+              <!--*ngIf="portfolioDataFileredsellable.length === 0 && showBuyLoader==false && activeTab==='Active'">-->
+              <!--<div class="content">-->
+              <!--No Baskets-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="col-xs-5">-->
+              <!--<div class="content">-->
+              <!--<div class="displayOnHover">-->
+              <!--<p class="onhover" (click)="showBuyPortfolioModal(i, sellAblePortfolio,'myBasket')">-->
+              <!--{{sellAblePortfolio.name}}</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="content">-->
+              <!--<p>{{sellAblePortfolio.valueInEther }}</p>-->
+              <!--</div>-->
+              <!--<div class="content">-->
+              <!--<p><a class="link" href="{{getAddressUrl()}}{{sellAblePortfolio.owner}}" target="_blank">{{sellAblePortfolio.owner}}</a>-->
+              <!--</p>-->
+              <!--</div>-->
+              <!--<div class="content">-->
+              <!--<div class="row">-->
+              <!--&lt;!&ndash;<div class="col-md-4"> <button class="newBtn"    (click)="editPortfoliomodal(sellAblePortfolio)">Edit</button></div>&ndash;&gt;-->
+              <!--<div class="col-md-4">-->
+              <!--<button class="newBtn" (click)="liquidateModal(sellAblePortfolio)">liquidate</button>-->
+              <!--</div>-->
+              <!--&lt;!&ndash;<div class="col-md-4">  <button class="newBtn" (click)="openCancelModal(sellAblePortfolio)">Cancel</button></div>&ndash;&gt;-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!-- <div *ngIf="activeTabs==='Active'">
+                <div *ngFor="let sellAblePortfolio of basketOrders; let i = index">
+                  <ng-template [ngIf]="sellAblePortfolio.ownerAddress===accountAddress">
+                    <div class="row col-12 portfolio-content hidden-xs" style="text-align: center;">
+                      <div class="col-sm">
+                        <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                          <div class="">
+                            <p class="onhover">
+                              {{sellAblePortfolio.basketName}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm">
+                        <div class="content ">
+                          <p>{{sellAblePortfolio.askingPrice | number:'1.0-4'}} {{sellAblePortfolio.askingToken}}</p>
+                        </div>
+                      </div>
+                      <div class="col-sm">
+                        <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                          <p><a class="link" target="_blank">{{sellAblePortfolio.ownerAddress}}</a>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-sm"> -->
+                        <!-- <div class="col-md-4"> <button class="newBtn"  style="width: 73px;"   (click)="editPortfoliomodal(sellAblePortfolio)">Edit</button></div> -->
+                        <!-- <button class="sign-publish-portfolio-button" style="width: 73px;"
+                                (click)="cancel(sellAblePortfolio)">Cancel &amp; liquidate
+                        </button> -->
+                        <!--<div class="col-md-4">  <button class="newBtn" (click)="openCancelModal(sellAblePortfolio)">Cancel</button></div>-->
+                      <!-- </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div> -->
+              <!-- <div *ngIf="activeTabs==='canceled'">
+                <div *ngFor="let sellAblePortfolio of canceledBasketOrders; let i = index" style="text-align: center;">
+                  <ng-template [ngIf]="sellAblePortfolio.ownerAddress===accountAddress">
+                    <div class="row col-12 portfolio-content hidden-xs" style="text-align: center;">
+                      <div class="col-sm">
+                        <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                          <div class="">
+                            <p class="onhover">
+                              {{sellAblePortfolio.basketName}}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm">
+                        <div class="content ">
+                          <p>{{sellAblePortfolio.askingPrice | number:'1.0-4'}} {{sellAblePortfolio.askingToken}}</p>
+                        </div>
+                      </div>
+                      <div class="col-sm">
+                        <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                          <p><a class="link" target="_blank">{{sellAblePortfolio.ownerAddress}}</a>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="row col-3">
+                        <div class="col-sm">
+                          <button class="sign-publish-portfolio-button"
+                                  (click)="bashketDetailLiquidate(sellAblePortfolio)">liquidate
+                          </button>
+                        </div>
+                        <div class="col-sm">
+                          <button class="sign-publish-portfolio-button" (click)="rebublish(sellAblePortfolio,'edit')">
+                            Edit
+                          </button>
+                        </div>
+                        <div class="col-sm">
+                          <button class="sign-publish-portfolio-button"
+                                  (click)="rebublish(sellAblePortfolio,'publish')">Republish
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div> -->
+            <!-- </div> -->
+          </div>
+          <div class="create-portfolio" *ngIf="visibleTab === 'create-portfolio'">
+            <app-neo-basket-new></app-neo-basket-new>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div *ngIf="shouldShowBuyPortfolioModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content darkThemeModal-Content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999!important;"
+                    (click)="hideBuyPorfolioModal()"><span aria-hidden="true"><i class="fa fa-times"></i></span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="portfolio-choices" style="background-color: black;">
+              <h4 class="modal-title" >Token Basket Name : {{selectedBuyAblePorfolio.portfolio.basketName}}</h4>
+              <div class="owner-ac">
+                <p> Account Owner : <a href="{{getAddressUrl()}}{{selectedBuyAblePorfolio.portfolio.ownerAddress}}"
+                                       target="_blank">{{selectedBuyAblePorfolio.portfolio.ownerAddress}}</a></p>
+              </div>
+              <div class="time-selectors">
+         <span class="col-xs-4 time-selector" (click)="setStockTF('mm')"
+               [ngClass]="{active : isStockTF('mm')}"><span>1m</span></span>
+                <span class="col-xs-4 time-selector" (click)="setStockTF('hh')"
+                      [ngClass]="{active : isStockTF('hh')}"><span>1h</span></span>
+                <span class="col-xs-4 time-selector" (click)="setStockTF('DD')"
+                      [ngClass]="{active : isStockTF('DD')}"><span>1d</span></span>
+              </div>
+            </div>
+            <!-- 24 summary -->
+            <!--<div class="container-fluid">-->
+            <!--<div class="ths-container">-->
+            <!--<div class="col-lg-4 col-xs-4 ths">-->
+            <!--<div class="right-border">-->
+            <!--<span class="value">{{selectedBuyAblePorfolio.totalVolume | number : '.0-4'}}</span>-->
+            <!--<br>-->
+            <!--<span class="sub-text">24 HOUR VOLUME (weighted average)</span>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--<div class="col-lg-4 col-xs-4 ths">-->
+            <!--<div class="right-border">-->
+            <!--<span class="value right-border">{{selectedBuyAblePorfolio.twenty4High | number : '.0-4'}} ETH</span>-->
+            <!--<span class="value">{{selectedBuyAblePorfolio.twenty4High * usd | number : '.0-4'}} USD</span>-->
+            <!--<br>-->
+            <!--<span class="sub-text">24 HOUR HIGH (for the Token basket)</span>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--<div class="col-lg-4 col-xs-4 ths">-->
+            <!--<div>-->
+            <!--<span class="value right-border">{{selectedBuyAblePorfolio.twenty4Low | number : '.0-4'}} ETH</span>-->
+            <!--<span class="value">{{selectedBuyAblePorfolio.twenty4Low * usd | number : '.0-4'}} USD</span>-->
+            <!--<br>-->
+            <!--<span class="sub-text">24 HOUR LOW (for the Token basket)</span>-->
+            <!--</div>-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!-- Graph -->
+            <div class="stock-graph">
+              <div id="stockchartdiv" [style.width.%]="100" [style.minHeight.px]="350"></div>
+            </div>
+            <div class="coin-details">
+              <div class="row">
+                <div class="col-md-8 col-sm-7 col-xs-12">
+                  <div class="tokenData">
+                    <div class="row bdrbtm">
+                      <div class="col-md-3 col-xs-3">
+                        <div class="heading">
+                          <p>
+                            Token
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3">
+                        <div class="heading">
+                          <p>
+                            Quantity
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3 pad0">
+                        <div class="heading">
+                          <p>
+                            Price (in ETH)
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3 pad0">
+                        <div class="heading">
+                          <p>
+                            Price (in USD)
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row bdrbtm">
+                      <div class="noToken"
+                           *ngIf="!selectedBuyAblePorfolio || !selectedBuyAblePorfolio.filteredAssets.length">
+                        <p> You Don't have any tokens in your Token basket</p>
+                      </div>
+                      <div class="tokenAvailble"
+                           *ngFor="let asset of selectedBuyAblePorfolio.filteredAssets; let i = index">
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <div class="legend" [ngStyle]="{'background-color' : getPieLegendColor(asset.Symbol)}">
+                              <p>{{asset.Symbol}}</p>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p> {{asset.value}} <span *ngIf="asset.value == 1">token</span><span
+                              *ngIf="!(asset.value == 1)">tokens</span></p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p>{{getAssetValue(asset, 'ETH') | number : '.0-6'}}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p>{{getAssetValue(asset, 'USD') | number : '.0-6'}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="total">
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{selectedBuyAblePorfolio.portfolio.name}}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{totalTokens}} Tokens
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{getTotalPorfolioValue('ETH') | number : '.0-6'}}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{getTotalPorfolioValue('USD') | number : '.0-6'}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="user-actions">
+              <div class="prices">
+                <h3 class="heading">Selling Price : </h3>
+                <p>{{selectedBuyAblePorfolio.portfolio.valueInEther}} ETH</p>
+                <br>
+                <p style="float: right;">{{selectedBuyAblePorfolio.portfolio.valueInEther * usd }} USD</p>
+              </div>
+              <button class="btn btn-custom" *ngIf="trackBuyButton" (click)="buy(selectedBuyAblePorfolio.portfolio)">
+                Instant Buy
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div *ngIf="bashketDetailModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " role="document">
+        <div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' "
+             class="modal-content darkThemeModal-Content">
+          <div class="modal-header" style="    padding: 10px!important;
+  background: #323c49!important;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"
+                    (click)="closeDetailModal()">
+              &#10005;
+              <!-- <span aria-hidden="true"><i class="fa fa-times"></i></span> -->
+            </button>
+            <h4 class="modal-title" style="color: white">Basket: {{selectedPortfolioToken.basketName}}</h4>
+          </div>
+          <div class="modal-body" style="padding: 45px!important;">
+            <p class="pull-right">Asking Price <b>{{selectedPortfolioToken.askingPrice}}
+              {{selectedPortfolioToken.askingToken}}</b></p>
+            <table class="table table-bordered">
+              <tr>
+                <th>Token</th>
+                <th>Value</th>
+              </tr>
+              <tr *ngFor="let tokens of selectedPortfolioToken.tokens">
+                <td>{{tokens.name}}</td>
+                <td>{{tokens.value}}</td>
+              </tr>
+            </table>
+            <div class="pull-right">
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="buy(selectedPortfolioToken)">Buy</button>
+              </div>
+              <br>
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="closeDetailModal()">Cancel</button>
+              </div>
+              <!-- <button class="btn btn-custom btn-justify" (click)="buy(selectedPortfolioToken);closeInstantbuyModal()">Buy now</button>
+              <button class="btn btn-custom btn-justify"  (click)="closeInstantbuyModal()">Cancel</button> -->
+            </div>
+            <!-- <div class="row ">
+              <button class="btn btn-custom "(click)="buy(selectedPortfolioToken)" >Buy</button>
+              <button class="btn btn-custom "  (click)="closeDetailModal()">Cancel</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <div *ngIf="bashketDetailModalliquidate">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " role="document">
+        <div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' "
+             class="modal-content darkThemeModal-Content">
+          <div class="modal-header" style="padding: 10px!important;background: #323c49!important;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"
+                    (click)="closeDetailModalLiquidate()">&#10005;
+              <!-- <span aria-hidden="true"><i class="fa fa-times"></i></span> -->
+            </button>
+            <h4 class="modal-title" style="color: white">Basket: {{selectedPortfolioToken.basketName}}</h4>
+          </div>
+          <div class="modal-body" style="padding: 45px!important;">
+            <p class="pull-right">Asking Price <b>{{selectedPortfolioToken.askingPrice}}
+              {{selectedPortfolioToken.askingToken}}</b></p>
+            <table class="table table-bordered">
+              <tr>
+                <th>Token</th>
+                <th>Value</th>
+              </tr>
+              <tr *ngFor="let tokens of selectedPortfolioToken.tokens">
+                <td>{{tokens.name}}</td>
+                <td>{{tokens.value}}</td>
+              </tr>
+            </table>
+            <p style="margin-top: 20px;color: red" *ngIf="selectedPortfolioToken.tokens.length>3">Liquidate allow only
+              three tokens</p>
+            <div class="pull-right">
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="liquidate()">Liquidate</button>
+              </div>
+              <br>
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="closeDetailModalLiquidate()">Cancel</button>
+              </div>
+            </div>
+            <p style="margin-top: 20px;">Your basket is liquidate into your Account
+              {{neoService.getAccountAddress()}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <!--<div *ngIf="trackCancelModal">-->
+  <!--<div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">-->
+  <!--<div class="modal-dialog " role="document">-->
+  <!--<div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' " class="modal-content">-->
+  <!--<div class="modal-header" style="    padding: 10px!important;background: #9C27B0!important;">-->
+  <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"-->
+  <!--(click)="closeCancelModal()"><span aria-hidden="true"><i class="fa fa-times"></i></span>-->
+  <!--</button>-->
+  <!--<h4 class="modal-title" style="color: white">Cancel Basket</h4>-->
+  <!--</div>-->
+  <!--<div class="modal-body" style="padding: 45px!important;padding-top: 0px!important;">-->
+  <!--<h3>Token Summary</h3>-->
+  <!--<table class="table table-responsive table-bordered">-->
+  <!--<tr>-->
+  <!--<th>Token</th>-->
+  <!--<th>Value</th>-->
+  <!--</tr>-->
+  <!--<tr *ngFor="let tokens of selectCancelPortfolio.token">-->
+  <!--<td>{{tokens.Symbol}}</td>-->
+  <!--<td>{{tokens.value}}</td>-->
+  <!--</tr>-->
+  <!--</table>-->
+  <!--<h5>Cancellation fee {{estimateGas}} </h5>-->
+  <!--<h4 style="text-align: right">Are you sure want to delete Basket ?</h4>-->
+  <!--<div class="row pull-right">-->
+  <!--<button class="btn btn-primary" (click)="CancelPortfolio(selectCancelPortfolio)">Yes</button>-->
+  <!--<button class="btn btn-danger"  (click)="closeCancelModal()">No</button>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="modal-backdrop fade in"></div>-->
+  <!--</div>-->
+  <!--<div *ngIf="insatantBuyModal">-->
+  <!--<div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">-->
+  <!--<div class="modal-dialog " role="document">-->
+  <!--<div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' " class="modal-content">-->
+  <!--<div class="modal-header" style="    padding: 10px!important;-->
+  <!--background: #9C27B0!important;">-->
+  <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"-->
+  <!--(click)="closeInstantbuyModal()"><span aria-hidden="true"><i class="fa fa-times"></i></span>-->
+  <!--</button>-->
+  <!--<h4 class="modal-title" style="color: white">Token Basket Name : {{selectedPortfolioToken.name}}</h4>-->
+  <!--</div>-->
+  <!--<div class="modal-body" style="padding: 45px!important;">-->
+  <!--<table class="table table-responsive table-bordered">-->
+  <!--<tr>-->
+  <!--<th>Token</th>-->
+  <!--<th>Value</th>-->
+  <!--</tr>-->
+  <!--<tr *ngFor="let tokens of selectedPortfolioToken.token">-->
+  <!--<td>{{tokens.Symbol}}</td>-->
+  <!--<td>{{tokens.value}}</td>-->
+  <!--</tr>-->
+  <!--</table>-->
+  <!--<p><b>ASKING PRICE</b> : {{selectedPortfolioToken.valueInEther}} ETH</p>-->
+  <!--<p style="font-style: italic;">When you buy this Token Basket, you get ownership of the Basket smart contract which contains the underlying Tokens. Once you liquidate, you will be able to see the underlying Tokens in your account.</p>-->
+  <!--<div class="row pull-right">-->
+  <!--<button class="btn btn-custom btn-justify" (click)="buy(selectedPortfolioToken)">Buy now</button>-->
+  <!--<button class="btn btn-custom btn-justify"  (click)="closeInstantbuyModal()">Cancel</button>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--<div class="modal-backdrop fade in"></div>-->
+  <!--</div>-->
+  <footer></footer>
+</div>

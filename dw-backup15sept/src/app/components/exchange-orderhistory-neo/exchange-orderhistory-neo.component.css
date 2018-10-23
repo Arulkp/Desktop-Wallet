@@ -1,0 +1,22 @@
+.trback{
+	background: #2c2e39;
+}
+
+.whitetext{
+	padding-top: 0;padding-bottom: 0;
+}
+
+.redtext{
+	color: red;padding-top: 0;padding-bottom: 0;
+}
+
+.greentext{
+	color: green;padding-top: 0;padding-bottom: 0;
+}
+
+.background {
+	background: #323640;
+	min-height: 340px;
+	max-height: 340px;
+	overflow-y: scroll;
+}

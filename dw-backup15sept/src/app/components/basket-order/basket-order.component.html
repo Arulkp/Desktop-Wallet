@@ -1,0 +1,287 @@
+<div [ngClass]="switchThemeService.switchTheme ?'order-container-wrapper darkThemeorder-container-wrapper':'order-container-wrapper'">
+  <div class="order-tab-container wandx-container">
+    <div class="tab" (click)="setVisibleTab(0)" [ngClass]="{'active': isTabVisible(0)}" matTooltip="These are the portfolios and underlying Tokens that you've bought" [matTooltipPosition]="'after'">Bought</div>
+    <div class="tab" (click)="setVisibleTab(1)" [ngClass]="{'active': isTabVisible(1)}" matTooltip="These are the portfolios that you've sold" [matTooltipPosition]="'above'">Sold</div>
+  </div>
+  
+  <div class="table-responsive" *ngIf="visibleTab === 0">
+    <table class="table table-striped table-dark" border="1">
+      <thead>
+        <tr>
+          <th scope="col">Basket</th>
+          <th scope="col">Seller</th>
+          <th scope="col">Tx Status</th>
+        </tr>
+      </thead>
+      <!-- loader -->
+      <tbody *ngIf="showOrderLoader">
+        <tr class="loader">
+          <td colspan="3">
+            <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+          </td>
+        </tr>
+      </tbody>
+      <!-- body with data -->
+      <tbody *ngIf="!showOrderLoader">
+        <tr *ngFor="let bought of currentBoughtOrders; let i = index">
+            <td>
+              {{bought['name']}}
+              <br />
+              Asking price {{bought['valueInEther']}} ETH
+            </td>
+            <td>
+              {{bought['owner']}}
+            </td>
+            <td>
+            Success
+            </td>
+        </tr>
+
+        <tr *ngIf="currentBoughtOrders.length === 0">
+          <td colspan="4" style="text-align: center;">
+             <img src="assets/orderhistory.png" alt="">
+             No Baskets Found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <div class="bought wandx-container" *ngIf="visibleTab === 0">
+    <div class="order-table-header">
+      <div class="order-col-1">
+        <p style="color: white;">Basket</p>
+      </div>
+      <div class="order-col-3">
+        <p style="color: white;">Seller</p>
+      </div>
+      <div class="order-col-3">
+        <p style="color: white;">Tx Status</p>
+      </div>
+    </div>
+    <div class="loader" *ngIf="showOrderLoader">
+      <div class="loader">
+        <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+      </div>
+    </div>
+
+    <div class="order-table-body" *ngIf="!showOrderLoader">
+      <div *ngIf="currentBoughtOrders.length === 0">
+        <div class="noData">
+          <img src="assets/orderhistory.png" alt="">
+          <p>No Baskets Found.</p>
+        </div>
+      </div>
+      <div class="order-table-row" *ngFor="let bought of currentBoughtOrders; let i = index">
+        <div class="order-col-1">
+          <p style="margin-bottom:0px; line-height: 18px; font-size: 14px; font-weight: normal; height: 18px; color: white">{{bought['name']}}</p>
+          <p style="height: 23px; line-height: 10px;font-size: 10px;font-weight: normal;color: white;">
+            Asking price {{bought['valueInEther']}} ETH
+          </p>
+        </div>
+        <div class="order-col-3">
+          <p style="font-weight: 300; font-size: 14px; line-height: 29px; color: #1EBED7;">
+            {{bought['owner']}}
+          </p>
+        </div>
+        <div class="order-col-4">
+          <p style="font-weight: 300; font-size: 14px; line-height: 29px; color: white; padding-left: 27px;">
+            Success
+          </p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="table-responsive" *ngIf="visibleTab === 1">
+    <table class="table table-striped table-dark" border="1">
+      <thead>
+        <tr>
+          <th scope="col">Basket</th>
+          <th scope="col">Seller</th>
+          <th scope="col">Tx Status</th>
+        </tr>
+      </thead>
+      <!-- loader -->
+      <tbody *ngIf="showOrderLoader">
+        <tr class="loader">
+          <td colspan="3">
+            <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+          </td>
+        </tr>
+      </tbody>
+      <!-- body with data -->
+      <tbody *ngIf="!showOrderLoader">
+        <tr *ngFor="let sold of currentSoldOrders; let i = index">
+            <td>
+              {{sold['name']}}
+              <br />
+              Asking price {{sold['valueInEther']}} ETH
+            </td>
+            <td>
+              {{sold['currentOwnerOrSeller']}}
+            </td>
+            <td>
+              <a class="order-link" href="{{getTransactionUrl()}}{{sold.TransactionId}}" target="_blank"> {{sold.TransactionId}} </a>
+              Success
+            </td>
+        </tr>
+
+        <tr *ngIf="currentSoldOrders.length === 0">
+          <td colspan="4" style="text-align: center;">
+             <img src="assets/orderhistory.png" alt="">
+             No Baskets Found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <div class="sold wandx-container" *ngIf="visibleTab === 1"> -->
+    <!-- <div class="order-table-header">
+      <div class="order-col-1">
+        <p style="color: white;"> Basket</p>
+      </div>
+      <div class="order-col-3">
+        <p style="color: white;">Buyer</p>
+      </div>
+      <div class="order-col-3">
+        <p style="color: white;"> Tx Status</p>
+      </div>
+    </div>
+    <div class="loader" *ngIf="showOrderLoader">
+      <div class="loader">
+        <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+      </div>
+    </div> -->
+
+    <!-- <div class="order-table-body" *ngIf="!showOrderLoader">
+      <div *ngIf="currentSoldOrders.length===0">
+        <div class="noData">
+          <img src="assets/orderhistory.png" alt="">
+          <p>No Baskets Found.</p>
+        </div>
+      </div>
+      <div class="order-table-row" *ngFor="let sold of currentSoldOrders; let i = index">
+        <div class="order-col-1">
+          <p style="margin-bottom:0px; line-height: 18px; font-size: 14px; font-weight: normal; height: 18px; color: #white">{{sold['name']}}</p>
+          <p style="height: 23px; line-height: 10px;font-size: 10px;font-weight: normal;color: white;">
+            Asking price {{sold['valueInEther']}} ETH
+          </p>
+        </div>
+        <div class="order-col-3">
+          <p style="font-weight: 300; font-size: 14px; line-height: 29px; color: #1EBED7;">
+            {{sold['currentOwnerOrSeller']}}
+          </p>
+        </div>
+        <div class="order-col-3">
+          <p style="font-weight: 300; font-size: 14px; line-height: 29px; color: #1EBED7;">
+            <a class="order-link" href="{{getTransactionUrl()}}{{sold.TransactionId}}" target="_blank"> {{sold.TransactionId}} </a>
+          </p>
+        </div>
+        <div class="order-col-4">
+          <p style="font-weight: 300; font-size: 14px; line-height: 29px; color: white; padding-left: 27px;">
+            Success
+          </p>
+        </div>
+      </div>
+    </div> -->
+  <!-- </div> -->
+
+  <div class="table-responsive" *ngIf="visibleTab === 2">
+    <table class="table table-striped table-dark" border="1">
+      <thead>
+        <tr>
+          <th scope="col">Token Basket</th>
+          <th scope="col">Tokens</th>
+          <th scope="col">Quoted Price (ETH)</th>
+          <th scope="col">Current Price(ETH)</th>
+        </tr>
+      </thead>
+      <!-- loader -->
+      <tbody *ngIf="showOrderLoader">
+        <tr class="loader">
+          <td colspan="3">
+            <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+          </td>
+        </tr>
+      </tbody>
+      <!-- body with data -->
+      <tbody *ngIf="!showOrderLoader">
+        <tr *ngFor="let sold of getQuotesOrders(); let i = index">
+            <td>
+              {{sold.porfolioName}}
+            </td>
+            <td>
+              <p *ngFor="let assest of sold.Assets;let j = index">
+                {{assest.Reqbalance}} {{assest.Symbol}} <span *ngIf="j!==sold.Assets.length-1">+</span>
+              </p>
+            </td>
+            <td matTooltip="{{sold.Value * usd | number:'1.0-4'}} USD" [matTooltipPosition]="'above'">
+              {{sold.Value | number:'1.1-4'}}
+            </td>
+            <td matTooltip="{{sold.CurrentValuationInWand * usd | number:'1.0-4'}} USD" [matTooltipPosition]="'above'">
+              {{sold.CurrentValuationInWand | number:'1.1-4'}}
+            </td>
+        </tr>
+
+        <tr *ngIf="getQuotesOrders().length===0">
+          <td colspan="4" style="text-align: center;">
+             <img src="assets/orderhistory.png" alt="">
+             No Baskets Found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- <div class="sold wandx-container" *ngIf="visibleTab === 2">
+    <div class="order-table-header">
+
+      <div class="order-col-1">
+        <p>Token Basket</p>
+      </div>
+      <div class="order-col-2">
+        <p>Tokens</p>
+      </div>
+      <div class="order-col-1">
+        <p>Quoted Price (ETH)</p>
+      </div>
+      <div class="order-col-1">
+        <p> Current Price(ETH)</p>
+      </div>
+    </div>
+    <div class="loader" *ngIf="showOrderLoader">
+      <div class="loader">
+        <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+      </div>
+    </div>
+    <div *ngIf="getQuotesOrders().length===0">
+      <div class="noData">
+        <img src="assets/orderhistory.png" alt="">
+        <p>No Baskets Found.</p>
+      </div>
+    </div>
+    <div class="order-table-body" *ngIf="!showOrderLoader">
+      <div class="order-table-row" *ngFor="let sold of getQuotesOrders(); let i = index">
+        <div class="order-col-1">
+          <p style="color: #5d5353; font-size: 13px;display: inline-block;margin:0">
+            {{sold.porfolioName}}
+          </p>
+        </div>
+        <div class="order-col-2">
+          <p style="color: #5d5353; font-size: 13px;display: inline-block;margin:0" *ngFor="let assest of sold.Assets;let j = index">
+            {{assest.Reqbalance}} {{assest.Symbol}} <span *ngIf="j!==sold.Assets.length-1">+</span>
+          </p>
+        </div>
+        <div class="order-col-1">
+          <p matTooltip="{{sold.Value * usd | number:'1.0-4'}} USD" [matTooltipPosition]="'above'" style="color: #5d5353;font-size: 13px;display: inline-block;margin:0">
+            {{sold.Value | number:'1.1-4'}}
+          </p>
+        </div>
+        <div class="order-col-1">
+          <p matTooltip="{{sold.CurrentValuationInWand * usd | number:'1.0-4'}} USD" [matTooltipPosition]="'above'" style="color: #5d5353;font-size: 13px;display: inline-block;margin:0">
+            {{sold.CurrentValuationInWand | number:'1.1-4'}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+</div>

@@ -1,0 +1,77 @@
+<div class="neo" >
+	<div class="container col-12 container2">
+		<div class="row">
+			<div class="col-xl-3 col-md-12 col-lg-3 col-sm-12 t1"><exchange-orderbook-sidepane-neo></exchange-orderbook-sidepane-neo></div>
+			<div class="col-xl-6 col-md-12 col-lg-6 col-sm-12 t11">
+				<div class="row">
+					<div class="col-6">
+						<div class="tabdiv">
+							<select class="btn1 btn-success1 dropdown-toggle" [(ngModel)]="selectedMarket" (change)="handleMarketSelect()">
+								<option class="options" value="" disabled>Select Market</option>
+								<option class="options" *ngFor="let m of markets" [ngValue]="m">{{m.name}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-6">
+						<exchange-platform-token-select-neo></exchange-platform-token-select-neo>
+					</div>
+				</div>
+				<exchange-graph [exchange]="'neo'"></exchange-graph>
+			</div>
+			<div class="col-xl-3 col-md-12 col-lg-3 col-sm-12 t12"><exchange-tradehistory-sidepane-neo></exchange-tradehistory-sidepane-neo></div>
+		</div>
+	</div>
+	<div class="container col-12">
+		<div class="row">
+			<div class="col-xl-6 col-md-12 col-lg-6 col-sm-12 t2">
+				<nav>
+					<ul class="nav nav-pills" style="background: #28272e;line-height: 10px;">
+						<li class="nav-item col-sm" style="padding: 0px;text-align: center;">
+							<a [class]="selectedWalletTab == 'depositewithdraw' ? 'nav-link active' : 'nav-link'" (click)="setWalletTab('depositewithdraw')" style="color: white;padding: 17px;">
+								Deposit/Withdraw
+							</a>
+						</li>
+						<li class="nav-item col-sm" style="padding: 0px;text-align: center;border-left: 2px solid grey;border-right: 2px solid grey;">
+							<a class="nav-link" [class]="selectedWalletTab == 'buy' ? 'nav-link active' : 'nav-link'" (click)="setWalletTab('buy')" style="color: white;padding: 17px;">
+								Buy {{selectedToken?.symbol}}
+							</a>
+						</li>
+						<li class="nav-item col-sm" style="padding: 0px;text-align: center;">
+							<a [class]="selectedWalletTab == 'sell' ? 'nav-link active' : 'nav-link'" (click)="setWalletTab('sell')" style="color: white;padding: 17px;">
+								Sell {{selectedToken?.symbol}}
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="tabs">
+					<exchange-wallet-buy-neo *ngIf="selectedWalletTab == 'buy'"></exchange-wallet-buy-neo>
+					<exchange-wallet-sell-neo *ngIf="selectedWalletTab == 'sell'"></exchange-wallet-sell-neo>
+					<exchange-depositewithdraw-neo *ngIf="selectedWalletTab == 'depositewithdraw'"></exchange-depositewithdraw-neo>
+				</div>
+				<!-- <router-outlet name="wallettabs"></router-outlet> -->
+			</div>
+			<div class="col-xl-6 col-md-12 col-lg-6 col-sm-12 t2b">
+				<nav>
+					<ul class="nav nav-pills" style="background: #28272e;line-height: 10px;">
+						<li class="nav-item col-6" style="padding: 0px;text-align: center;">
+							<a [class]="selectedOrdersTab == 'openorders' ? 'nav-link active' : 'nav-link'" (click)="setOrderTab('openorders')" style="color: white;padding: 17px;">
+								Open Orders
+							</a>
+						</li>
+						<li class="nav-item col-6" style="border-left: 2px solid grey;padding: 0px;text-align: center;">
+							<a [class]="selectedOrdersTab == 'orders' ? 'nav-link active' : 'nav-link'" (click)="setOrderTab('orders')" style="color: white;padding: 17px;">
+								Order History
+							</a>
+						</li>
+						<!-- <li class="nav-item"><a class="nav-link"  [routerLink]="[{ outlets: { ordertabs: ['tradehistory'] }}]" routerLinkActive="active" style="color: white;">Trade History</a></li> -->
+					</ul>
+				</nav>
+				<div class="tabs">
+					<exchange-openorders-neo *ngIf="selectedOrdersTab == 'openorders'"></exchange-openorders-neo>
+					<exchange-orderhistory-neo *ngIf="selectedOrdersTab == 'orders'" ></exchange-orderhistory-neo>
+				</div>
+				<!-- <router-outlet name="ordertabs"></router-outlet> -->
+			</div>
+		</div>
+	</div>
+</div>

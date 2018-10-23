@@ -1,0 +1,10 @@
+<!-- Main Layout -->
+<simple-notifications [options]="options"></simple-notifications>
+<div>
+  <!-- <app-header></app-header> -->
+  <app-firsttime *ngIf = '!check' [updateFirstInitialize]="updateFirstInitialize"></app-firsttime>
+  <div *ngIf = 'check'>
+  	<sidebar></sidebar>
+  	<main-content></main-content>
+  </div>
+</div>

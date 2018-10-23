@@ -1,0 +1,64 @@
+.center {
+	max-width: 550px;
+    margin: auto;
+    /*background: white;*/
+    padding: 10px;
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+}
+
+img {
+	border-radius: 25px;
+	margin-bottom: 10px;
+}
+
+.termsx {
+  overflow-y: scroll;
+  height: 200px;
+  width: 100%;
+  border: 1px solid #DDD;
+  padding: 10px;
+  border: 1px solid #7c7c92;
+  text-align: left;
+
+}
+
+ul {
+  list-style-type: decimal;
+}
+
+li {
+  color: #efc600;
+  font-weight: 900;
+}
+
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 7px 9px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #7858e4;
+  outline: none;
+  color: white;
+  min-width: 50%;
+  margin-top: 10%;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}

@@ -1,0 +1,53 @@
+<!-- <main> -->
+<div class="container col-12 container1">
+	Dashboard
+	<div class="container col-12 container2">
+		<div class="row">
+			<div class="col-md-8"><portfolio-graph></portfolio-graph></div>
+			<div class="col-md-4"><portfolio-breakdown></portfolio-breakdown></div>
+		</div>
+	</div>
+	<!-- <section class="dashboard">
+		<div class="portfolio-graph">
+			<portfolio-graph></portfolio-graph>	
+		</div>
+		<div class="portfolio-breakdown">
+			<portfolio-breakdown></portfolio-breakdown>
+		</div>
+	</section> -->
+	<div class="container col-12">
+		<div class="row">
+			<div class="col-md-8 t2">
+				<nav>
+					<ul class="nav nav-pills" style="background: #28272e;">
+						<li class="nav-item col-4" style="padding: 0px;text-align: center;"><a class="nav-link" [routerLink]="[{ outlets: { dashboarWallettabs: ['wallet'] }}]" routerLinkActive="active" style="color: white;padding: 20px;">ETH Wallets</a></li>
+						<li class="nav-item col-4" style="border-left: 2px solid grey;border-right: 2px solid grey;padding: 0px;text-align: center;"><a class="nav-link" [routerLink]="[{ outlets: { dashboarWallettabs: ['depositewithdraw'] }}]" routerLinkActive="active" style="color: white;padding: 20px;">NEO Wallets</a></li>
+						<li class="nav-item col-4" style="padding: 0px;text-align: center;"><a class="nav-link" [routerLink]="[{ outlets: { dashboarWallettabs: ['quicktrade'] }}]" routerLinkActive="active" style="color: white;padding: 20px;">Create/Add Wallet</a></li>
+					</ul>
+				</nav>
+				<router-outlet name="dashboarWallettabs"></router-outlet>
+			</div>
+			<div class="col-md-4 t2b">
+				<dashboard-recentactivity></dashboard-recentactivity>
+			</div>
+		</div>
+	</div>
+	<!-- <section>
+		<div class="wallet-tabs">
+			<tabs>
+				<nav>
+					<ul>
+						<li><a [routerLink]="[{ outlets: { dashboarWallettabs: ['wallet'] }}]" routerLinkActive="active">Wallet</a></li>
+						<li><a [routerLink]="[{ outlets: { dashboarWallettabs: ['depositewithdraw'] }}]" routerLinkActive="active">Deposite/Withdraw</a></li>
+						<li><a [routerLink]="[{ outlets: { dashboarWallettabs: ['quicktrade'] }}]" routerLinkActive="active">Quick Trade</a></li>
+					</ul>
+				</nav>
+				<router-outlet name="dashboarWallettabs"></router-outlet>
+			</tabs>
+		</div>
+		<div class="recent-activity">
+			<dashboard-recentactivity></dashboard-recentactivity>
+		</div>
+	</section> -->
+<!-- </main> -->
+</div>

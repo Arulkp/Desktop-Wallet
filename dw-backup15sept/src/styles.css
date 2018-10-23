@@ -1,0 +1,44 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: #323c49;
+	font-family: 'Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i';
+    font-size: 15px !important;
+}
+
+@font-face {
+	font-family: 'Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i';
+	src: url(assets/fonts/Roboto/Roboto-Light.ttf);
+}
+
+.amcharts-chart-div a {
+    display: none !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+    border-radius: 100px;
+    height: 50px;
+    width: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

@@ -1,0 +1,78 @@
+<div class="container-fluid container5">
+	<!-- <div class="row">
+		<div class="col-md-7">
+			<portfolio-graph></portfolio-graph>
+		</div>
+		<div class="col-md-5">
+			<portfolio-breakdown></portfolio-breakdown>
+		</div>
+	</div> -->
+	<div class="row col-12">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 t2">
+			<!-- <tabs> -->
+				<nav>
+					<!-- <ul class="nav nav-pills" style="background: #28272e;">
+						<li class="nav-item col-4" style="padding: 0px;text-align: center;"><a class="nav-link" [routerLink]="[{ outlets: { walletactions: ['wallet-eth'] }}]" routerLinkActive="active" style="color: white;padding: 20px;">ETH Wallets</a></li>
+						<li class="nav-item col-4" style="border-left: 2px solid grey;border-right: 2px solid grey;padding: 0px;text-align: center;"><a class="nav-link" [routerLink]="[{ outlets: { walletactions: ['wallet-neo'] }}]" routerLinkActive="active" style="color: white;padding: 20px;">NEO Wallets</a></li>
+						<li class="nav-item dropdown col-4" style="padding: 0px;text-align: center;">
+					        <a class="nav-link dropbtn" role="button">
+					          Create/Add Wallet
+					        </a>
+					        <div class="dropdown-content">
+					          <a [routerLink]="[{ outlets: { walletactions: ['wallet-create-eth']}}]" routerLinkActive="active" style="color: white;text-align: center;margin: 0 auto;"><img src="../../assets/images/eth.png">ETH</a>
+					          <a [routerLink]="[{ outlets: { walletactions: ['wallet-create-neo']}}]"  routerLinkActive="active" style="color: white;text-align: center;margin: 0 auto;"><img class="img" src="../../assets/images/neo.png">NEO</a>
+					        </div>
+					    </li>
+					</ul> -->
+					<ul class="nav nav-pills" style="background: #28272e;">
+						<li class="nav-item col-sm" style="padding: 0px;text-align: center;"><a class="nav-link" (click)="setCurrentTab('wallets-eth')" [class]="selectedTab == 'wallets-eth' ? 'nav-link active' : 'nav-link'" style="color: white;padding: 17px;">ETH Wallets</a></li>
+						<li class="nav-item col-sm" style="border-left: 2px solid grey;border-right: 2px solid grey;padding: 0px;text-align: center;"><a class="nav-link" (click)="setCurrentTab('wallets-neo')" [class]="selectedTab == 'wallets-neo' ? 'nav-link active' : 'nav-link'" style="color: white;padding: 17px;">NEO Wallets</a></li>
+						<li class="nav-item col-sm" style="border-left: 2px solid grey;border-right: 2px solid grey;padding: 0px;text-align: center;"><a class="nav-link" (click)="setCurrentTab('wallets-wan')" [class]="selectedTab == 'wallets-wan' ? 'nav-link active' : 'nav-link'" style="color: white;padding: 17px;">WAN Wallets</a></li>
+						<li class="nav-item col-sm" style="border-left: 2px solid grey;border-right: 2px solid grey;padding: 0px;text-align: center;"><a class="nav-link" (click)="setCurrentTab('wallets-aion')" [class]="selectedTab == 'wallets-aion' ? 'nav-link active' : 'nav-link'" style="color: white;padding: 17px;">AION Wallets</a></li>
+						<li class="nav-item dropdown col-sm" style="padding: 0px;text-align: center;">
+					        <a class="nav-link dropbtn" role="button">
+					          Create/Add Wallet
+					        </a>
+					        <div class="dropdown-content">
+					          <a (click)="setCurrentTab('create-eth')" [class]="selectedTab == 'create-eth' ? 'active' : ''" style="color: white;text-align: center;margin: 0 auto;"><img class="img" src="assets/images/eth.png">ETH</a>
+					          <a (click)="setCurrentTab('create-neo')" [class]="selectedTab == 'create-neo' ? 'active' : ''" style="color: white;text-align: center;margin: 0 auto;"><img class="img" src="assets/images/neo.png">NEO</a>
+										<a (click)="setCurrentTab('create-wan')" [class]="selectedTab == 'create-eth' ? 'active' : ''" style="color: white;text-align: center;margin: 0 auto;"><img class="img" src="assets/images/wanchain.svg">WAN</a>
+										<a (click)="setCurrentTab('create-aion')" [class]="selectedTab == 'create-eth' ? 'active' : ''" style="color: white;text-align: center;margin: 0 auto;"><img class="img" src="assets/images/aion-icon.png">AION</a>
+					        </div>
+					    </li>
+					</ul>
+				</nav>
+				<div class="tabs">
+					<wallet-info [walletBaseCurrency]="'eth'" *ngIf="selectedTab == 'wallets-eth'" [handleWalletDetail]="handleWalletDetail" [handleWalletTokens]="handleWalletTokens"></wallet-info>
+					<wallet-info [walletBaseCurrency]="'neo'" *ngIf="selectedTab == 'wallets-neo'" [handleWalletDetail]="handleWalletDetail" [handleWalletTokens]="handleWalletTokens"></wallet-info>
+					<wallet-info [walletBaseCurrency]="'wan'" *ngIf="selectedTab == 'wallets-wan'" [handleWalletDetail]="handleWalletDetail" [handleWalletTokens]="handleWalletTokens"></wallet-info>
+					<wallet-info [walletBaseCurrency]="'aion'" *ngIf="selectedTab == 'wallets-aion'" [handleWalletDetail]="handleWalletDetail" [handleWalletTokens]="handleWalletTokens"></wallet-info>
+					<wallet-create [walletBaseCurrency]="'eth'" *ngIf="selectedTab == 'create-eth'" [handleWalletDetail]="handleWalletDetail" [redirectToInfo]="redirectToInfoEth"></wallet-create>
+					<wallet-create [walletBaseCurrency]="'neo'" *ngIf="selectedTab == 'create-neo'" [handleWalletDetail]="handleWalletDetail" [redirectToInfo]="redirectToInfoNeo"></wallet-create>
+					<wallet-create [walletBaseCurrency]="'wan'" *ngIf="selectedTab == 'create-wan'" [handleWalletDetail]="handleWalletDetail" [redirectToInfo]="redirectToInfoWan"></wallet-create>
+					<wallet-create [walletBaseCurrency]="'aion'" *ngIf="selectedTab == 'create-aion'" [handleWalletDetail]="handleWalletDetail" [redirectToInfo]="redirectToInfoAion"></wallet-create>
+				</div>
+				<!-- <router-outlet name="walletactions"></router-outlet> -->
+			<!-- </tabs> -->
+		</div>
+	</div>
+	<br>
+	<br>
+	<div class="row col-12">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+			<nav>
+				<ul class="nav nav-pills" style="background: #28272e;">
+					<li class="nav-item col-12" style="padding: 0px;text-align: center;"><a class="nav-link" style="color: white;padding: 20px;">Wallet and Token Details</a></li>
+				</ul>
+			</nav>
+			<div class="tabs">
+				<wallet-detail *ngIf="tokenOrDetail == 'detail'" [wallet]="walletDetail"></wallet-detail>
+				<wallet-tokens *ngIf="tokenOrDetail == 'tokens'" [wallet]="walletDetail"></wallet-tokens>
+				<div *ngIf="tokenOrDetail == 'nodetails'" style="text-align: center;color: white;padding-top: 50px;padding-bottom: 50px;">
+					Please go to your Wallets list and click on Wallet Details or Token Details for more Info.
+				</div>
+			</div>
+			<!-- <router-outlet name="walletdetails"></router-outlet> -->
+		</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+.main-content {
+	margin-left: 100px;
+	/*padding: 10px;
+	width: calc(100% - 140px); *//* 100% - (margin-left + 2* padding) */
+}

@@ -1,0 +1,736 @@
+<div class="container col-12 portfolioPage">
+  <div class="tabcontent darkTheamebackgroundColor">
+    <div id="tab2" class="tab active">
+      <nav>
+        <ul class="nav-tablinks darkTheamebackgroundColor">
+          <li class="nav-tab active" (click)="setVisibleTab('buy');" [ngClass]="{'active': isTabVisible('buy')}">
+            <span>Token Baskets</span>
+            <div class="border-animation "></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTab('sell');pendingPortfolio('Active')"
+              [ngClass]="{'active': isTabVisible('sell')}">
+            <span>My Token Baskets</span>
+            <div class="border-animation "></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTab('create-portfolio');newPortfolio()"
+              [ngClass]="{'active': isTabVisible('create-portfolio')}">
+            <span>Create Token Baskets</span>
+            <div class="border-animation"></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTab('wallet');" [ngClass]="{'active': isTabVisible('wallet')}">
+            <span>Wallet</span>
+            <div class="border-animation"></div>
+          </li>
+          <li class="nav-tab" (click)="setVisibleTab('Request');getThemedBasket()"
+              [ngClass]="{'active': isTabVisible('Request')}">
+            <span>Request Themed</span>
+            <div class="border-animation"></div>
+          </li>
+        </ul>
+      </nav>
+      <section>
+        <div class="portfolio-holder darkTheamebackgroundColor">
+          <div class="portfolio darkTheameBoxbackground" *ngIf="visibleTab === 'buy'">
+            <div class="search">
+              <i class="fa fa-search"></i>
+              <input type="text" placeholder="Search Tokens contained in Token Baskets" [ngModel]="searchText"
+                     (ngModelChange)="search($event)" title="Type and press enter to search"/>
+            </div>
+            <div class="container-fluid">
+              <div class="row" *ngIf="showBuyLoader">
+                <div class="col-lg-12">
+                  <div class="loader-portfolio">
+                    <div class="loader">
+                      <img class="img img-responsive" src="assets/wandex-loading.png" alt=""
+                           style="width:100px;margin-left:45%;margin-top:40px;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row" *ngIf="!showBuyLoader">
+                <div class="row col-lg-12" *ngIf="portfolioDataFilered.length === 0 && showBuyLoader===false ">
+                  <div class="no-portfolio">
+                    No Baskets
+                  </div>
+                </div>
+                <div *ngIf="portfolioDataFilered.length >0" class="row col-lg-12">
+                  <div class="col-lg-4 col-md-6 col-sm-6 margin-botton22"
+                       *ngFor="let buyAblePortfolio of portfolioDataFilered; let i = index">
+                    <div class="portfolio-item darkTheamebackgroundColor">
+                      <div class="portfolio-item-heading">
+                        <!--  <span class="name" (click)="showBuyPortfolioModal(i, buyAblePortfolio)">{{buyAblePortfolio.PortfolioName}}</span>-->
+                        <div class="compleateName" (click)="showBuyPortfolioModal(i, buyAblePortfolio,'Basket')">
+                          <div class="name" *ngFor="let asset of buyAblePortfolio.tokens | slice:0:2; let i = index">
+                                                    <span class="">{{asset.value | number:'1.0-4'}} {{asset.symbol}}
+                                                        <span
+                                                          *ngIf="buyAblePortfolio.tokens.length===1 && i!==0">+</span>
+                                                    <span *ngIf="i!==1 && buyAblePortfolio.tokens.length!==1">+</span>
+                                                    <span *ngIf="i===1 ">+..</span>
+                                                    </span>
+                          </div>
+                        </div>
+                        <div class="currentPrice">
+                          <span class="current-price">{{buyAblePortfolio.valueInEther}} ETH</span>
+                          <div class="sub-text">ASKING PRICE</div>
+                        </div>
+                      </div>
+                      <div class="portfolio-item-body">
+                        <ngx-charts-line-chart *ngIf="renderChart===true" [view]="view"
+                                               [results]="buyAblePortfolio.ChartData" [scheme]="colorScheme"
+                                               [legend]="false" [gradient]="gradient" [xAxis]="false" [yAxis]="false"
+                                               [autoScale]="true" [timeline]="false" [showGridLines]="false"
+                                               [tooltipDisabled]="false">
+                        </ngx-charts-line-chart>
+                      </div>
+                      <div class="portfolio-item-footer">
+                        <div>
+                          <button class="sign-publish-portfolio-button"
+                                  matTooltip="This enables you to buy the Token basket with WXETH at the given price"
+                                  [matTooltipPosition]="'above'" (click)="openIntanseBuyModal(buyAblePortfolio)">Buy
+                          </button>
+                          <div class="shareIcon" (click)="openShareModal(buyAblePortfolio.contractAddress)">
+                            <i style="-webkit-text-stroke: 2px white!important;" class="fa fa-share-alt"
+                               aria-hidden="true"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="myportfolio darkTheameBoxbackground" *ngIf="visibleTab === 'sell'">
+            <div class="row" style="margin-top: 0px; margin-bottom: 35px; margin-left: 35%;">
+              <button
+                style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;"
+                class="btn btn-primary" (click)="pendingPortfolio('Pending')"
+                [ngClass]="{'active-btn': activeTab==='Pending'}">Pending
+              </button>
+              <button
+                style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;"
+                class="btn btn-primary" (click)="pendingPortfolio('Active')"
+                [ngClass]="{'active-btn': activeTab==='Active'}">Active
+              </button>
+              <!--<button  style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;" class="btn btn-primary" (click)="pendingPortfolio('canceled')" [ngClass]="{'active-btn': activeTab==='canceled'}" >Canceled</button>-->
+              <button
+                style="background: white!important;color: purple!important;border-radius: 0px!important;outline: none;!important;"
+                class="btn btn-primary" (click)="pendingPortfolio('quick-buy');getOrderHistory();"
+                [ngClass]="{'active-btn': activeTab==='quick-buy'}">Order History
+              </button>
+            </div>
+            <div class="table-responsive" *ngIf="activeTab !== 'quick-buy'">
+              <table class="table table-striped table-dark" border="1">
+                <thead>
+                  <tr>
+                    <th scope="col" matTooltip="These are portfolios of ERC20 Tokens in your portfolio" [matTooltipPosition]="'above'">Title</th>
+                    <th scope="col">Current Price (in ETH)</th>
+                    <th scope="col" matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+
+                <tbody *ngIf="showBuyLoader">
+                  <tr class="loader">
+                    <td colspan="3">
+                      <img class="img img-responsive" src="assets/wandex-loading.png" alt="" style="width:100px;margin-left:45%;margin-top:40px;">
+                    </td>
+                  </tr>
+                </tbody>
+
+                <tbody *ngIf="activeTab==='Active'">
+                  <tr *ngFor="let sellAblePortfolio of portfolioDataFileredsellable; let i = index">
+                    <td class="displayOnHover">
+                      <p class="onhover" (click)="showBuyPortfolioModal(i, sellAblePortfolio,'myBasket')">
+                        {{sellAblePortfolio.name}}
+                      </p>
+                    </td>
+                    <td class="content">
+                      <p>
+                        {{sellAblePortfolio.valueInEther}}
+                      </p>
+                    </td>
+                    <td>
+                      <p style="cursor: pointer" (click)="shell.openExternal(getAddressUrl()+sellAblePortfolio.owner)">
+                        {{sellAblePortfolio.owner}}
+                      </p>
+                    </td>
+                    <td>
+                      <button class="sign-publish-portfolio-button" (click)="liquidateModal(sellAblePortfolio)">
+                      Liquidate
+                    </button>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="portfolioDataFileredsellable.length === 0 && showBuyLoader==false && activeTab==='Active'">
+                    <td colspan="4" style="text-align: center;">No Baskets</td>
+                  </tr>
+                </tbody>
+
+                <tbody *ngIf="activeTab==='Pending'">
+                  <tr *ngFor="let sellAblePortfolio of portfolioPendingList; let i = index">
+                    <td class="displayOnHover">
+                      <p class="onhover">
+                        {{sellAblePortfolio.name}}
+                      </p>
+                    </td>
+                    <td class="content">
+                      <p>
+                        {{sellAblePortfolio.valueInEther}}
+                      </p>
+                    </td>
+                    <td class="content">
+                      <p style="cursor: pointer" (click)="shell.openExternal(getAddressUrl()+sellAblePortfolio.owner)">
+                        {{sellAblePortfolio.owner}}</p>
+                    </td>
+                    <td>
+                      <button class="sign-publish-portfolio-button" (click)="updatePendingPortfolio(sellAblePortfolio)">In
+                        Progress
+                      </button>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="portfolioPendingList.length === 0 && showBuyLoader==false &&  activeTab==='Pending'">
+                    <td colspan="4" style="text-align: center;">No Baskets</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- <div class="row col-12 portfolio-heading hidden-xs" *ngIf="activeTab !== 'quick-buy'"
+                 style="text-align: center;">
+              <div class="col-sm">
+                <div class="heading">
+                  <p matTooltip="These are portfolios of ERC20 Tokens in your portfolio" [matTooltipPosition]="'above'">
+                    Title</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p>Current Price (in ETH)</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p matTooltip="Owner of the portfolio" [matTooltipPosition]="'above'">Account Owner</p>
+                </div>
+              </div>
+              <div class="col-sm">
+                <div class="heading">
+                  <p>Status</p>
+                </div>
+              </div>
+            </div> -->
+            <!-- <div class="portfolio-body"> -->
+              <!-- <div class="portfolio-content hidden-xs"
+                   *ngIf="portfolioDataFileredsellable.length === 0 && showBuyLoader==false && activeTab==='Active'">
+                <div class="content">
+                  <p> No Baskets</p>
+                </div>
+              </div>
+              <div class="portfolio-content hidden-xs"
+                   *ngIf="portfolioPendingList.length === 0 && showBuyLoader==false &&  activeTab==='Pending'">
+                <div class="content">
+                  <p> No Baskets</p>
+                </div>
+              </div>
+              <div class="loader-portfolio" *ngIf="showBuyLoader">
+                <div class="loader">
+                  <img class="img img-responsive" src="assets/wandex-loading.png" alt=""
+                       style="width:100px;margin-left:45%;margin-top:40px;">
+                </div>
+              </div>
+              <div *ngIf="activeTab==='Active'">
+                <div class="row col-12 portfolio-content"
+                     *ngFor="let sellAblePortfolio of portfolioDataFileredsellable; let i = index"
+                     style="text-align: center;">
+                  <div class="col-sm">
+                    <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                      <div class="displayOnHover">
+                        <p class="onhover" (click)="showBuyPortfolioModal(i, sellAblePortfolio,'myBasket')">
+                          {{sellAblePortfolio.name}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="content ">
+                      <p>{{sellAblePortfolio.valueInEther}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                      <p style="cursor: pointer" (click)="shell.openExternal(getAddressUrl()+sellAblePortfolio.owner)">
+                        {{sellAblePortfolio.owner}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm ">
+                    <button class="sign-publish-portfolio-button" (click)="liquidateModal(sellAblePortfolio)">
+                      Liquidate
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="activeTab==='Pending'">
+                <div class="row col-12 portfolio-content"
+                     *ngFor="let sellAblePortfolio of portfolioPendingList; let i = index" style="text-align: center;">
+                  <div class="col-sm">
+                    <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                      <div class="displayOnHover">
+                        <p class="onhover">
+                          {{sellAblePortfolio.name}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="content ">
+                      <p>{{sellAblePortfolio.valueInEther}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm">
+                    <div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">
+                      <p style="cursor: pointer" (click)="shell.openExternal(getAddressUrl()+sellAblePortfolio.owner)">
+                        {{sellAblePortfolio.owner}}</p>
+                    </div>
+                  </div>
+                  <div class="col-sm ">
+                    <button class="sign-publish-portfolio-button" (click)="updatePendingPortfolio(sellAblePortfolio)">In
+                      Progress
+                    </button>
+                  </div>
+                </div>
+              </div> -->
+              <!--<div *ngIf="activeTab==='canceled'">-->
+              <!--<div class="portfolio-content hidden-xs" *ngFor="let sellAblePortfolio of portfolioCancelList; let i = index">-->
+              <!--<div class="head1">-->
+              <!--<div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">-->
+              <!--<div class="displayOnHover">-->
+              <!--<p class="onhover">-->
+              <!--{{sellAblePortfolio.name}}</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="head2">-->
+              <!--<div class="content ">-->
+              <!--<p>{{sellAblePortfolio.valueInEther}}</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="head1">-->
+              <!--<div class="content" style="white-space: nowrap;  overflow: hidden; text-overflow: ellipsis;">-->
+              <!--<p ><a class="link" href="{{getAddressUrl()}}{{sellAblePortfolio.owner}}" target="_blank">{{sellAblePortfolio.owner}}</a>-->
+              <!--</p>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--<div class="head5 " >-->
+              <!--<button  class="sign-publish-portfolio-button">Canceled</button>-->
+              <!--</div>-->
+              <!--</div>-->
+              <!--</div>-->
+              <div *ngIf="activeTab === 'quick-buy'">
+                <div class="portfolio-content hidden-xs">
+                  <app-basket-order></app-basket-order>
+                </div>
+              </div>
+            <!-- </div> -->
+          </div>
+          <div class="create-portfolio" *ngIf="visibleTab === 'create-portfolio'">
+            <app-basket-new></app-basket-new>
+          </div>
+          <div class="wallet" *ngIf="visibleTab === 'wallet'">
+            <app-basket-wallet></app-basket-wallet>
+          </div>
+          <div class="wallet" style="color: white!important;" *ngIf="visibleTab === 'Request'">
+            <div *ngIf="themedBasketRequest.length>0">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Basket Id</th>
+                  <th>Basket Name</th>
+                  <th>Basket Price In ETH</th>
+                  <th>Basket Max Price In ETH</th>
+                  <th>Expiry Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let basket of themedBasketRequest">
+                  <td>{{basket.PortfolioId}}</td>
+                  <td>{{basket.PortfolioTheme}}</td>
+                  <td>{{basket.PortfolioPriceInEth}}</td>
+                  <td>{{basket.PortfolioMaxPriceInEth}}</td>
+                  <td>{{basket.ExpiryDate}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="themedBasketRequest.length===0">
+              <div class="content">
+                <p> No Request</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <div class="modal-container" *ngIf="showSellablePortfolioQuotesModal">
+    <div class="quotes-modal">
+      <div class="quotes-header-container">
+        <div class="quotes-header">
+          Available Quotes
+        </div>
+        <div class="quotes-button">
+          <i class="fa fa-times"
+             style="float: right; position: relative; margin-top: 15px; margin-right: 20px; cursor: pointer;"
+             (click)="hideSaleQuotesModal()"></i>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="quote-table-header">
+        <div style="width:280px; display: inline-block;">User</div>
+        <div style="width:170px; display: inline-block;">Quote (in ETH)</div>
+      </div>
+      <div class="col-lg-12" *ngIf="sellablePortfolioQuotes.length === 0">
+        <div>
+          No quotes available for this portfolio
+        </div>
+      </div>
+      <div class="quote-row" *ngFor="let quote of sellablePortfolioQuotes">
+        <div style="width:280px; display: inline-flex;" title="{{quote.UserAccount}}">
+          <a class="link" style="display: inline-block; width: 240px; overflow: hidden; text-overflow: ellipsis;"
+             href="{{getAddressUrl()}}{{quote.UserAccount}}" target="_blank"> {{quote.UserAccount}} </a></div>
+        <div style="width:170px; display: inline-block;">{{quote.Value}}</div>
+        <span class="inpbtn">
+                            <button class="row-button" style="margin-bottom: 10px;"
+                                    (click)="sellPortfolio(quote)">Sell</button>
+                        </span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="shouldShowBuyPortfolioModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content darkThemeModal-Content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999!important;"
+                    (click)="hideBuyPorfolioModal()">
+              &#10005;
+              <!-- <span aria-hidden="true"><i class="fa fa-times"></i></span> -->
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="portfolio-choices">
+              <h4 class="modal-title">Token Basket Name : {{selectedBuyAblePorfolio.portfolio.name}}</h4>
+              <br>
+              <br>
+              <div class="owner-ac">
+                <p style="cursor: pointer"
+                   (click)="shell.openExternal(getAddressUrl()+selectedBuyAblePorfolio.portfolio.owner)"> Account Owner
+                  : {{selectedBuyAblePorfolio.portfolio.owner}}</p>
+                <p style="cursor: pointer"
+                   (click)="shell.openExternal(getAddressUrl()+selectedBuyAblePorfolio.portfolio.contractAddress)">
+                  Contract Address : {{selectedBuyAblePorfolio.portfolio.contractAddress}}</p>
+              </div>
+              <div class="time-selectors">
+                <span class="col-xs-4 time-selector" (click)="setStockTF('mm')"
+                      [ngClass]="{active : isStockTF('mm')}"><span>1m</span></span>
+                <span class="col-xs-4 time-selector" (click)="setStockTF('hh')"
+                      [ngClass]="{active : isStockTF('hh')}"><span>1h</span></span>
+                <span class="col-xs-4 time-selector" (click)="setStockTF('DD')"
+                      [ngClass]="{active : isStockTF('DD')}"><span>1d</span></span>
+              </div>
+            </div>
+            <div class="stock-graph">
+              <div id="stockchartdiv" [style.width.%]="100" [style.minHeight.px]="350"></div>
+            </div>
+            <div class="coin-details">
+              <div class="row">
+                <div class="col-12">
+                  <div class="tokenData">
+                    <div class="row bdrbtm">
+                      <div class="col-md-3 col-xs-3">
+                        <div class="heading">
+                          <p>
+                            Token
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3">
+                        <div class="heading">
+                          <p>
+                            Quantity
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3 pad0">
+                        <div class="heading">
+                          <p>
+                            Price (in ETH)
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-md-3 col-xs-3 pad0">
+                        <div class="heading">
+                          <p>
+                            Price (in USD)
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bdrbtm">
+                      <div class="noToken"
+                           *ngIf="!selectedBuyAblePorfolio || !selectedBuyAblePorfolio.filteredAssets.length">
+                        <p> You Don't have any tokens in your Token basket</p>
+                      </div>
+                      <div class="row tokenAvailble"
+                           *ngFor="let asset of selectedBuyAblePorfolio.filteredAssets; let i = index">
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <div class="legend" [ngStyle]="{'background-color' : getPieLegendColor(asset.Symbol)}">
+                              <p>{{asset.symbol}}</p>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p> {{asset.value}} <span *ngIf="asset.value == 1">token</span><span
+                              *ngIf="!(asset.value == 1)">tokens</span></p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p>{{getAssetValue(asset, 'ETH') | number : '.0-6'}}</p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="tokenDataValue">
+                            <p>{{getAssetValue(asset, 'USD') | number : '.0-6'}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="row total">
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{selectedBuyAblePorfolio.portfolio.name}}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{totalTokens}} Tokens
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{getTotalPorfolioValue('ETH') | number : '.0-6'}}
+                            </p>
+                          </div>
+                        </div>
+                        <div class="col-md-3 col-xs-3">
+                          <div class="totalValue">
+                            <p>
+                              {{getTotalPorfolioValue('USD') | number : '.0-6'}}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="col-md-4 col-xs-12 col-sm-5">
+                  <div class="piechart">
+                    <div id="piechartdiv" [style.width.%]="100" [style.minHeight.px]="250"></div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="user-actions" style="text-align: center;">
+              <div class="row col-12 prices">
+                <div class="col-sm">
+                  <h3 class="heading">Selling Price : </h3>
+                  <p>{{selectedBuyAblePorfolio.portfolio.valueInEther}} ETH =
+                    {{selectedBuyAblePorfolio.portfolio.valueInEther * usd }} USD</p>
+                </div>
+                <div class="col-sm">
+                  <button class="btn btn-custom" *ngIf="trackBuyButton"
+                          (click)="buy(selectedBuyAblePorfolio.portfolio)">Buy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <div *ngIf="trackLiquidateModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " role="document">
+        <div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' "
+             class="modal-content">
+          <div class="modal-header" style="padding: 10px!important;background: #323c49!important;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"
+                    (click)="closeLiquidateModal()">
+              &#10005;
+              <!-- <span aria-hidden="true"><i class="fa fa-times"></i></span> -->
+            </button>
+            <h4 class="modal-title" style="color: white">Liquidate Basket</h4>
+          </div>
+          <div class="modal-body" style="padding: 45px!important;">
+            <table class="table table-bordered" style="color: black!important;">
+              <tr>
+                <th>Token</th>
+                <th>Value</th>
+              </tr>
+              <tr *ngFor="let tokens of selectedPortfolioToken.tokens">
+                <td>{{tokens.symbol}}</td>
+                <td>{{tokens.value}}</td>
+              </tr>
+            </table>
+            <div class="pull-right">
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify"
+                        (click)="liquidate(selectedPortfolioToken);closeLiquidateModal()">Liquidate
+                </button>
+              </div>
+              <br>
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="closeLiquidateModal()">Cancel</button>
+              </div>
+            </div>
+          </div>
+          <p style="margin-top: 16px;text-align: center;color: #382673;">Your basket is liquidate into your Account <a
+            href="https://ropsten.etherscan.io/address/{{userAddress}}">{{userAddress}}</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <div *ngIf="trackCancelModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " role="document">
+        <div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' "
+             class="modal-content">
+          <div class="modal-header" style="    padding: 10px!important;background: #9C27B0!important;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"
+                    (click)="closeCancelModal()"><span aria-hidden="true"><i class="fa fa-times"></i></span>
+            </button>
+            <h4 class="modal-title" style="color: white">Cancel Basket</h4>
+          </div>
+          <div class="modal-body" style="padding: 45px!important;padding-top: 0px!important;">
+            <h3>Token Summary</h3>
+            <table class="table table-responsive table-bordered">
+              <tr>
+                <th>Token</th>
+                <th>Value</th>
+              </tr>
+              <tr *ngFor="let tokens of selectCancelPortfolio.token">
+                <td>{{tokens.Symbol}}</td>
+                <td>{{tokens.value}}</td>
+              </tr>
+            </table>
+            <h5>Cancellation fee {{estimateGas}} </h5>
+            <h4 style="text-align: right">Are you sure want to delete Basket ?</h4>
+            <div class="row pull-right">
+              <button class="btn btn-primary" (click)="CancelPortfolio(selectCancelPortfolio);closeCancelModal()">Yes
+              </button>
+              <button class="btn btn-danger" (click)="closeCancelModal()">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <div *ngIf="insatantBuyModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " role="document">
+        <div [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content':'modal-content' "
+             class="modal-content">
+          <div class="modal-header" style="    padding: 10px!important;
+    background: #323c49!important;">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="z-index: 999;!important;"
+                    (click)="closeInstantbuyModal()">
+              &#10005;
+              <!-- <span aria-hidden="true"><i class="fa fa-times"></i></span> -->
+            </button>
+            <h4 class="modal-title" style="color: white">Token Basket Name : {{selectedPortfolioToken.name}}</h4><br>
+          </div>
+          <div class="modal-body" style="padding: 45px!important;">
+            <table class="table  table-bordered">
+              <tr>
+                <th>Token</th>
+                <th>Value</th>
+              </tr>
+              <tr *ngFor="let tokens of selectedPortfolioToken.tokens">
+                <td>{{tokens.symbol}}</td>
+                <td>{{tokens.value}}</td>
+              </tr>
+            </table>
+            <p><b>ASKING PRICE</b> : {{selectedPortfolioToken.valueInEther}} ETH</p>
+            <p style="font-style: italic;">When you buy this Token Basket, you get ownership of the Basket smart
+              contract which contains the underlying Tokens. Once you liquidate, you will be able to see the underlying
+              Tokens in your account.</p>
+            <div class="pull-right">
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="buy(selectedPortfolioToken);closeInstantbuyModal()">
+                  Buy now
+                </button>
+              </div>
+              <br>
+              <div style="text-align: center;">
+                <button class="btn btn-custom btn-justify" (click)="closeInstantbuyModal()">Cancel</button>
+              </div>
+              <!-- <button class="btn btn-custom btn-justify" (click)="buy(selectedPortfolioToken);closeInstantbuyModal()">Buy now</button>
+              <button class="btn btn-custom btn-justify"  (click)="closeInstantbuyModal()">Cancel</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <div *ngIf="shareModal">
+    <div class="modal fade in portfolio-dialogue" tabindex="-1" role="dialog">
+      <div class="modal-dialog " style="width: 21%!important;" role="document">
+        <div
+          [ngClass]="switchThemeService.switchTheme ? 'modal-content darkThemeModal-Content shareModal':'modal-content' "
+          class="modal-content">
+          <div class="modal-header" style="padding: 10px!important;">
+            <div style="z-index: 999;!important; float: right;cursor: pointer;
+    font-size: 24px;"
+                 (click)="closeShareModal()"><span aria-hidden="true"><i class="fa fa-times"></i></span>
+            </div>
+            <h4 class="modal-title" style="color: white">Share</h4>
+          </div>
+          <div class="modal-body" style="padding: 30px;padding-top: 5px!important;">
+            <div class="input-group">
+              <label *ngIf="isCopied1 !== true" style="cursor: pointer" ngxClipboard [cbContent]="link"
+                     (cbOnSuccess)="isCopied1 = true">Click to copy link</label>
+              <label *ngIf="isCopied1 === true">Link copied</label>
+              <p style="border: none; width: 200px;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background: white;
+    box-shadow: none!important;
+    border-bottom: 1px solid #ccc!important;
+    border-radius: 0px!important;" ngxClipboard [cbContent]="link" (cbOnSuccess)="isCopied1 = true">{{link}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop fade in"></div>
+  </div>
+  <footer></footer>
+</div>

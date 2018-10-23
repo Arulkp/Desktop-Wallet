@@ -1,0 +1,375 @@
+<div *ngIf="wizard1===true" class="darkTheameBoxbackground" >
+  <h3>Step to Create Basket</h3>
+  <div class="row" style="padding-right: 0px;">
+    <div class="col-sm">
+      <div class="card">
+        <p>1.Select Tokens: Select the Tokens that you currently have for which you want to create a Token Basket.</p>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <p>2. Basket creation: A smart contract will be created that will hold the underlying Tokens.</p>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <p>3. Authorization: Authorize the smart contract to enable hold and transfer of the underlying Tokens.</p>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <p>4. Deposit: Deposit the underlying Tokens from your wallet into the Basket smart contract.</p>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="card">
+        <p>5. Publish: Publish the Token Basket onto the Ethereum Blockchain.</p>
+      </div>
+    </div>
+  </div>
+  <div class="contract col-12">
+    <p style="margin-top: 7px;color: #0f9e0f;font-style: italic;">
+      *Every Token Basket is a smart contract. Ownership of the smart contract is transferred when a
+      trade occurs. This is entirely decentralized, and WandX holds no code but the front-end to enable this creation
+      and trade of Token Baskets.
+    </p>
+  </div>
+  <h3>Create Themed Baskets</h3>
+  <div class="row">
+    <div class="col-md-2 marginbtm crsr" >
+      <div class="card">
+        <p  [scrollTo]="place2">Decentralised exchange tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised exchange tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Centralized exchange tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Centralized exchange tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralized identity Tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralized identity Tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralized insurance tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralized identity Tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Debt based token baskets</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Debt based token baskets')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralised supply chain tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised supply chain tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralised storage tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised storage tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralised entertainment tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised entertainment tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Top 8 ERC20 tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Top 8 ERC20 tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm crsr" (click)="createWithThemedToken('marketcap')" [scrollTo]="place2">
+      <div class="card">
+        <p>Low market cap ERC20 tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Low market cap ERC20 tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralised payment system tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised payment system tokens')">Request</div>
+    </div>
+    <div class="col-md-2 marginbtm" matTooltip="Coming soon"
+         [matTooltipPosition]="'above'">
+      <div class="card">
+        <p>Decentralised gaming tokens</p>
+      </div>
+      <div class="overide" (click)="requestForTheme('Decentralised gaming tokens')">Request</div>
+    </div>
+  </div>
+  <br/>
+  <div class="container" style="text-align: center;">
+    <button style="margin-bottom: 10px;" class="sign-publish-portfolio-button" [scrollTo]="place2">Create Your Basket
+    </button>
+    <!--<button  style="margin-bottom: 100px;" class="sign-publish-portfolio-button" matTooltip="Coming Soon"-->
+    <!--[matTooltipPosition]="'above'">Create Utility Basket</button>-->
+    <!--<button  style="margin-bottom: 100px;" class="sign-publish-portfolio-button" matTooltip="Coming Soon"-->
+    <!--[matTooltipPosition]="'above'">Create Debt Basket</button>-->
+    <!--<button  style="margin-bottom: 100px;" class="sign-publish-portfolio-button" matTooltip="Coming Soon"-->
+    <!--[matTooltipPosition]="'above'">Create Themed Basket</button>-->
+  </div>
+</div>
+<div #place2 class="container col-12 darkTheameBoxbackground" >
+  <div class="wizard" *ngIf="wizard1===true">
+    <div class="row ">
+      <div class="col-md-6" style="border-right: 1px solid white;">
+        <h3>Step 1. Create new Basket</h3>
+        <p style="font-size: 13px;color: #64bd63;font-style: italic; margin: 0px 0 6px;;">*Make sure you have <span><a
+          href="" routerLink="/basket/wallet">WXETH</a></span> in the wallet and <span><a href=""
+                                                                                          routerLink="/basket/wallet">WXETH</a></span>
+          is authorized</p>
+        <div class="form-group">
+          <input type="text" placeholder="Basket Title" class="form-control ds" id="name" name="name"
+                 [(ngModel)]="data['portfolioName']" (ngModelChange)="calling(data['portfolioName'])">
+          <p style="color: red">{{error}}</p>
+        </div>
+        <div class="form-group">
+          <input readonly class="form-control ds" placeholder="Basket duration = 6 months">
+        </div>
+        <div class="form-group">
+          <div class="multiselect-holder ds">
+            <angular2-multiselect [data]="itemList" [(ngModel)]="selectedItems" [settings]="settings"
+                                  (onSelect)="OnItemSelect($event)" (onDeSelect)="OnItemDeSelect($event)">
+            </angular2-multiselect>
+          </div>
+        </div>
+        <div class="create-portfolio-assets" *ngIf="portfolio.length > 0">
+          <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Token</p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Balance</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-4">
+              <div class="tokenHeadings">
+                <p>Current Price </p>
+              </div>
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+              <div class="tokenHeadings text-center">
+                <p>Quantity *</p>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-asset-row" title="{{asset.Title}}" *ngFor="let asset of portfolio; let i = index">
+            <div class="row">
+              <div class="col-md-2 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span>{{asset.CoinName}}</span>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span>{{asset.balance | number:'1.1-4'}}</span>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-4 col-xs-4">
+                <div class="tokenHeadings">
+                  <span matTooltip="current price in USD {{asset.priceUSD}}"
+                        [matTooltipPosition]="'above'">{{asset.price}} ETH</span>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-4 col-xs-4">
+                <div class="tokenHeadings text-center">
+                  <input type="number" class="create-portfolio-number-input" [(ngModel)]="portfolio[i].Reqbalance"
+                         (input)="trackWithTokenBalance(portfolio[i].Reqbalance,portfolio[i].balance)"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p *ngIf="totalprice>0"><b>Total</b> <span>{{totalprice | number:'1.1-4'}} ETH</span></p>
+        </div>
+        <div class="form-group">
+          <br/>
+          <!--<div class="form-group" *ngIf="updatePorfolioFlag===false" >-->
+          <!--<b>Asking Price in</b>-->
+          <!--<input type="radio" name="ask" id="sa1" value="WXETH" [checked]="true" [(ngModel)]="data.askingPriceIn" checked (ngModelChange)="getAskingPriceIn(data.askingPriceIn)"> <label for="sa1">WXETH</label>-->
+          <!--</div>-->
+          <div class="form-group">
+            <label>Asking Price (in WXETH)</label>
+            <input type="number" class="form-control ds" [(ngModel)]="data.askingPriceInWand" name="ask"/>
+          </div>
+          <br/>
+          <button class="sign-publish-portfolio-button" (click)="createPortfolio(data)" [disabled]="!isPortfolioValid()"
+                  *ngIf="updatePorfolioFlag===false">Create Basket
+          </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3 style="text-align: center;">Basket Analysis</h3>
+        <!-- <h3 style="margin-top: 30px" *ngIf="showChart === true">Basket Analysis</h3> -->
+        <div class="charts" style="min-height: 100%;max-height: 100%;padding: 20%;">
+          <div id="piechartdiv1" [style.width.%]="100" [style.height.px]="200"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loader" style="width: 100%!important;" *ngIf="showLoader">
+    <div class="loader">
+      <img class="img img-responsive" src="assets/wandex-loading.png" alt=""
+           style="width:100px;margin-left:45%;margin-top:40px;">
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="wizard2===true">
+    <div class="wizard">
+      <app-basket-authorize-token></app-basket-authorize-token>
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="wizard3===true">
+    <div class="wizard">
+      <div class="row">
+        <div class="col-md-6">
+          <h3>Step 3. Deposit Tokens into your Basket</h3>
+          <div style="width: 84%;  margin-top: 18px">
+            <table class="table  table-bordered">
+              <tr>
+                <th>Token</th>
+                <th>Quantity</th>
+                <th>Current Price(ETH)</th>
+              </tr>
+              <tr *ngFor="let token of portfolioTokenWithValue; let i = index">
+                <td>
+                  <p>{{token.symbol}}</p>
+                </td>
+                <td>
+                  <p>{{token.value}}</p>
+                </td>
+                <td>
+                  <p>{{token.currentPrice}}</p>
+                </td>
+              </tr>
+            </table>
+            <p>Total ETH value of tokens <span class="pull-right">{{totalDepositPrice | number:'1.1-4'}} ETH</span></p>
+            <div style="text-align: center">
+              <button class="sign-publish-portfolio-button" (click)="basketDeposit()">Deposit</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3 style="margin-top: 30px" *ngIf="showChart === true">Basket Analysis</h3>
+          <div class="charts" style="max-width: 88%;margin-top: 67px">
+            <div id="piechartdeposite" [style.width.%]="100" [style.height.px]="200"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-12" *ngIf="wizard4===true">
+    <h3 style="margin-left: 33px;">Step 4. Publish Basket </h3>
+    <div class="portfolio-analysis" style="padding: 10px!important; ">
+      <div class="analysis-result">
+        <div class="portfolioAnalysis">
+          <div class="portfolioHeading">
+            <p>Basket Analysis</p>
+          </div>
+          <div class="graph">
+            <div class="row mar0">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="charts" style="max-width: 80%;margin: 0 auto">
+                  <div id="piechartdiv" [style.width.%]="100" [style.height.px]="200"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-header" *ngIf="showdata">
+          <div class="col col-1">Token</div>
+          <div class="col col-2">Quantity</div>
+          <div class="col col-3">Price (ETH)</div>
+          <div class="col col-4">Price (USD)</div>
+        </div>
+        <div class="createdPortfolio" *ngIf="showdata">
+          <div class="table-row" *ngFor="let asset of publishData">
+            <div class="col col-1">{{asset.title}}</div>
+            <div class="col col-2">{{asset.value}}</div>
+            <div class="col col-3">{{asset.alltoken['ETH'] | number:'1.0-4'}}</div>
+            <div class="col col-4">{{asset.alltoken['USD'] | number:'1.0-4'}}</div>
+          </div>
+        </div>
+        <div class="totalValue">
+          <div class="table-row">
+            <div class="col col-1">Total</div>
+            <div class="col col-2">{{totalQuanity}}</div>
+            <div class="col col-3">{{overallETH | number:'1.0-4'}}</div>
+            <div class="col col-4">{{overallUSD | number:'1.0-4'}}</div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center;margin: 30px;">
+        <button class="sign-publish-portfolio-button" (click)="publish()">Publish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup-box" [ngStyle]="{'display':displayGif}">
+  <div class="popup-gif">
+    <div class="popup_header">Please Wait</div>
+    <div class="popup_content">
+      <div class="popup_sub">
+        <img class="img img-responsive gif-img" src="assets/wandex-loading.png" alt=""
+             style="width: 100px;">
+      </div>
+      <div class="gif_footer">Please wait while the transaction confirms on the Blockchain</div>
+    </div>
+  </div>
+</div>
+<div class="popup-box" [ngStyle]="{'display':displayRequest}">
+  <div class="popup-gif" style="height: 35rem!important;width: 37%!important;">
+    <div class="popup_header">Themed Baskets Request</div>
+    <div class="popup_content">
+      <div class="popup_sub" style="text-align: left!important;">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+          <div class="form-group">
+            <label for="willingtopay">Willing to Pay</label>
+            <input id="willingtopay" class="form-control" type="number" placeholder="IN ETH" formControlName="PortfolioPriceInEth">
+            <span class="error" *ngIf="form.get('PortfolioPriceInEth').dirty == true && form.get('PortfolioPriceInEth').errors && form.get('PortfolioPriceInEth').errors.required == true">Willing to Pay is required</span>
+          </div>
+          <div class="form-group">
+            <label for="mark">Mark up for Max</label>
+            <input id="mark" class="form-control" type="number" placeholder="IN ETH" formControlName="PortfolioMaxPriceInEth">
+            <span class="error" *ngIf="form.get('PortfolioMaxPriceInEth').dirty == true && form.get('PortfolioMaxPriceInEth').errors && form.get('PortfolioMaxPriceInEth').errors.required == true">Mark up for Max</span>
+          </div>
+          <div class="form-group">
+            <label for="ExpiryDate">Expiry Date</label>
+            <input id="ExpiryDate" class="form-control" type="text" readonly placeholder="Expiry Date = 1 week">
+          </div>
+          <div class="button-row" style="text-align: center;!important;">
+            <button class="sign-publish-portfolio-button"  type="submit">Submit</button>
+            <button   type="reset" class="sign-publish-portfolio-button" (click)="requestForTheme('exch')">Cancel</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

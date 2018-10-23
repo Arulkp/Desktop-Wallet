@@ -1,0 +1,53 @@
+.container1{
+	padding: 20px;
+	background: #323640;
+	min-height: 100%;max-height: 100%;/*padding-top: 50px;padding-left: 35px;padding-right: 35px;*/
+}
+
+.trback{
+	background: linear-gradient(45deg, #434053 0%, #201E29 100%);
+}
+
+.whitetext{
+	/*padding-top: 0;padding-bottom: 0;*/
+}
+
+.redtext{
+	color: red;/*padding-top: 0;padding-bottom: 0;*/
+}
+
+.greentext{
+	color: green;/*padding-top: 0;padding-bottom: 0;*/
+}
+
+table{
+	text-align: center;
+}
+
+button{
+	/*width: 70%;*/
+    background: none;
+    border-color: #ffffff;
+    color: white;
+    border-radius: 5px;
+    border: 0.5px solid;
+    padding: 5px;
+}
+
+.neo{
+	width: 20px;
+}
+
+p{
+	color: white;
+}
+
+img{
+	width: 95px;
+    background: white;
+}
+
+td {
+	width: 50%;
+	vertical-align: middle;
+}

@@ -1,0 +1,46 @@
+<div class="container col-12 container1">
+<!-- <main> -->
+	<!-- Exchange -->
+	<div class="container row col-12 container21">
+		<!-- <div class="col-2">
+			<div class="tabdiv">
+				<select class="btn1 btn-success1 dropdown-toggle" (change)="handleExchangeSelect()" [(ngModel)]="selectedExchange">
+					<option class="options" value="" disabled="" selected>Select Exchange</option>
+					<option class="options" value="eth">Ether</option>
+					<option class="options" value="neo">NEO</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-4">
+			<exchange-wallet-select></exchange-wallet-select>
+		</div> -->
+		<exchange-wallet-select-inline></exchange-wallet-select-inline>
+		<!-- <div class="col-3">
+			<exchange-platform-token-select *ngIf="selectedExchange == 'eth'"></exchange-platform-token-select>
+			<exchange-platform-token-select-neo *ngIf="selectedExchange == 'neo'"></exchange-platform-token-select-neo>
+		</div> -->
+	</div>
+
+	<exchange-eth *ngIf="selectedExchange == 'eth' && this.selectedWallet.isDecrypted"></exchange-eth>
+	<exchange-neo *ngIf="selectedExchange == 'neo' && this.selectedWallet.isDecrypted"></exchange-neo>
+</div>
+<!-- <div class="popup-box" [ngStyle]="{'display':displayRequest}">
+  <div class="popup-gif">
+    <div class="popup_header">Please Enter your Wallet Password</div>
+    <div class="popup_content">
+      <div class="popup_sub">
+        <div class="gif_footer">
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="password">
+            <small id="passwordWrong" class="form-text text-muted" style="font-size: 40%;color: red !important;"
+                   [ngStyle]="{'display':displayWrongPassword}">Please verify your password.
+            </small>
+          </div>
+          <button class="sign-publish-portfolio-button" (click)="handleWalletPassword()">Confirm</button>
+          <button class="sign-publish-portfolio-button" (click)="requestForTheme(null)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

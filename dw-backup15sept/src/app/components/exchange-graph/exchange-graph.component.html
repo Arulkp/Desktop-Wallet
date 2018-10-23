@@ -1,0 +1,54 @@
+<div class="advanceChart'">
+  <div class="timeDetailAdv row" style="padding-bottom: 10px;">
+    <!-- <div class="col-sm" style="display: inline-block;padding-top: 10px;margin: auto;text-align: center;">
+      <p class="advText">Advanced Graph</p>
+    </div> -->
+    <div class="chartBtn col-sm" style="padding-top: 10px;">
+      <button class="btn btn-secondary col-sm" [ngClass]="{'active': tracKGraph=='line'}" (click)="changeChart('line')">Line Graph</button>
+    </div>
+    <div class="chartBtn col-sm" style="padding-top: 10px;">
+      <button class="btn btn-secondary rightBtn col-sm" [ngClass]="{'active': tracKGraph=='candle'}" (click)="changeChart('candle')">Candle Graph</button>
+    </div>
+    <div class="selectTimeAdv row" style="text-align: center;padding-top: 10px;margin: auto;">
+      <button [ngClass]="{'active': activeBtn=='M'}" (click)="getMinData()">1m</button>
+      <button [ngClass]="{'active': activeBtn=='H'}" (click)="getDayData()">1h</button>
+      <button [ngClass]="{'active': activeBtn=='D'}" (click)="getHoursData()">1d</button>
+    </div>
+  </div>
+  <div class="priceDetail row">
+    <div class="priceValueAdvcChart col-sm row">
+      <div class="ethPrice col-sm">
+        <p>{{currentPrice}} {{selectedMarket?.symbol}}</p>
+        <span>PRICE IN {{selectedMarket?.symbol}}</span>
+      </div>
+      <div class="usdPrice brdrleft col-sm">
+        <p>{{(currentPrice * usd) | number:'1.1-4'}} USD</p>
+        <span>PRICE IN USD</span>
+      </div>
+    </div>
+    <div class="priceValueAdvcChart col-sm row">
+      <div class="ethPrice col-sm">
+        <p>{{highPrice}} {{selectedMarket?.symbol}}</p>
+        <span>HIGH</span>
+      </div>
+      <div class="usdPrice brdrleft col-sm">
+        <p>{{(highPrice * usd) | number:'1.1-4'}} USD</p>
+        <span>HIGH</span>
+      </div>
+    </div>
+    <div class="priceValueAdvcChart col-sm row">
+      <div class="ethPrice col-sm">
+        <p>{{lowPrice}} {{selectedMarket?.symbol}} </p>
+        <span>LOW</span>
+      </div>
+      <div class="usdPrice brdrleft col-sm">
+        <p>{{(lowPrice * usd) | number:'1.1-4'}} USD</p>
+        <span>LOW</span>
+      </div>
+    </div>
+  </div>
+  <div class="advancedGraph">
+    <advanced-chart *ngIf="tracKGraph==='line'"></advanced-chart>
+    <detail-chart *ngIf="tracKGraph!='line'"></detail-chart>
+  </div>
+</div>

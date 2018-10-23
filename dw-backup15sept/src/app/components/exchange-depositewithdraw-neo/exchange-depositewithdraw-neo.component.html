@@ -1,0 +1,42 @@
+<div class="exchange-wallet" style="padding-left: 35px;padding-right: 35px;padding-bottom: 20px;">
+	<!-- exchange-depositewithdraw works! -->
+  <div class="row">
+    <div class="col-6">
+      <p style="color: white;">{{selectedToken?.symbol}} Balance : {{tokenBalance }} </p>
+      <p style="color: white;">{{selectedToken?.symbol}} Balance in Contract : {{balance }} </p>
+    </div>
+    <div class="col-6">
+      <p style="color: white;">{{selectedOfferToken?.symbol}} Balance : {{marketTokenBalance }} </p>
+      <p style="color: white;">{{selectedOfferToken?.symbol}} Balance in Contract : {{marketTokenBalanceIncontract }} </p>
+    </div>
+  </div>
+	<!-- <p style="color: white;">ETH Balance in Smart Contract : {{escrowEtherValue}}</p> -->
+	<hr style="background: white;">
+	<div class="row">
+		<div class="col-6">
+			<input type="number" class="form-control" id="exampleInputEmail1" placeholder="0" [(ngModel)]="amountToDepositOrWithdraw">
+			<span style="color: red" *ngIf="invalidDeposit">Deposit amount should be greater than zero</span>
+		</div>
+    <div class="col-6">
+      <div class="custom-control custom-radio custom-control-inline" (click)="choose(selectedOfferToken)" *ngIf="selectedOfferToken">
+        <input type="radio" id="customRadioInline1" name="customRadioInline1"  class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline1" >{{selectedOfferToken?.symbol}}</label>
+      </div>
+      <div class="custom-control custom-radio custom-control-inline" (click)="choose(selectedToken)" *ngIf="selectedToken">
+        <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
+        <label class="custom-control-label" for="customRadioInline2">{{selectedToken?.symbol}} </label>
+      </div>
+      <p style="color: red" *ngIf="invalidToken">Please select token</p>
+	</div>
+	</div>
+	<br>
+	<br>
+	<div class="row">
+		<div class="col-6">
+			<button class="sign-publish-portfolio-button" (click)="deposit()" [disabled]="depositBtnTrack">Deposit</button>
+		</div>
+		<div class="col-6">
+			<button class="sign-publish-portfolio-button" (click)="withdraw()" [disabled]="withdrawBtnTrack">Withdraw</button>
+		</div>
+	</div>
+</div>

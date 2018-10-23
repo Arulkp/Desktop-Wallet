@@ -1,0 +1,55 @@
+.header {
+	text-align: center;
+	padding: 10px;
+	color: white;
+	background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+}
+
+.loader-container {
+	height: 250px;
+	position:relative;
+}
+.loader-container .loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+table {
+	width: 100%;
+}
+th {
+  padding: 10px;
+  width: 50%;
+  font-size: 15px;
+  /*font-family: helvetica-bold;*/
+}
+
+td {
+	padding: 10px;
+  text-align: center;
+}
+
+.address {
+	word-break: break-all;
+}
+
+.buttons {
+	margin-top: 15px;
+}
+
+.buttons button {
+	width: 49%;
+	padding: 15px;
+	border: 1px solid #ccc;
+}
+
+.cancel {
+	background: white;
+	float : right;
+}
+.confirm {
+	background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+	color: white;
+}

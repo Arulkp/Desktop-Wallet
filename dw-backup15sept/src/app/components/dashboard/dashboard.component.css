@@ -1,0 +1,55 @@
+
+.portfolio-graph {
+	display: inline-block;
+	background: grey;
+	width: 70%;
+}
+.portfolio-breakdown {
+	display: inline-block;
+	background: grey;
+	width: 29%;
+}
+
+.wallet-tabs {
+	display: inline-block;
+	background: grey;
+	width: 70%;
+}
+.recent-activity {
+	display: inline-block;
+	background: grey;
+	width: 29%;
+}
+section {
+	margin-top: 10px;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #007bff00; 
+    border-bottom: 5px solid #4EBCF4;
+}
+
+.nav-pills .nav-link {
+     border-radius: 0; 
+}
+
+.t1{
+	min-height: 770px;max-height: 770px;
+}
+
+.container1{
+	background: #323c49;padding-top: 30px;height:100vh;
+}
+
+.container2{
+	margin-bottom: 20px;
+}
+
+.t2{
+	min-height: 500px;max-height: 500px;overflow-y: hidden;
+}
+
+.t2b{
+	in-height: 500px;max-height: 500px;overflow-y: hidden;background: #323640;padding: 0;
+}

@@ -1,0 +1,34 @@
+.airdrop{
+  padding: 10px;
+  color: white;
+}
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 9px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #7858e4;
+  outline: none;
+  color: white;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #7858e4;
+  color: #7858e4;
+  border: none;
+  cursor: not-allowed;
+}
+.error{
+  color: red;
+}

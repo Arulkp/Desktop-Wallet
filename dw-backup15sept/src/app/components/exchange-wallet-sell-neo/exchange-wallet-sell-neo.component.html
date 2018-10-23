@@ -1,0 +1,138 @@
+<form #sellForm="ngForm" (ngSubmit)="onSubmitSell(sellForm)" novalidate >
+	<div class="exchange-wallet">
+		<div class="row" style="margin-bottom: -10px;">
+			<div class="col-6">
+				<div class="row">
+				  <div class="col-12">
+				  	<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Amount (<b>{{selectedToken?.symbol}}</b>)</span>
+						  </div>
+						  <input type="number" class="form-control"  aria-describedby="basic-addon3" placeholder="Amount" [(ngModel)]="amountToSell" name="sellamount" #sellamount="ngModel" required>
+						  <span class="error" *ngIf="sellamount.invalid && sellamount.touched" style="color: #cc823f;z-index: 1;">Sell amount should be greater than zero</span>
+						</div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Price (<b>{{selectedOfferToken?.name}}</b>)</span>
+						  </div>
+						  <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Price" [(ngModel)]="priceToSell" name="sellprice" #sellprice="ngModel" required>
+						  <span class="error" *ngIf="sellprice.invalid && sellprice.touched" style="color: #cc823f;z-index: 1;">Sell price should be greater than zero</span>
+						</div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Total</span>
+						  </div>
+						  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"  readonly [value]="getSellTotalValue()"/>
+						</div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="row">
+				  <div class="col-12">
+				    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				      <a class="nav-link r1" id="v-pills-home-tab" data-toggle="pill" role="tab">Transaction Summary</a>
+				      <a class="nav-link r2" id="v-pills-profile-tab" data-toggle="pill" role="tab"><div class="exdiv">Selling {{amountToSell}} {{selectedToken?.symbol}} @ {{priceToSell}} {{selectedOfferToken?.symbol}}</div>
+				      	<span>Amount<span class="lspan">{{amountToSell}} {{selectedToken?.symbol}}</span></span></a>
+				      <!-- <a class="nav-link r3" id="v-pills-messages-tab" data-toggle="pill" role="tab">Total<span class="lspan">&#x24;{{USDValue}}</span></a> -->
+				    </div>
+				  </div>
+				</div>
+				<p style="color: white;">{{selectedToken?.symbol}} Balance : {{tokenBalance }} </p>
+				<p style="color: white;">{{selectedToken?.symbol}} Balance in Contract : {{balance }} </p>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-6">
+				<div class="row">
+					<div class="col-12">
+						<div class="enableBtn">
+							<span class="green">Exchange Fee : {{buyerFee | number:'.0-6'}} {{selectedToken?.symbol}} </span>
+	            <!-- <p matTooltip="This authorizes the Tokens to be traded from your Metamask address" [matTooltipPosition]="'above'">Authorize the Tokens to enable creation of Sell Order</p>
+	            <div class="row col-12">
+	            	<div class="checkboxValue row col-sm">
+		              <ui-switch [(ngModel)]="authorize" size="small" name="uiSwitch" (change)="onAuthorizeChange($event)"></ui-switch>
+		              <p>{{selectedToken.symbol}}</p>
+		            </div>
+		            <div class="checkboxValue row col-sm">
+		              <ui-switch *ngIf="!(selectedSourceTokenSymbol === 'WAND')" name="uiSwitch1" size="small" [(ngModel)]="authorizeWand" (change)="onAuthorizeWandChange($event)"></ui-switch>
+		              <p *ngIf="!(selectedSourceTokenSymbol === 'WAND')">WAND</p>
+		            </div>
+	            </div>
+	            <span class="red">*Enabling this would result in reducing the exchange fee <span class="green">Exchange Fee : {{getSellExchangeFee() | number:'.0-6'}} </span></span> -->
+	          </div>
+					</div>
+				  <div class="col-12">
+				  	<!-- <p>Exchange Fee : {{getSellExchangeFee() | number:'.0-6'}} </p> -->
+					    <!-- <div class="custom-control custom-checkbox">
+						  <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="useWandxForFee" name="useWandxForFee">
+						  <label class="custom-control-label" for="customCheck2">Use WAND for fee reduction?<br><span>0.1% fee = 0.009 USD</span></label>
+						</div> -->
+				  </div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="row">
+				  <div class="col-12">
+				    <button class="sign-publish-portfolio-button" type="button" (click)="onSubmitSell(sellForm)">Complete Transaction</button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal" class="popup-box summary-modal" *ngIf="isSellSummaryModalVisible">
+	    <div class="popup-gif modal-content">
+	      <div class="popup_header">
+	        <p>Sell summary for: <span>{{selectedToken.symbol}}</span></p>
+	      </div>
+	      <div class="gif_footer">
+	        <div class="row">
+	          <div class="col-md-6">
+	            <div class="details">
+	              <p>Quantity</p>
+	              <p>Exchange Fee</p>
+	              <p>Price for 1 {{selectedToken.symbol}}</p>
+	            </div>
+	          </div>
+	          <div class="col-md-6">
+	            <div class="value">
+	              <p>{{amountToSell}}</p>
+	              <p>{{getSellExchangeFee() | number : '.0-8'}}</p>
+	              <p>{{priceToSell | number:'1.1-6'}} ETH</p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="reduceExchangeFee">
+	                  <div class="row">
+	                      <div class="col-md-12">
+	                          <p><input type="checkbox" [(ngModel)]="useWandxForFee"> Use <span>Wand Tokens</span> to reduce the exchange fee</p>
+	                      </div>
+	                  </div>
+	              </div>
+	        <div class="totalamt">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <p>Total Price</p>
+	            </div>
+	            <div class="col-md-6">
+	              <div class="totalValue">
+	                <p>{{getSellTotalValue() | number:'1.1-6'}} ETH</p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="executeBtn">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="placeSellOrder()">EXECUTE</button>
+	            </div>
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="isSellSummaryModalVisible = false">CANCEL</button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</form>

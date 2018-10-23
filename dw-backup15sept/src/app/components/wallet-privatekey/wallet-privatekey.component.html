@@ -1,0 +1,31 @@
+<app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+<form [formGroup]="privateKeyForm" (ngSubmit)="onSubmitAddFromPrivateKey()" *ngIf="!showSpinner">
+
+  <div class="form-group">
+    <label for="exampleWalletName1">Private Key</label>
+    <input type="text" class="form-control" id="exampleWalletName1" aria-describedby="privateKey" placeholder="Enter Private Key" formControlName="privateKey" required>
+    <small style="color:red;" *ngIf="privateKeyForm.get('privateKey').dirty == true && privateKeyForm.get('privateKey').errors && privateKeyForm.get('privateKey').errors.required == true">Private Key is required</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleWalletName2">Wallet Name</label>
+    <input type="name" class="form-control" id="exampleWalletName2" aria-describedby="password" placeholder="Enter Wallet Name" formControlName="walletName" required>
+    <small class="form-text text-muted">This is the name given to your wallet.</small>
+    <small style="color:red;" *ngIf="privateKeyForm.get('walletName').dirty == true && privateKeyForm.get('walletName').errors && privateKeyForm.get('walletName').errors.required == true">Wallet Name is required</small>
+    <small style="color:red;" *ngIf="privateKeyForm.get('walletName').dirty == true && privateKeyForm.get('walletName').errors && privateKeyForm.get('walletName').errors.duplicate == true">Wallet Name already exists. Please choose different name</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleWalletName3">Password</label>
+    <input type="password" class="form-control" id="exampleWalletName3" aria-describedby="password" placeholder="Enter Password" formControlName="password" required>
+    <small style="color:red;" *ngIf="privateKeyForm.get('password').dirty == true && privateKeyForm.get('password').errors && privateKeyForm.get('password').errors.required == true">Password is required</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword2">Confirm Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password" formControlName="confirmPassword" required>
+    <small style="color:red;" *ngIf="privateKeyForm.get('confirmPassword').dirty == true && privateKeyForm.get('confirmPassword').errors && privateKeyForm.get('confirmPassword').errors.required == true">Confirm Password is required</small>
+    <small style="color:red;" *ngIf="privateKeyForm.get('confirmPassword').dirty == true && privateKeyForm.get('confirmPassword').errors && privateKeyForm.get('confirmPassword').errors.notmatch == true">Password does not match the confirm password.
+    </small>
+
+  </div>
+  <div><small style="color:red;" *ngIf="walletError">{{walletError}}</small></div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

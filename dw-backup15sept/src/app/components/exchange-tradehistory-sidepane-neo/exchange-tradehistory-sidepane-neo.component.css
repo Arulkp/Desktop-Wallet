@@ -1,0 +1,83 @@
+.exchange-th-side {
+	/*width: 15%;*/
+	background: grey;
+	margin: 10px;
+	display: inline-block;
+}
+
+.trh {
+	color: white;
+    text-align: center;
+}
+
+.trh:hover{
+	background-color: rgba(142, 142, 142, 0.2);
+}
+
+.trh1 {
+	color: white;
+    text-align: center;
+}
+
+.trh1:hover{
+	background-color: #9a4f6f;
+}
+
+/*.container{
+	min-height: 100%;
+	max-height: 100%;
+	background: #2f343f;
+	padding-right: 0px;
+    padding-left: 0px;
+}*/
+
+.container5{
+	min-height: 100%;
+	max-height: 100%;
+	background: #2f343f;
+    overflow-y: scroll;
+}
+
+.tradehistory1{
+	background: #2c2e39;
+	font-weight: 100;
+	/*font-family: 'Source Sans Pro', sans-serif*/;color: white;
+}
+
+.tradehistory2{
+	background: #28262e;
+	font-weight: 100;
+	/*font-family: 'Source Sans Pro', sans-serif*/;
+	color: white;margin: 0;padding: 10px;text-align: left;
+	/*font-weight: 100;*/
+	font-size: 15px;
+}
+
+.tr{
+	background: #2c2e39;/*font-family: 'Source Sans Pro', sans-serif*/;color: white;text-align: center;
+}
+
+.headerinfo{
+	font-size: 15px;
+	/*font-weight: 100;*/
+	padding: 10px;color: #a2a2a2;
+}
+
+.tbody{
+	background-color: #2f343f;
+}
+
+.redtext{
+	font-size: 15px;
+	color: red;/*font-family: 'Source Sans Pro', sans-serif*/;padding-top: 0;padding-bottom: 0;
+}
+
+.whitetext{
+	font-size: 15px;
+	color: white;/*font-family: 'Source Sans Pro', sans-serif*/;padding-top: 0;padding-bottom: 0;
+}
+
+.yellowtext{
+	font-size: 15px;
+	color: #FCFF00;/*font-family: 'Source Sans Pro', sans-serif*/;padding-top: 0;padding-bottom: 0;
+}

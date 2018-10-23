@@ -1,0 +1,94 @@
+.airdrop{
+  padding: 100px;
+  padding-top: 50px;
+  background: #212121;
+  border-radius: 5px;
+  color: white;
+}
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 9px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #7858e4;
+  outline: none;
+  color: white;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #7858e4;
+  color: #7858e4;
+  border: none;
+  cursor: not-allowed;
+}
+.error{
+  color: red;
+}
+
+
+.popup-box {
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 100px;
+  background-color:rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  -webkit-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+}
+
+.popup-box-gif {
+  text-align: center;
+}
+
+.popup-gif {
+  margin: 0 auto;
+  width: 30%;
+  height: 15rem;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 99999;
+}
+
+.popup_header {
+  color: #fff;
+  font-size: 20px;
+  padding: 1rem;
+  text-align: center;
+  border-bottom: .5px solid #333;
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#382673), to(#682382));
+  background-image: gradient(linear, left top, left bottom, from(#382673), to(#682382));*/
+  background: #28272e;
+}
+
+.popup_content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.popup_sub {
+  display: block;
+  font-size: 1.7rem;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.gif_footer {
+  font-size: 2rem;
+}

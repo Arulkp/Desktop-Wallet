@@ -1,0 +1,30 @@
+<div>
+	<div class="container">
+		<div class="row col-12">
+			<div class="col-sm-6">
+				<div *ngIf="!showFullScreen">
+					<div>
+						<button *ngFor="let e of exchanges" [class]="e.isSelected ? 'button selected' : 'button'" (click)="setSelectedExchange(e)">{{e.name}}</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div>
+					<select class="btn1 btn-success1 dropdown-toggle" class="btn1 btn-success1 dropdown-toggle" #selectElem (change)="onSelectWallet()" [(ngModel)]="selectedWallet">
+						<option value="" disabled="" selected="">Select Wallet</option>
+						<option *ngFor="let w of wallets; let i = index" [ngValue]="w" (click)="requestForTheme(w)">{{w.walletName}} - {{w.getAddress()}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="popup-box" *ngIf="displayPopup || showFullScreen">
+	  <div class="popup-gif">
+	    <div class="popup_header">Please select your Exchange and Wallet</div>
+	    <div class="popup_content" style="background: white;">
+	      <exchange-wallet-select [exchangeName]="exchange" [walletAddress]="wallet" [successCallback]="handleSuccess" [cancel]="cancelCallback" [showCancel]="!showFullScreen"></exchange-wallet-select>
+	    </div>
+	  </div>
+	</div>
+</div>

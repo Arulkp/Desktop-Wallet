@@ -1,0 +1,80 @@
+<div  class="WalletBodyHolder darkThemeWalletBodyHolder">
+  <section class="wallet-body" *ngIf="showContent===false">
+    <div class="heading">
+      <p>Current Wallet Balance</p>
+    </div>
+    <div class="ethBalanceValue">
+      <div class="ethInMetamask">
+        <p>{{currentEtherBalance}}</p>
+        <h4>Current ETH Balance in Wallet</h4>
+      </div>
+      <div class="ethInMetamask">
+        <p>{{wxETHBalance}}</p>
+        <h4>Current WXETH Balance in WandX smart contract</h4>
+      </div>
+    </div>
+    <div class="wallet-deposit">
+      <p>Deposit/Withdraw WXETH from your Wallet to be able to buy Basket</p>
+      <p> *WXETH is a ETH wrapper for creating Token Baskets. This is stored in the account from which you deposit ETH.</p>
+      <input class="amount" placeholder="Transaction amount in ETH" type="number" [(ngModel)]="amount" />
+      <div class="deposit">
+        <button matTooltip="Convert your Ether into WXETH to enable creation of Portfolios including Ether" [matTooltipPosition]="'above'" (click)="deposit()">Deposit</button>
+      </div>
+      <div class="withdraw">
+        <button matTooltip="Convert your WXETH back into Ether and deposit it into your Wallet address" [matTooltipPosition]="'above'" (click)="withdraw()">Withdraw</button>
+      </div>
+      <div class="diclaimer">
+        <p>*Deposit or Withdraw connects with the Blockchain, hence may take a while. </p>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="wallet-holder" style="padding: 40px;">
+      <div class="headContent">
+        <div class="heading1 headingColor">
+          <p matTooltip="Shows list of Tokens" [matTooltipPosition]="'above'">Token</p>
+        </div>
+        <div class="heading2 headingColor">
+          <p matTooltip="Shows the balance of the Tokens on your Wallet address" [matTooltipPosition]="'above'">Balance</p>
+        </div>
+        <div class="heading3 headingColor">
+          <p matTooltip="Maximum Tokens that can be traded" [matTooltipPosition]="'above'">Authorized</p>
+        </div>
+        <div class="heading4 headingColor">
+          <p matTooltip="Authorizing Tokens gives your Wallet address permission to trade this Token" [matTooltipPosition]="'above'">Authorize Tokens</p>
+        </div>
+      </div>
+      <div class="headContentValue">
+        <div class="headContent" *ngFor="let tokenStatus of userAccountSummary" >
+          <div *ngIf="tokenStatus.Symbol==='WXETH' ">
+            <div class="heading1">
+              <div class="walletValue">
+                <p>{{tokenStatus.Symbol}}</p>
+              </div>
+            </div>
+            <div class="heading2">
+              <div class="walletValue">
+                <p matTooltip="{{tokenStatus.Balance * usd | number:'1.1-6'}} USD" [matTooltipPosition]="'above'">
+                  {{tokenStatus.Balance | number:'1.1-6'}}
+                </p>
+              </div>
+            </div>
+            <div class="heading3">
+              <div class="walletValue">
+                <p>{{AllowanceBalance}}</p>
+              </div>
+            </div>
+            <div class="heading4" *ngIf="tokenStatus.tokenContract">
+              <div class="wallet-value">
+                <input type="number" value="{{tokenStatus.tokenContract.AuthorizationAmount}}" [(ngModel)]="tokenStatus.tokenContract.AuthorizationAmount" />
+                <button (click)="authorize(tokenStatus.tokenContract)" class="buy">Authorize</button>
+              </div>
+            </div>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

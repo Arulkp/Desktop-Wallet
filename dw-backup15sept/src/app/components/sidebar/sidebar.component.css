@@ -1,0 +1,128 @@
+.sidebar {
+	position: fixed;
+	height: 100vh;
+	background: linear-gradient(45deg, #1B1B1B 0%, #544886 100%);
+	width: 100px;
+	color: white;
+	top: 0;
+	text-align: center;
+	padding-top: 30px;
+	box-shadow: 4px -1px 6px 1px #000000ad;
+}
+
+li a {
+	color: white;
+}
+
+a {
+	/*color: #7d798c;*/
+  color: white;
+	text-decoration: none;
+	padding-top: 15px;
+  border-right: 5px solid transparent;
+}
+
+a:hover{
+	color: white;
+	background: #303030;
+	border-right: 5px solid #4EBCF4;
+}
+
+.cont1 {
+	margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+a.active{
+	color: white;
+	background: #303030;
+	border-right: 5px solid #4EBCF4;
+}
+
+.cont2 {
+	padding-bottom: 20px;
+}
+
+.popup-box {
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  -webkit-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+}
+
+.popup-box-gif {
+  text-align: center;
+}
+
+.popup-gif {
+  margin: 0 auto;
+  width: 30%;
+  height: 20rem;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 99999;
+}
+
+.popup_header {
+  color: #fff;
+  font-size: 20px;
+  padding: 2rem;
+  text-align: center;
+  border-bottom: .5px solid #333;
+  /*background-image: -webkit-gradient(linear, left top, left bottom, from(#382673), to(#682382));
+  background-image: gradient(linear, left top, left bottom, from(#382673), to(#682382));*/
+  background: #28272e;
+}
+
+.popup_content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.popup_sub {
+  display: block;
+  font-size: 1.7rem;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.gif_footer {
+  font-size: 2rem;
+}
+
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 9px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #382673;
+  outline: none;
+  color: white;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}

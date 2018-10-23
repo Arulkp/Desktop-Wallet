@@ -1,0 +1,1698 @@
+.portfolioPage {
+  /*width: 100%;
+  display: inline-block;
+  position: relative;
+  height: 100vh;
+  top: -20px;*/
+  background: #323c49;
+  padding-top: 30px;
+  /*padding-bottom: 50px;*/
+}
+
+.tabcontent {
+  padding-bottom: 10px;
+  min-height: calc(100% - 102px);
+  background: #FAF8F8;
+}
+.active-btn{
+  border-bottom: 3px solid purple!important;
+}
+.tabcontent .tab {
+  display: none;
+}
+
+.tabcontent .tab.active {
+  display: block;
+  position: relative;
+}
+
+.tabcontent .token-holder {
+  background-color: #F3F3F3;
+  padding: 20px 0px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tabcontent .token-holder h5 {
+  font-size: 20px;
+  color: #D1D1D1;
+  margin: 0;
+  display: inline-flex;
+}
+
+.tabcontent .token-holder .input_field {
+  background-color: transparent;
+  border: none;
+  width: 126px;
+  border-bottom: 2px solid #979797;
+}
+
+.tabcontent .token-holder .input_field:focus {
+  outline: none;
+}
+
+.trading-holder {
+  text-align: center;
+  margin-bottom: 0px;
+  padding: 0 20px;
+}
+
+.trading-holder .price {
+  width: 12.66%;
+  display: inline-block;
+  text-align: left;
+  border: 1px solid #E2E2E2;
+  border-radius: 1px;
+  box-sizing: border-box;
+  margin: 0px 15px;
+  min-width: 135px;
+  padding: 6px;
+}
+
+.trading-holder .price span {
+  font-size: 15px;
+  color: #302E2E;
+}
+
+.trading-holder .price p {
+  font-size: 20px;
+  color: #27C359;
+  margin: 0;
+}
+
+.trading-holder .day-holder {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px 15px;
+  width: 12.66%;
+}
+
+.trading-holder .day-holder .price {
+  margin: 0;
+  width: 100%;
+}
+
+.trading-holder .day-holder .price p {
+  text-align: left;
+  font-size: 20px;
+  margin: 0;
+}
+
+.trading-holder .day-holder p {
+  margin: 6px 0 0 0;
+  text-align: right;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+.trading-holder .day-holder p span {
+  font-size: 10px;
+  color: #27C359;
+}
+
+.trading-holder .xrp-btn {
+  background-image: linear-gradient(-180deg, #9EEDC7 0%, #72BDAB 100%);
+  border: 1px solid #E2E2E2;
+  border-radius: 4px;
+  vertical-align: top;
+  height: 55px;
+  text-decoration: none;
+  outline: none;
+}
+
+.trading-holder .xrp-btn p {
+  font-size: 20px;
+  color: #FFFFFF;
+}
+
+.createProfile {
+  background: #4CAF50;
+  border: 1px solid #4caf50 !important;
+  color: #fff;
+  height: 57px;
+  vertical-align: top;
+  font-size: 19px;
+  text-align: center !important;
+  border-radius: 4px !important;
+  float: right;
+  cursor: pointer;
+}
+
+.portfolio-holder {
+  padding: 0 80px 40px;
+}
+
+.myportfolio {
+  min-height: 300px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(217, 217, 217, 0.50);
+}
+
+.order {
+  min-height: 300px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(217, 217, 217, 0.50);
+}
+
+.portfolio-search input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #21e65f;
+  padding: 3px 10px;
+  color: #8a8a8a;
+  width: 200px;
+}
+
+.portfolio-search input:focus {
+  outline: none;
+}
+
+.portfolio-holder .tabs .tablinks:focus {
+  outline: none;
+}
+
+.portfolio-holder .tabs .tablinks {
+  background: none;
+  border: none;
+  margin-right: 5px;
+}
+
+.portfolio-holder .tabs .tablinks.active {
+  border-bottom: 4px solid #000;
+}
+
+.createProfile {
+  background: #4CAF50;
+  border: 1px solid #4caf50 !important;
+  color: #fff;
+  height: 57px;
+  vertical-align: top;
+  font-size: 19px;
+  text-align: center !important;
+  border-radius: 4px !important;
+}
+
+.portfolio-holder .tabs .tablinks p {
+  /*font-family: Helvetica-Bold;*/
+  font-size: 17px;
+  color: #BBBBBB;
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.portfolio-holder .tabs .tablinks.active p {
+  color: #302E2E;
+  outline: none;
+}
+
+.head1 {
+  width: 15%;
+  display: inline-block;
+}
+
+.head2 {
+  width: 18%;
+  display: inline-block;
+}
+
+.head3 {
+  width: 15%;
+  display: inline-block;
+}
+
+.head4 {
+  width: 20%;
+  display: inline-block;
+}
+
+.head5 {
+  width: 20%;
+  display: inline-block;
+}
+
+.head6 {
+  width: 15%;
+  display: inline-block;
+}
+
+.link {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 29px;
+  color: #546172;
+  text-decoration: none;
+}
+
+.portfolio-holder .heading p {
+  /*font-family: Helvetica-bold !important;*/
+  margin-bottom: 5px;
+  font-size: 15px !important;
+  color: #546172 !important;
+}
+
+.portfolio-holder .heading p span {
+  font-size: 10px;
+}
+
+.portfolio-heading {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.portfolio-content {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 15px 0;
+}
+
+.portfolio-content .content p {
+  margin-bottom: 1px;
+  margin: 0;
+  /*font-family: helvetica-light;*/
+  cursor: pointer;
+  font-size: 14px;
+  color: #546172;
+  display: inline-block;
+}
+
+.content .accountName p {
+  color: #fff;
+  word-wrap: break-word;
+  margin-bottom: 0px;
+}
+
+.portfolio-content .content span {
+  /*font-family: helvetica-bold;*/
+  min-width: 30px;
+  color: #5d5353;
+  font-size: 14px;
+  color: #546172;
+}
+
+.portfolio-content .content-value p {
+  font-size: 14px;
+  margin-bottom: 1px;
+  margin: 0;
+  /*font-family: helvetica-bold;*/
+}
+
+.portfolio-content .content-value span {
+  font-size: 10px;
+  /*font-family: helvetica-light;*/
+}
+
+.asset-equivalent {
+  font-size: 11px;
+}
+
+.inpbtn input {
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  padding: 9px;
+  width: 110px;
+}
+
+.inpbtn input:focus {
+  outline: none;
+}
+
+.inpbtn input:hover+.alert {
+  display: block !important;
+}
+
+.inpbtn button {
+  border: 0;
+  color: #fff;
+  padding: 4px 35px;
+  font-size: 16px;
+  border-radius: 4px;
+  background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+}
+
+.inpbtn button:focus {
+  outline: none;
+}
+
+.inpbtn {
+  position: relative;
+}
+
+.inpbtn .alert {
+  display: none;
+  border: 1px solid #D0021B;
+  text-align: left;
+  border-radius: 4px;
+  margin-top: 25px;
+  position: absolute;
+  z-index: 99999999;
+  background: #fff;
+  top: 15px;
+  width: 290px;
+}
+
+.inpbtn .alert p {
+  /*font-family: Helvetica-Oblique;*/
+  font-size: 24px;
+  color: #FFFFFF;
+  background-color: #D0021B;
+  width: 30px;
+  padding: 24px 1px;
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+}
+
+.inpbtn .alert .arrow-right {
+  width: 0px;
+  height: 0px;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 10px solid #D0021B;
+  display: inline-block;
+  margin-left: -5px;
+}
+
+.inpbtn .alert span {
+  font-size: 10px;
+  color: #6F6F6F;
+  line-height: 20px;
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.accountName {
+  background-color: #2c2950;
+  box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.7);
+  padding: 10px 15px;
+  position: absolute;
+  top: 24px;
+  z-index: 9;
+  display: none;
+  width: 220px;
+  border-radius: 5px;
+}
+
+.accountName h3 {
+  margin: 0px 0 6px;
+  font-size: 14px;
+  color: #fff;
+  margin: 8px 0 3px;
+}
+
+.portfolio-content .content {
+  position: relative;
+}
+
+.accountName .arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 7px solid #2c2950;
+  position: absolute;
+  top: -7px;
+}
+
+.content .onhover:hover {
+  color: #4a90e2;
+}
+
+.displayOnHover:hover .accountName {
+  display: block;
+}
+
+.displayOnHover p.onhover {
+  background-color: #eee;
+  padding: 5px 10px;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+}
+
+.displayOnHover {
+  display: inline-block;
+  min-width: 100%;
+}
+
+.btn {
+  border-radius: 4px;
+  color: #fff;
+  font-size: 15px;
+  padding: 9px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn.info {
+  background: #4A90E2;
+}
+
+.btn-outline {
+  border: 1px solid #9b9b9b;
+  color: #9b9b9b;
+  font-size: 20px;
+  text-align: center;
+  width: auto;
+  padding: 4px 10px;
+}
+
+.btn-outline.info {
+  border-color: #4A90E2;
+  color: #4A90E2;
+  background: white;
+}
+
+.input-control {
+  border: 1px solid #e2e2e2;
+  border-radius: 4px;
+  padding: 9px;
+  width: 110px;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+}
+
+.quotes-modal {
+  position: absolute;
+  top: 50px;
+  width: 700px;
+  height: 450px;
+  background-color: rgba(255, 255, 255, 1);
+  left: 50%;
+  margin-left: -350px;
+  overflow-y: auto;
+}
+
+.quotes-header-container {
+  width: 100%;
+  height: 53px;
+  border-bottom: 2px solid #F3F3F3;
+  margin-bottom: 20px;
+}
+
+.quotes-header {
+  height: 33px;
+  font-weight: 300;
+  color: #232323;
+  font-size: 26px;
+  line-height: 33px;
+  margin-top: 9px;
+  margin-left: 40px;
+  float: left;
+}
+
+.quote-row {
+  padding-left: 40px;
+  border-bottom: 2px solid #F3F3F3;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.quote-table-header {
+  padding-left: 40px;
+  border-bottom: 1px solid #EAEAEA;
+  font-size: 12px;
+  font-weight: 300;
+  color: #717171;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  line-height: 15px;
+}
+
+
+/* New styles 12th feb 2017 */
+
+
+/* and portfolio sub header, portfolio base holder*/
+
+body {
+  min-width: initial !important;
+}
+
+.nav-tablinks {
+  list-style: none;
+  padding: 0 60px;
+  background: #F4F4F4;
+  box-shadow: 0 2px 3px 0 rgba(196, 194, 194, 0.50);
+  margin: 0;
+}
+
+.nav-tab {
+  display: inline-block;
+  font-size: 16px;
+  color: #546172;
+  padding: 12px 38px;
+  position: relative;
+  cursor: pointer;
+  outline: 0;
+  font-weight: 600;
+}
+
+.nav-tab.active {
+  color: #652381;
+}
+
+.nav-tab .border-animation {
+  position: absolute;
+  height: 0;
+  border: 2px solid transparent;
+  width: 0;
+  bottom: 0;
+  left: 36px;
+  transition: width .75s, border .75s;
+}
+
+.nav-tab:hover .border-animation,
+.nav-tab.active .border-animation {
+  width: calc(100% - 75px);
+  border-color: #652381;
+}
+
+.portfolio-holder {
+  padding: 25px;
+  background: #FAF8F8;
+}
+
+.portfolio-holder .portfolio {
+  background: white;
+  padding: 25px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 4px 0 rgba(217, 217, 217, 0.50);
+  border-radius: 5px;
+}
+
+
+/* Styles specific to portfolio component */
+
+.search {
+  position: relative;
+  color: #BBBBBB;
+  margin-bottom: 30px;
+}
+
+.search input {
+  width: 100%;
+  background: #FCFCFC;
+  border: 2px solid rgba(191, 191, 191, 0.5);
+  border-radius: 3px;
+  height: 45px;
+  padding: 16px;
+  padding-left: 48px;
+  font-size: 14px;
+  outline: 0;
+  color: #666;
+}
+
+.search i {
+  position: absolute;
+  font-size: 19px;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+}
+
+.search input::-webkit-input-placeholder {
+  font-size: 14px;
+  color: #BBBBBB;
+}
+
+.search input::-moz-placeholder {
+  font-size: 14px;
+  color: #BBBBBB;
+}
+
+.search input:-ms-input-placeholder {
+  font-size: 14px;
+  color: #BBBBBB;
+}
+
+.search input:-moz-placeholder {
+  font-size: 14px;
+  color: #BBBBBB;
+}
+
+.search input::placeholder {
+  font-size: 14px;
+  color: #BBBBBB;
+}
+
+
+/* grid adjustments */
+
+.col-lg-2,
+.col-lg-3,
+.col-lg-4,
+.col-lg-5,
+.col-lg-6,
+.col-lg-7,
+.col-lg-8,
+.col-lg-9,
+.col-lg-10,
+.col-lg-11,
+.col-lg-12 {
+  padding-right: 11px;
+  padding-left: 11px;
+}
+
+.margin-botton22 {
+  margin-bottom: 22px;
+}
+
+.no-portfolio {
+  font-size: 22px;
+  color: #546172;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.loader-portfolio {
+  height: 100px;
+}
+
+.spinner-portfolio {
+  margin: 0;
+  width: 70px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.portfolio-item {
+  background: #FFFFFF;
+  /* given by design */
+  /*box-shadow: 0 2px 4px 0 rgba(217,217,217,0.50);*/
+  box-shadow: 2px 2px 4px 2px rgba(217, 217, 217, 0.50);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 22px;
+  position: relative;
+  height: 290px;
+}
+
+.portfolio-item .asset-summary-popup {
+  display: none;
+  width: 30%;
+  left: 8px;
+  top: 56px;
+  position: absolute;
+  background: rgb(61, 38, 117);
+  border-radius: 5px;
+  text-align: left;
+  color: white;
+  padding: 5px 10px;
+}
+
+.portfolio-item .asset-summary-popup .up-arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid rgb(62, 38, 117);
+  position: absolute;
+  top: -8px;
+  left: 20px;
+}
+
+.portfolio-item .asset-summary-popup .asset {
+  margin: 5px 10px;
+}
+
+.portfolio-item .asset-summary-popup .asset-qty {
+  font-size: 14px;
+}
+
+.portfolio-item .asset-summary-popup .asset-name {
+  font-size: 12px;
+}
+
+.portfolio-item .portfolio-item-heading {
+  margin-bottom: 5px;
+}
+
+.portfolio-item .portfolio-item-heading .name {
+  font-size: 15px;
+  color: #546172;
+  letter-spacing: 0;
+  float: left;
+  cursor: pointer;
+}
+
+.portfolio-item .portfolio-item-heading .compleateName:hover~.asset-summary-popup {
+  display: block;
+}
+
+.portfolio-item .portfolio-item-heading .compleateName:hover .name {
+  color: #fff;
+}
+
+.portfolio-item .portfolio-item-heading .compleateName:hover {
+  background-image: linear-gradient(-180deg, #2f2060 0%, #581e6e 100%);
+  outline-color: #ce8de7;
+  background-color: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.portfolio-item .portfolio-item-heading .current-price {
+  font-size: 18px;
+  color: #546172;
+}
+
+.portfolio-item .portfolio-item-heading .sub-text {
+  font-size: 12px;
+  color: #8097B7;
+  margin-top: 3px;
+}
+
+.portfolio-item .portfolio-item-body {
+  height: 150px;
+  background: #FAF8F8;
+}
+
+.portfolio-item .portfolio-item-footer {
+  padding-top: 10px;
+  text-align: center;
+}
+
+.portfolio-item .portfolio-item-footer .btn {
+  font-size: 16px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  margin: 0 3px;
+}
+
+.portfolio-item input.form-control {
+  height: 40px;
+  display: inline-block;
+  width: auto;
+  width: calc(100% - 170px);
+  vertical-align: middle;
+}
+
+.btn.btn-justify {
+  width: calc(50% - 8px);
+}
+
+.btn-custom {
+  color: #fff;
+  /*background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);*/
+  background: #382673;
+  border-radius: 8px;
+  outline: 0;
+  min-height: 40px;
+}
+
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active {
+  /*background-image: linear-gradient(-180deg, #2f2060 0%, #581e6e 100%);*/
+  background: #382673;
+  outline-color: #ce8de7;
+  color: white;
+}
+
+
+/* Styles for modal in portfolio buy */
+
+.portfolio-dialogue.modal {
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: block;
+  opacity: 1;
+  top: -64px!important;
+}
+
+.portfolio-dialogue .modal-content {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(217, 217, 217, 0.50);
+}
+
+.portfolio-dialogue .modal-backdrop {
+  background-color: rgba(55, 55, 55, 0.88);
+}
+
+.modal-backdrop.in {
+  opacity: 0.45;
+}
+
+.portfolio-dialogue .modal-title {
+  /*font-size: 20px;
+  color: #93A7C3;
+  letter-spacing: 0;
+  font-family: helvetica-light;*/
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.portfolio-dialogue .modal-dialog.modal-lg {
+  width: calc(100% - 90px);
+}
+
+.portfolio-dialogue.modal.fade .modal-dialog {
+  transform: translate(0, 70px);
+}
+
+.portfolio-dialogue .modal-header {
+  border: 0;
+  padding: 0;
+  position: relative;
+}
+
+.portfolio-dialogue .modal-body {
+  padding: 0
+}
+
+.portfolio-choices {
+  padding: 11px 19px;
+  border-bottom: 1px solid #E6E6E6;
+  margin-top: 9px;
+}
+
+.time-selectors {
+  /*font-size: 16px;
+  color: #546172;
+  letter-spacing: 0;
+  position: absolute;
+  right: 50px;
+  top: 15px;*/
+  z-index: 1;
+}
+
+.time-selector {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 30px;
+}
+
+.time-selector span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-55%, -50%);
+}
+
+.time-selector.active {
+  border: 1px solid #6E2385;
+}
+
+.time-selector:hover {
+  border: 1px solid #6E2385;
+}
+
+
+/*ths-container == twenty-hour-summary-container*/
+
+.ths-container {
+  text-align: center;
+}
+
+.ths-container .value {
+  font-size: 20px;
+  color: #546172;
+  letter-spacing: 0;
+  /*font-family: helvetica-light;*/
+  padding: 0 20px;
+}
+
+.ths-container .sub-text {
+  font-size: 12px;
+  color: #8097B7;
+  /*font-family: helvetica-light;*/
+}
+
+
+/* ths == twenty-hour-summary*/
+
+.ths-container .ths {
+  padding: 15px;
+}
+
+.right-border {
+  border-right: 1px solid #E6E6E6;
+}
+
+.portfolio-dialogue .twenty-four {
+  border-bottom: 2px solid #ddd;
+}
+
+.portfolio-dialogue .stock-graph {
+  height: 400px;
+  background: white;
+  padding: 25px;
+  position: relative;
+}
+
+.coin-details {
+  border-bottom: 1px solid #E6E6E6;
+  padding: 50px 50px 30px;
+  height: 250px;
+}
+
+.coin-details .legend {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  background: red;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.coin-details .legend p {
+  margin: -4px 18px;
+}
+
+.tokenData .heading p {
+  font-size: 20px;
+  /*font-family: helvetica-light;*/
+  color: #93A7C3;
+}
+
+.coin-details .piechart {
+  width: 320px;
+  position: absolute;
+  top: -50px;
+  right: 20px;
+}
+
+.user-actions {
+  background: #F7F7F7;
+  box-shadow: 0 2px 4px 0 rgba(217, 217, 217, 0.50);
+  border-radius: 0 0 5px 5px;
+  padding: 20px 50px;
+}
+
+.owner-ac {
+  display: inline-block;
+}
+
+.owner-ac p {
+  /*font-size: 18px;
+  color: #93A7C3;
+  letter-spacing: 0;
+  font-family: helvetica-light;*/
+  padding-left: 10px;
+  border-left: 1px solid #eee;
+}
+
+.owner-ac p a {
+  color: #000;
+  font-size: 16px;
+}
+
+.user-actions .prices {
+  display: inline-block;
+  padding-right: 40px;
+}
+
+.user-actions .prices .heading {
+  font-size: 20px;
+  color: #93A7C3;
+  letter-spacing: 0;
+  /*font-family: helvetica-light;*/
+  display: inline-block;
+  margin: 0;
+}
+
+.user-actions .prices p {
+  display: inline-block;
+  font-size: 16px;
+  /*font-family: helvetica-light;*/
+}
+
+.user-actions .input-actions {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 70%;
+}
+
+.input-actions input.form-control {
+  width: 40%;
+  display: inline-block;
+  vertical-align: middle;
+  height: 40px;
+  margin-right: 13px;
+  max-width: 250px;
+}
+
+.conditions-apply {
+  margin-top: 15px;
+  color: #4A90E2;
+  font-style: italic;
+}
+
+.conditions-apply h4 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.conditions-apply span {
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.compleateName {
+  background-color: #eee;
+  border: 1px solid #d2d2d2;
+  display: inline-block;
+  padding: 6px 16px 6px 6px;
+  border-radius: 5px;
+  width: 170px;
+}
+
+.currentPrice {
+  display: inline-block;
+  float: right;
+}
+
+.darkTheamebackgroundColor {
+  background-color: #323c49;
+  box-shadow: none !important;
+}
+
+.darkTheamebackgroundColor .nav-tab,
+.darkTheamebackgroundColor .nav-tab.active {
+  color: #d4d4d4;
+}
+
+.darkTheamebackgroundColor .nav-tab:hover .border-animation,
+.darkTheamebackgroundColor .nav-tab.active .border-animation {
+  border-color: #ffff;
+}
+
+.darkTheameBoxbackground {
+  background: #24292f !important;
+  box-shadow: none !important;
+}
+.darkTheamebackgroundColor .portfolio-item-body {
+  background: #24292f;
+}
+
+.darkTheamebackgroundColor .portfolio-item-heading .current-price {
+  color: #d4d4d4;
+}
+
+.darkTheamebackgroundColor .heading p {
+  color: #8097B7 !important;
+}
+
+.tokenData .totalValue p {
+  font-size: 16px;
+  /*font-family: helvetica-light;*/
+  margin: 0;
+}
+
+.darkTheamebackgroundColor .content p {
+  color: #d4d4d4;
+}
+
+.darkTheamebackgroundColor .link {
+  color: #d4d4d4;
+}
+
+.darkTheamebackgroundColor .displayOnHover p.onhover {
+  background-color: #464646;
+  min-width: 100%;
+}
+
+.darkTheamebackgroundColor .compleateName {
+  background-color: #24292f;
+  border: 1px solid transparent;
+}
+
+.darkTheamebackgroundColor .portfolio-item .portfolio-item-heading .name {
+  color: #d4d4d4;
+}
+
+.footer {
+  background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+  position: absolute;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.footer .footer-title {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+  font-weight: bold;
+  /*font-family: helvetica-bold;*/
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  /*font-family: helvetica-light;*/
+  color: #f3f3f3;
+}
+
+.footer p a {
+  color: #f3f3f3;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.social-icons a {
+  text-decoration: none;
+  margin: 8px;
+}
+
+#myBtn1 {
+  cursor: pointer;
+}
+
+.close1 button {
+  padding: 12px 25px !important;
+  color: #fff;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.dropbtn {
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #35325a;
+  min-width: 100px;
+  z-index: 1;
+  border-radius: 6px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.7);
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 5px 16px;
+  text-decoration: none;
+  display: block;
+  /*font-family: helvetica-light, Arial, sans-serif;*/
+}
+
+.dropdown-content a:hover {
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+.mar0 {
+  margin: 0;
+}
+
+.chartTheme {
+  margin: 10px 25px 50px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.chartTheme .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 25px;
+}
+
+.chartTheme .switch input {
+  display: none;
+}
+
+.chartTheme .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #382673;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.chartTheme .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.chartTheme input:checked+.slider {
+  background-color: #efefef;
+}
+
+.chartTheme input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+.chartTheme input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(37px);
+}
+
+
+/*------ ADDED CSS ---------*/
+
+.chartTheme .slider:after {
+  content: 'Night';
+  color: white;
+  display: block;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 64%;
+  font-size: 9px;
+  font-family: Verdana, sans-serif;
+}
+
+.chartTheme input:checked+.slider:after {
+  content: 'Day';
+  color: #382673;
+  left: 40%;
+}
+
+.darkTheameBoxbackground .search input {
+  background: #464646;
+  color: #fff;
+}
+
+button.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.bdrbtm {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.tokenDataValue p {
+  font-size: 15px;
+  /*font-family: helvetica-light;*/
+}
+
+.tokenData .totalValue p {
+  font-size: 16px;
+  /*font-family: helvetica-light;*/
+  margin: 0;
+}
+
+
+/* css for dark theme modal */
+
+.darkThemeModal-Content {
+  /*background-color: #464646;*/
+  background-color: white;
+  color: black;
+}
+.darkThemeModal-Content  p{
+  color: black;
+}
+
+.darkThemeModal-Content .stock-graph,
+.darkThemeModal-Content .user-actions {
+  background-color: #24292f
+}
+
+.darkThemeModal-Content .modal-title,
+.darkThemeModal-Content .owner-ac p,
+.darkThemeModal-Content .owner-ac p a,
+.darkThemeModal-Content .time-selectors,
+.darkThemeModal-Content .ths-container .value,
+.darkThemeModal-Content .ths-container .sub-text,
+.darkThemeModal-Content .tokenData .heading p,
+.darkThemeModal-Content .coin-details .legend p,
+.darkThemeModal-Content .tokenDataValue p,
+.darkThemeModal-Content .tokenData .totalValue p,
+.darkThemeModal-Content .user-actions .prices .heading,
+.darkThemeModal-Content .user-actions .prices p,
+.darkThemeModal-Content .conditions-apply h4,
+.darkThemeModal-Content .conditions-apply span {
+  color: #fff
+}
+
+.darkThemeModal-Content .form-control {
+  background-color: #464646;
+  color: #fff;
+}
+
+@media screen and (max-width:767px) {
+  .modal-content {
+    width: 355px;
+  }
+  .portfolio-choices {
+    padding: 10px 15px;
+    margin-top: 20px;
+  }
+  .portfolio-choices {
+    border-bottom: none;
+  }
+  .modal-dialog .modal-title {
+    font-size: 20px;
+  }
+  .owner-ac p {
+    font-size: 20px;
+    padding-left: 0;
+  }
+  .owner-ac p a {
+    font-size: 14px;
+  }
+  .time-selectors {
+    margin-top: 85px;
+  }
+  .time-selector {
+    margin: 0 34px;
+  }
+  .tokenData .heading p {
+    font-size: 12px;
+  }
+  .coin-details {
+    padding: 20px 4px 0px;
+    height: 180px;
+  }
+  .tokenDataValue p,
+  .tokenData .totalValue p {
+    font-size: 12px;
+  }
+  .ths-container .value {
+    font-size: 13px;
+  }
+  .ths-container .sub-text {
+    font-size: 10px;
+  }
+  .heading {
+    padding: 10px 10px;
+  }
+  .bdrbtm {
+    padding: 0px 10px;
+  }
+  .coin-details .piechart {
+    top: 0;
+    right: 30px;
+  }
+  .coin-details .piechart {
+    width: 310px;
+  }
+  .right-border {
+    border-right: none;
+  }
+  .ths-container .ths {
+    padding: 0px;
+  }
+  .user-actions {
+    box-shadow: none;
+    border-radius: 0px;
+    padding: 0px;
+    margin: 190px 0px 0px 0px;
+    padding: 10px 0px 0px 10px;
+  }
+  .user-actions .prices .heading {
+    font-size: 20px;
+  }
+  .user-actions .prices p {
+    font-size: 17px;
+  }
+  .conditions-apply h4 {
+    font-size: 15px;
+  }
+  .conditions-apply span {
+    font-size: 12px;
+  }
+  .portfolioPage {
+    width: 100%;
+    left: 0;
+  }
+  .nav-tablinks {
+    padding: 50px 10px 10px 0px;
+  }
+  .nav-tab {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+  .nav-tab.active .border-animation {
+    border-color: #fff;
+  }
+  .portfolio-holder .portfolio {
+    padding: 10px;
+  }
+  .portfolio-holder {
+    padding: 10px;
+  }
+  .search input {
+    width: 100%;
+  }
+  .container-fluid {
+    padding: 30px 0px 0px 0px;
+  }
+  .portfolio-item .portfolio-item-heading .name {
+    font-size: 14px;
+  }
+  .portfolio-item .portfolio-item-heading .sub-text,
+  .portfolio-item .portfolio-item-heading .current-price {
+    font-size: 10px;
+  }
+  .user-actions .input-actions {
+    width: 100%;
+  }
+  .input-actions input.form-control {
+    width: 100%;
+    margin-right: 0px;
+    margin-left: 60px;
+  }
+  .btn {
+    margin-left: 120px;
+    margin-top: 10px;
+  }
+  .content {
+    height: 45px;
+    padding: 10px 0;
+  }
+  .heading {
+    height: 45px;
+    padding: 10px 0;
+  }
+  .responsiveBox {
+    padding: 0px 10px;
+    margin-bottom: 20px;
+  }
+  .myportfolio {
+    padding: 0px;
+  }
+  .bdrryt {
+    border-right: 1px solid #eee;
+  }
+  .portfolio-heading-responsive {
+    border-radius: 6px;
+    box-shadow: 0 0px 4px 0 rgba(217, 217, 217, 0.50);
+  }
+  .portfolio-content {
+    border-bottom: none;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:991px) {
+  .nav-tablinks {
+    padding: 0px;
+  }
+  .compleateName {
+    padding: 6px 20px 6px 10px;
+    width: 118px;
+  }
+  .portfolio-item .portfolio-item-heading .current-price {
+    font-size: 16px;
+  }
+  .portfolio-item .portfolio-item-heading .sub-text {
+    font-size: 11px;
+  }
+  .portfolio-item .portfolio-item-footer .btn {
+    font-size: 11px;
+  }
+  .coin-details .piechart {
+    width: 320px;
+    top: 20px;
+    right: -30px;
+  }
+  .tokenData .heading p {
+    font-size: 18px;
+  }
+  .user-actions .prices .heading {
+    font-size: 17px;
+  }
+  .head1 {
+    width: 13%;
+  }
+  .portfolio-content .content p {
+    font-size: 12px;
+  }
+  .portfolio-holder .heading p {
+    font-size: 13px !important;
+  }
+}
+
+@media screen and (min-width:992px) and (max-width:1024px) {
+  .nav-tab {
+    padding: 12px 16px;
+  }
+  .nav-tab:hover .border-animation,
+  .nav-tab.active .border-animation {
+    width: calc(100% - 33px);
+  }
+  .nav-tab .border-animation {
+    left: 17px;
+  }
+  .chartTheme {
+    margin: 12px 12px 38px;
+  }
+  .head1,
+  .head2,
+  .head3,
+  .head4,
+  .head5,
+  .head6 {
+    width: 24%;
+  }
+  .head1 {
+    text-align: left
+  }
+  .portfolio-heading {
+    text-align: left;
+  }
+  .portfolio-content {
+    text-align: left;
+  }
+  .portfolio-dialogue .modal-title,
+  .owner-ac p {
+    font-size: 14px;
+  }
+  .owner-ac p a,
+  .time-selectors,
+  .conditions-apply p {
+    font-size: 12px;
+  }
+  .portfolio-choices {
+    padding: 17px 16px;
+  }
+  .ths-container .value,
+  .tokenData .totalValue p,
+  .user-actions .prices,
+  .user-actions .prices .heading,
+  .user-actions .prices p {
+    font-size: 14px;
+  }
+  .ths-container .sub-text,
+  .tokenDataValue p {
+    font-size: 12px;
+  }
+  .input-actions input.form-control {
+    height: 30px;
+  }
+  .btn-custom {
+    min-height: 30px;
+  }
+  .btn {
+    padding: 5px 20px;
+    font-size: 12px;
+  }
+  .conditions-apply h4 {
+    font-size: 13px;
+  }
+  .myportfolio {
+    padding: 10px 60px 30px 20px;
+  }
+  .portfolio-holder .heading p {
+    font-size: 10px !important;
+  }
+  .tokenData .heading p {
+    font-size: 16px;
+  }
+}
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 7px 9px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #7858e4;
+  outline: none;
+  color: white;
+  min-width: 50%;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}
+.newBtn{
+  border-radius: 0px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #382673;
+  outline: none;
+  color: white;
+}
+.shareIcon{
+  cursor: pointer;
+  font-size: 28px;
+  position: absolute;
+  color: #682382;
+  right: 9%;
+  font-weight: inherit;
+  bottom: 10%;
+}
+.shareModal p{
+  color: #000;
+}
+
+

@@ -1,0 +1,144 @@
+<form #sellForm="ngForm" (ngSubmit)="onSubmitSell(sellForm)" novalidate >
+	<div class="exchange-wallet">
+		<div class="row" style="margin-bottom: -10px;">
+			<div class="col-sm">
+				<!-- <div class="row">
+					Eth Wallet Balance {{ethWalletBalance | number:'1.1-3'}}
+					{{selectedPlatformToken?.symbol}} Wallet Balance {{platformTokenWalletBalance | number:'1.1-3'}}
+				</div> -->
+				<div class="row">
+				  <div class="col-12">
+				  	<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Quantity ({{selectedPlatformToken?.symbol}})</span>
+						  </div>
+						  <input type="number" class="form-control"  aria-describedby="basic-addon3" placeholder="Quantity" [(ngModel)]="amountToSell" name="sellamount" #sellamount="ngModel" required>
+						  <span class="error" *ngIf="sellamount.invalid && sellamount.touched" style="color: #cc823f;z-index: 1;font-size:11px;">Sell quantity should be greater than zero</span>
+						</div>
+						<div class="input-group mb-3">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Price ({{selectedOfferToken?.symbol}})</span>
+						  </div>
+						  <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Price" [(ngModel)]="priceToSell" name="sellprice" #sellprice="ngModel" required>
+						  <span class="error" *ngIf="sellprice.invalid && sellprice.touched && sellprice.value <= 0" style="color: #cc823f;z-index: 1;font-size:11px;">Sell price should be greater than zero</span>
+						</div>
+						<div class="input-group mb-1">
+						  <div class="input-group-prepend">
+						    <span class="input-group-text" id="basic-addon3">Total</span>
+						  </div>
+						  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="78653292 ETH" readonly [value]="getSellTotalValue() | number : '.0-6'" />
+						</div>
+						<div>
+							<p class="mb-1" style="color: white;">Eth Wallet Balance {{ethWalletBalance | number:'1.1-3'}}</p>
+							<p class="mb-2" style="color: white;">{{selectedPlatformToken?.symbol}} Wallet Balance {{platformTokenWalletBalance | number:'1.1-3'}}</p>
+						</div>
+				  </div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="row">
+				  <div class="col-12">
+				    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				      <a class="nav-link r1" id="v-pills-home-tab" data-toggle="pill" role="tab">Transaction Summary</a>
+				      <a class="nav-link r2" id="v-pills-profile-tab" data-toggle="pill" role="tab">
+				      	<span>Quantity<span class="lspan">{{amountToSell}} {{selectedPlatformToken?.symbol}}</span></span>
+				      	<div>Price<span class="lspan">{{priceToSell}} {{selectedOfferToken?.symbol}}</span></div>
+				      </a>
+				      <a class="nav-link r3" id="v-pills-messages-tab" data-toggle="pill" role="tab">Total<span class="lspan">{{getSellTotalValue()}} {{selectedOfferToken?.symbol}}</span></a>
+				    </div>
+				    <span class="red" style="font-size: 15px;">*Enabling this would result in reducing the exchange fee <span class="green">Exchange Fee : {{getSellExchangeFee() | number:'.0-6'}} </span></span>
+				  </div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm">
+				<div class="row">
+					<div class="col-sm">
+						<div class="enableBtn">
+	            			<p matTooltip="This authorizes the Tokens to be traded from your Wallet address" [matTooltipPosition]="'above'" style="margin-bottom: 0px;">Authorize the Tokens to enable creation of Sell Order</p>
+	            			<div class="row col-12">
+	            				<div class="checkboxValue row col-sm">
+		              				<ui-switch [(ngModel)]="authorize" size="small" name="uiSwitch" (change)="onAuthorizeChange($event)"></ui-switch>
+		              				<p>{{selectedPlatformToken.symbol}}</p>
+		            			</div>
+		            			<div class="checkboxValue row col-sm">
+			              			<ui-switch *ngIf="!(selectedPlatformToken.symbol === 'WAND')" name="uiSwitch1" size="small" [(ngModel)]="authorizeWand" (change)="onAuthorizeWandChange($event)"></ui-switch>
+			              			<p *ngIf="!(selectedPlatformToken.symbol === 'WAND')">WAND</p>
+			            		</div>
+		            		</div>
+			          	</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm">
+				<div class="custom-control custom-checkbox">
+				  <input type="checkbox" class="custom-control-input" id="customCheck2" [(ngModel)]="useWandxForFee" name="useWandxForFee">
+				  <label class="custom-control-label" for="customCheck2">
+				  	Use WAND for fee reduction<span>0.1% fee = 0.009 USD</span>
+				  </label>
+				</div>
+				<br>
+				<div class="row">
+				  <div class="col-12">
+				    <button class="sign-publish-portfolio-button" type="submi">Complete Transaction</button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal" class="popup-box summary-modal" *ngIf="isSellSummaryModalVisible">
+	    <div class="popup-gif modal-content">
+	      <div class="popup_header">
+	        <p>Sell summary for: <span>{{selectedPlatformToken.symbol}}</span></p>
+	      </div>
+	      <div class="gif_footer">
+	        <div class="row">
+	          <div class="col-md-6">
+	            <div class="details">
+	              <p>Quantity</p>
+	              <p>Exchange Fee</p>
+	              <p>Price for 1 {{selectedPlatformToken.symbol}}</p>
+	            </div>
+	          </div>
+	          <div class="col-md-6">
+	            <div class="value">
+	              <p>{{amountToSell}}</p>
+	              <p>{{getSellExchangeFee() | number : '.0-8'}}</p>
+	              <p>{{priceToSell | number:'1.1-6'}} ETH</p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="reduceExchangeFee">
+              	<div class="row">
+                  	<div class="col-md-12">
+                      	<p style="font-size: 12px;"><input style="vertical-align: text-bottom;margin-right: 8px;" type="checkbox" [(ngModel)]="useWandxForFee" name="wandxfee"> Use <span>Wand Tokens</span> to reduce the exchange fee</p>
+                  	</div>
+              	</div>
+	        </div>
+	        <div class="totalamt">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <p>Total Price</p>
+	            </div>
+	            <div class="col-md-6">
+	              <div class="totalValue">
+	                <p>{{getSellTotalValue() | number:'1.1-6'}} ETH</p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="executeBtn">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="placeSellOrder()">EXECUTE</button>
+	            </div>
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="isSellSummaryModalVisible = false">CANCEL</button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</form>

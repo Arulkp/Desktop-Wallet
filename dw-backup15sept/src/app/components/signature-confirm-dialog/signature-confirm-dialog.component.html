@@ -1,0 +1,19 @@
+<div>
+	<h4 class="header">Signature Request</h4>
+	<table border="1">
+		<tbody>
+			<tr>
+				<th>Signatory</th>	<td class="address">{{from}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<span class="title">Message</span>
+		<span class="message">{{txdata}}</span>
+	</div>
+	<div class="buttons">
+		<button (click)="confirm()" class="confirm">Sign</button> <button (click)="cancel()" class="cancel">Cancel</button>
+	</div>
+</div>
+
+

@@ -1,0 +1,41 @@
+.container1{
+	color: white;
+	padding: 20px;
+	background: #323640;
+	min-height: 100%;max-height: 100%;/*padding-top: 50px;padding-left: 35px;padding-right: 35px;*/
+}
+
+ul{
+	list-style: none;
+}
+
+.container2{
+	min-height: 100%;
+    max-height: 100%;
+    background: #212529;
+    max-width: 48%;
+    margin: 1%;
+    padding: 30px;
+}
+
+.containerfluid1{
+	min-height: 350px;
+    max-height: 350px;
+}
+
+.row1{
+	min-height: 350px;
+    max-height: 350px;
+}
+
+img{
+	width: 20px;
+}
+
+li {
+	margin-bottom: 20px;
+}
+
+.button1 {
+	width: 50%;
+}

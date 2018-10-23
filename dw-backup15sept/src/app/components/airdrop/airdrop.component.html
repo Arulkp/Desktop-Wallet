@@ -1,0 +1,70 @@
+<div class="airdrop">
+  <!-- <h2>Airdrop Registration</h2> -->
+  <h2 style="text-align: center;">WandX 300 WANDNEO <br> Airdrop Completion Form</h2>
+  <br>
+  <br>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <div class="form-group">
+    <!-- <label for="willingtopay">NEO Address</label> -->
+    <label for="willingtopay">Step 1: Enter your WandX NEO Wallet Address</label>
+    <select formControlName="NEO" class="btn1 btn-success1 dropdown-toggle form-control" id="willingtopay" (change)="changeNeoAddress()" [(ngModel)]="selectedWallet" >
+      <option *ngIf="!wallets || !wallets.length" value="" disabled="" selected="">Please create a NEO Wallet First</option>
+      <option value="" disabled="" selected="">Select NEO Wallet</option>
+      <option *ngFor="let w of wallets; let i = index" [ngValue]="w"  >{{w.walletName}} - {{w.getAddress()}}</option>
+    </select>
+    <div *ngIf="form.controls['NEO'].touched && !form.controls['NEO'].valid">
+      <span class="error" *ngIf="form.controls['NEO'].hasError('required') ">NEO Address is required</span>
+      <span class="error" *ngIf="form.controls['NEO'].hasError('minLength') ">NEO Address max length is 34</span>
+    </div>
+    <span class="error" *ngIf="alredayExist" >This NEO address is already registered for the airdrop. If you want to update your info, please fill out the form again.</span>
+  </div>
+  <div class="form-group">
+    <!-- <label for="mark">Telegram Id</label> -->
+    <label for="willingtopay">Step 2: Enter your Telegram ID</label>
+    <input id="mark" class="form-control" type="text" placeholder="Telegram ID" formControlName="Telegram">
+    <div *ngIf="form.controls['Telegram'].touched && !form.controls['Telegram'].valid">
+    <span class="error" *ngIf="form.controls['Telegram'].hasError('required') ">Telegram id is required</span>
+    </div>
+  </div>
+  <div class="form-group">
+    <!-- <label for="Email">Email Id</label> -->
+    <label for="willingtopay">Step 3: Enter your E-Mail Address</label>
+    <input id="Email" class="form-control" type="text" formControlName="Email" placeholder="Email">
+    <div *ngIf="form.controls['Email'].touched && !form.controls['Email'].valid">
+    <span class="error" *ngIf="form.controls['Email'].hasError('required') ">Email address is required</span>
+    <span class="error" *ngIf="form.controls['Email'].hasError('email')">Email address is invalid</span>
+    </div>
+  </div>
+  <br>
+  <div class="button-row" style="text-align: center;!important;">
+    <!-- <button class="sign-publish-portfolio-button"  type="submit">Submit</button> -->
+    <button class="sign-publish-portfolio-button"  type="submit">Confirm</button>
+  </div>
+  <br>
+</form>
+<h5>Additional Notes</h5>
+<ul>
+  <li>We will verify your e-mail address and previously submitted information and send a confirmation e-mail within two weeks of successful registration</li>
+  <li>Airdrop distribution will occour on October 10th</li>
+  <li>Please find the 1:1 WAND:WANDNEO registration form on the WandX Website</li>
+  <li>Incase you dont have any NEO Wallet Address please create one.</li>
+</ul>
+</div>
+
+<!-- <div class="airdrop">
+  <div class="container" style="text-align: center;background: #212121;border-radius: 5px;padding-top: 20px;padding-bottom: 20px;">
+    <h3 style="color: green;">You have already registered for an Airdrop!</h3>
+    <p>You will get a notification soon on the Desktop App and also on your email.</p>
+  </div>
+</div> -->
+
+ <div class="popup-box" *ngIf="airdropSuccess">
+  <div class="popup-gif">
+    <div class="popup_header">Notification</div>
+    <div class="popup_content" style="background: white;">
+      <h3 style="color: green;">Thank You for registering for Airdrop !</h3>
+      <p>You will get a notification via email or on the desktop wallet soon.</p>
+      <button class="btn btn-dark text-center" (click)="airdropSuccess=false">Cancel</button>
+    </div>
+  </div>
+</div>

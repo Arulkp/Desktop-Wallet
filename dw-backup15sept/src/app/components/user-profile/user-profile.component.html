@@ -1,0 +1,41 @@
+<div class="airdrop">
+  <h2>Profile</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="willingtopay">Name</label>
+      <input id="willingtopay" class="form-control" type="text" placeholder="Address" formControlName="Name">
+      <div *ngIf="form.controls['Name'].touched && !form.controls['Name'].valid">
+        <span class="error" *ngIf="form.controls['Name'].hasError('required') ">Name is required</span>
+      </div>
+      <!--
+          <span class="error" *ngIf="form.get('NEO').dirty == true && form.get('NEO').errors && form.get('NEO')?.errors.required == true">NEO Address is required</span>
+      -->
+    </div>
+    <div class="form-group">
+      <label for="Email">Email Id</label>
+      <input id="Email" class="form-control" type="text" formControlName="Email" placeholder="Email">
+      <div *ngIf="form.controls['Email'].touched && !form.controls['Email'].valid">
+        <span class="error" *ngIf="form.controls['Email'].hasError('required') ">Email address is required</span>
+        <span class="error" *ngIf="form.controls['Email'].hasError('email')">Email address is invalid</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Ethereum">Password</label>
+      <input id="Ethereum" class="form-control" type="password" formControlName="Password" placeholder="Password">
+      <div *ngIf="form.controls['Password'].touched && !form.controls['Password'].valid">
+        <span class="error" *ngIf="form.controls['Password'].hasError('required') ">Password is required</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="Ethereum">Confirm password</label>
+      <input id="Confirm" class="form-control" type="password" formControlName="Confirm" placeholder="Confirm Password">
+      <div *ngIf="form.controls['Confirm'].touched && !form.controls['Confirm'].valid">
+        <span class="error" *ngIf="form.controls['Confirm'].hasError('required') ">Confirm Password is required</span>
+        <span class="error" *ngIf="notMatch ">Confirm Password not match</span>
+      </div>
+    </div>
+    <div class="button-row" style="text-align: center;!important;">
+      <button class="sign-publish-portfolio-button" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

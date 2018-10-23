@@ -1,0 +1,28 @@
+<div>
+  <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+</div>
+<div class="background" *ngIf="showSpinner==false">
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr class="trback">
+        <th scope="col">Quantity</th>
+        <th scope="col">Price(ETH)</th>
+        <th scope="col">Total(ETH)</th>
+        <th scope="col">Order Type</th>
+        <th scope="col">Cancel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="!openOrders || !openOrders.length">
+        <th scope="row" colspan="5" style="text-align: center;color: yellow;">No Open Orders for now</th>
+      </tr>
+      <tr *ngFor="let o of openOrders">
+        <th scope="row" class="whitetext">{{o.volume}}</th>
+        <td class="whitetext">{{o.TargetVolume | number:'1.1-6'}}</td>
+        <td class="whitetext">{{(o.volume * o.TargetVolume) | number:'1.1-6'}}</td>
+        <td class="whitetext" [ngStyle]="{'color':o.type === 'Buy' ? '#a58fcc' : '#9fb531' }">{{o.type}}</td>
+        <td class="redtext"><button type="button" class="btn btn-danger btn-sm" (click)="o.cancel()">Cancel</button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

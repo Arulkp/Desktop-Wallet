@@ -1,0 +1,381 @@
+.tabcontent .token-holder {
+  background-color: #F3F3F3;
+  padding: 12px 0px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.wallet-deposit {
+  padding: 20px 50px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.deposit {
+  display: inline-block;
+  margin-right: 30px;
+  margin-left: 30px;
+  vertical-align: top;
+}
+
+.withdraw {
+  display: inline-block;
+}
+
+.wallet-deposit button {
+  font-size: 18px;
+  border: 1px solid #2c2950;
+  color: #ffffff;
+  padding: 6px;
+  width: 150px;
+  border-radius: 5px;
+  background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+}
+
+.wallet-deposit button:focus {
+  outline: none;
+}
+
+.wallet-body .heading p {
+  font-size: 20px;
+  color: #899FBD;
+  /*font-family: helvetica-light;*/
+  font-weight: 600;
+  margin: 0;
+}
+
+.wallet-body .heading {
+  padding: 20px 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.wallet-holder {
+  padding: 0px 0px 40px;
+}
+
+.wallet-holder .headContent {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10px 50px;
+}
+
+.wallet-holder .headContent .heading1 {
+  display: inline-block;
+  width: 18%;
+}
+
+.wallet-holder .headContent .heading2 {
+  display: inline-block;
+  width: 18%;
+}
+
+.wallet-holder .headContent .heading3 {
+  display: inline-block;
+  width: 15%;
+}
+
+.wallet-holder .headContent .heading4 {
+  display: inline-block;
+  width: 30%;
+}
+
+.wallet-holder .headContent p {
+  color: #5d5353;
+  /*font-family: Helvetica-Light;*/
+  font-size: 13px;
+  display: inline;
+}
+
+.wallet-value p {
+  margin-left: 20px;
+}
+
+.wallet-value input {
+  height: 34px;
+  padding: 10px;
+  width: 30%;
+  background: #FCFCFC;
+  border: 0;
+  box-shadow: 0 2px 4px 0 rgba(249, 249, 249, 0.50), inset 0 1px 1px 0 rgba(159, 159, 159, 0.50);
+  border-radius: 3px;
+}
+
+.heading4 .buy {
+  border: 0;
+  color: #fff;
+  padding: 7px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-left: 30px;
+  background-image: linear-gradient(-180deg, #382673 0%, #682382 100%);
+}
+
+.heading4 button {
+  background: #e8e8e8;
+  border: 0;
+  color: #fff;
+  padding: 6px 45px;
+  font-size: 16px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.authorize-amount {
+  width: 70px;
+  height: 21px;
+}
+
+.amount {
+  height: 40px;
+  padding: 10px;
+  background: #FCFCFC;
+  border: 0;
+  box-shadow: 0 2px 4px 0 rgba(249, 249, 249, 0.50), inset 0 1px 1px 0 rgba(159, 159, 159, 0.50);
+  border-radius: 3px;
+  width: 330px;
+}
+
+.amount:focus {
+  outline: none;
+}
+
+.WalletBodyHolder {
+  background: #fff;
+  padding: 1px 0px 30px;
+  border-radius: 5px;
+}
+
+.headingColor p {
+  /*font-family: Helvetica-bold!important;*/
+  margin-bottom: 5px;
+  font-size: 15px !important;
+  color: #546172 !important;
+}
+
+.diclaimer p {
+  display: block;
+  font-size: 13px !important;
+  color: #64bd63 !important;
+  font-style: italic;
+  margin: 15px 0 0 !important;
+}
+
+.ethBalanceValue {
+  padding: 15px 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.ethBalanceValue .ethInMetamask {
+  display: inline-block;
+  margin-right: 70px;
+}
+
+.ethBalanceValue .ethInMetamask p {
+  font-size: 22px;
+  color: #546172;
+  /*font-family: helvetica-light;*/
+  margin-bottom: 5px;
+}
+
+.ethBalanceValue .ethInMetamask h4 {
+  font-size: 12px;
+  color: #8097B7;
+  margin: 0;
+  /*font-family: helvetica-light;*/
+}
+
+.wallet-deposit p {
+  font-size: 16px;
+  color: #546172;
+  /*font-family: helvetica-light;*/
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+
+/* dark theme changes */
+
+.darkThemeWalletBodyHolder {
+  background-color: #323c49;
+  box-shadow: none;
+}
+
+.darkThemeWalletBodyHolder .headingColor p {
+  color: #8097B7 !important;
+}
+
+.darkThemeWalletBodyHolder .wallet-holder .headContent p {
+  color: #fff;
+}
+
+.darkThemeWalletBodyHolder .ethBalanceValue .ethInMetamask p {
+  color: #fff;
+}
+
+.darkThemeWalletBodyHolder .wallet-deposit p {
+  color: #fff;
+}
+
+.darkThemeWalletBodyHolder .amount {
+  background: #464646;
+  box-shadow: none;
+  color: #fff;
+}
+
+.headContentValue {
+  max-height: 330px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+@media screen and (max-width:767px) {
+  .wallet-body .heading {
+    padding: 10px 20px;
+  }
+  .wallet-body .heading p {
+    font-size: 17px;
+  }
+  .ethBalanceValue {
+    padding: 10px 20px;
+  }
+  .ethBalanceValue .ethInMetamask p {
+    font-size: 17px;
+  }
+  .ethBalanceValue .ethInMetamask h4 {
+    font-size: 11px;
+  }
+  .wallet-deposit {
+    padding: 10px 20px 10px;
+  }
+  .wallet-deposit p {
+    font-size: 14px;
+    margin: 10px;
+  }
+  .deposit {
+    margin: 0px 10px 0px 10px;
+  }
+  .wallet-deposit button {
+    margin-top: 10px;
+    border-radius: 5px;
+    width: 140px;
+  }
+  .diclaimer p {
+    font-size: 11px !important;
+  }
+  .wallet-holder {
+    padding: 10px 0 0;
+  }
+  .wallet-holder .headContent {
+    padding: 5px 10px
+  }
+  .wallet-holder .headContent .heading1 {
+    width: 15%;
+  }
+  .wallet-holder .headContent .heading2 {
+    width: 20%;
+  }
+  .wallet-holder .headContent .heading3 {
+    width: 25%;
+  }
+  .wallet-holder .headContent .heading4 {
+    width: 32%;
+  }
+  .headingColor p {
+    font-size: 12px !important;
+  }
+  .heading4 .buy {
+    margin-left: 0px;
+    padding: 6px 9px;
+    font-size: 11px;
+  }
+  .headContentValue {
+    height: 250px;
+  }
+  .wallet-value input {
+    height: 25px;
+    padding: 8px;
+  }
+}
+
+@media screen and (min-width:769px) and (max-width:1024px) {
+  .wallet-holder .headContent {
+    padding: 10px 10px;
+  }
+  .heading4 .buy {
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+  .wallet-value input {
+    height: 30px;
+  }
+  .wallet-holder {
+    padding: 0px;
+  }
+  .wallet-body .heading,
+  .ethBalanceValue {
+    padding: 10px 30px;
+  }
+  .ethBalanceValue .ethInMetamask p {
+    font-size: 18px;
+  }
+  .wallet-deposit {
+    padding: 10px 30px 10px;
+  }
+  .wallet-deposit p {
+    font-size: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:991px) {
+  .wallet-holder .headContent .heading1 {
+    display: inline-block;
+    width: 23%;
+  }
+  .heading4 .buy {
+    padding: 7px 2px;
+    font-size: 12px;
+  }
+  .deposit {
+    margin-top: 10px;
+    margin-left: 0px;
+  }
+  .withdraw {
+    margin-top: 10px;
+  }
+  .wallet-holder .headContent {
+    padding: 10px 10px;
+  }
+}
+.sign-publish-portfolio-button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 9px 30px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: #382673;
+  outline: none;
+  color: white;
+}
+
+.sign-publish-portfolio-button:focus {
+  outline: none;
+}
+
+.publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}
+
+.sign-publish-portfolio-button:not(:disabled):hover,
+.sign-publish-portfolio-button:not(:disabled):focus {
+  box-shadow: 0px 2px 2px 0px grey;
+}
+
+.sign-publish-portfolio-button:disabled {
+  background-color: #F4F4F3;
+  color: #b9b8b8;
+  border: none;
+  cursor: not-allowed;
+}

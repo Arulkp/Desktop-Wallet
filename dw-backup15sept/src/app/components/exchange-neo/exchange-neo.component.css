@@ -1,0 +1,108 @@
+.exchange-second-section {
+    text-align: center;
+}
+
+.wallet-tabs {
+    display: inline-block;
+    background: grey;
+    width: 40%;
+}
+.order-tabs {
+    display: inline-block;
+    background: grey;
+    width: 59%;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0); 
+    border-bottom: 5px solid #4EBCF4;
+}
+
+.nav-pills .nav-link {
+     border-radius: 0; 
+}
+
+.t1{
+    min-height: 500px;max-height: 500px;
+}
+
+.t11{
+    min-height: 500px;max-height: 500px;
+    /*background: #2f343f;*/
+    /*background: white;*/
+}
+
+.t12{
+    min-height: 500px;max-height: 500px;
+    padding-right: 0px;
+}
+
+
+.container1{
+    background: #323c49;
+    padding-top: 10px;
+    /*height:100vh;*/
+    padding-bottom: 10px;
+}
+
+.container2{
+    margin-bottom: 10px;
+}
+
+.container21{
+    margin-bottom: 10px;
+    padding-right: 0px;
+}
+
+.t2{
+    /*min-height: 400px;
+    max-height: 400px;
+    overflow-y: hidden;*/
+    color: white;
+}
+
+.t2b{
+    /*min-height: 400px;
+    max-height: 400px;*/
+    /*overflow-y: scroll;*/
+    /*background: #323640;padding: 0;*/
+}
+
+
+/*Top Tabs*/
+
+.btn-success1 {
+    color: #fff;
+    background-color: #28262e !important;
+    border-color: #28262e !important;
+}
+
+.btn1 {
+    min-width: 100%;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    /*-webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;*/
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.options{
+    background: white;
+    color: black;
+}
+
+.tabdiv {
+    /*background: #28262e;*/
+    line-height: 3;
+}

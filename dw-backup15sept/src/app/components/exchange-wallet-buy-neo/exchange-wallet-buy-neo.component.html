@@ -1,0 +1,127 @@
+<form #buyForm="ngForm" (ngSubmit)="onSubmitBuy(buyForm)" novalidate>
+	<div class="exchange-wallet">
+		<div class="row" style="margin-bottom: -10px;">
+			<div class="col-6">
+				<div class="row">
+					  <div class="col-12">
+						  	<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="basic-addon3">Amount (<b>{{selectedToken?.symbol}}</b>)</span>
+							  </div>
+							  <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Amount To Buy" [(ngModel)]="amountToBuy" required name="buyamount" #buyamount="ngModel">
+							   <span class="error" *ngIf="buyamount.invalid && buyamount.touched" style="color: #cc823f;z-index: 1;">Buy amount should be greater than zero</span>
+							</div>
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="basic-addon3">Price (<b>{{selectedOfferToken?.symbol}}</b>)</span>
+							  </div>
+							  <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" placeholder="Price" [(ngModel)]="priceToBuy" required name="buyprice" #buyprice="ngModel">
+							  <span class="error" *ngIf="buyprice.invalid && buyprice.touched" style="color: #cc823f;z-index: 1;">Buy price should be greater than zero</span>
+							</div>
+							<div class="input-group mb-3">
+							  <div class="input-group-prepend">
+							    <span class="input-group-text" id="basic-addon3">Total</span>
+							  </div>
+							  <input type="number" class="form-control" id="basic-url" aria-describedby="basic-addon3" readonly [value]="getBuyTotalValue()" name="basic-url">
+							</div>
+					  </div>
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="row">
+				  <div class="col-12">
+				    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				      <a class="nav-link r1" id="v-pills-home-tab" data-toggle="pill" role="tab">Transaction Summary</a>
+				      <a class="nav-link r2" id="v-pills-profile-tab" data-toggle="pill" role="tab">
+                <div class="exdiv">Buying {{amountToBuy}} {{selectedToken?.symbol}} @ {{priceToBuy}} {{selectedOfferToken?.symbol}}</div>
+				      	<span>Amount<span class="lspan">{{amountToBuy * priceToBuy | number:'1.1-5' }} {{selectedOfferToken?.symbol}}</span></span></a>
+				      <!-- <a class="nav-link r3" id="v-pills-messages-tab" data-toggle="pill" role="tab">Total<span class="lspan">&#x24;{{USDValue}}</span></a> -->
+				    </div>
+				  </div>
+				</div>
+				<p style="color: white;">{{selectedOfferToken?.symbol}} Balance : {{marketTokenBalance }} </p>
+				<p style="color: white;">{{selectedOfferToken?.symbol}} Balance in Contract : {{marketTokenBalanceIncontract }} </p>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-6">
+				<div class="row">
+					<div class="col-12">
+						<div class="enableBtn">
+							<span class="green">Exchange Fee : {{sellerFee | number:'.0-6'}} {{selectedToken?.symbol}}</span>
+		            <!-- <p matTooltip="This authorizes the Tokens to be traded from your Metamask address" [matTooltipPosition]="'above'">Turn on to use WAND to pay for the exchange fee</p>
+		            <div class="checkboxValue row col-12">
+		              <ui-switch size="small" name="uiSwitch2" [(ngModel)]="authorizeWand" (change)="onAuthorizeWandChange($event)"></ui-switch>
+		              <p>WAND</p>
+		            </div>
+		            <span class="red">*Enabling WAND would reduce exchange fee by 75%
+		            	<span class="green">Exchange Fee : {{getBuyExchangeFee() | number:'.0-6'}} </span>
+		            </span> -->
+		        </div>
+					</div>
+				  <!-- <div class="col-12">
+				    <div class="custom-control custom-checkbox">
+					  <input type="checkbox" class="custom-control-input" id="customCheck1" [(ngModel)]="useWandxForFee" name="customCheck1">
+					  <label class="custom-control-label" for="customCheck1">Use WAND for fee reduction?<br><span>0.1% fee = 0.009 USD</span></label>
+					</div>
+				  </div> -->
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="row">
+				  <div class="col-12">
+				    <button class="sign-publish-portfolio-button">Complete Transaction</button>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="myModal" class="popup-box summary-modal" *ngIf="isBuySummaryModalVisible">
+	    <div class="popup-gif modal-content">
+	      <div class="popup_header">
+	        <p>Buy summary for: <span>{{selectedToken?.symbol}}</span></p>
+	      </div>
+	      <div class="gif_footer">
+	        <div class="row">
+	          <div class="col-md-6">
+	            <div class="details">
+	              <p>Quantity</p>
+	              <p>Exchange Fee</p>
+	              <p>Prices for 1 {{selectedToken?.symbol}}</p>
+	            </div>
+	          </div>
+	          <div class="col-md-6">
+	            <div class="value">
+	              <p>{{amountToBuy}}</p>
+	              <p>{{getBuyExchangeFee() | number: '.0-8' }}</p>
+	              <p>{{priceToBuy | number:'1.1-6'}} ETH</p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="totalamt">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <p>Total Price</p>
+	            </div>
+	            <div class="col-md-6">
+	              <div class="totalValue">
+	                <p>{{getBuyTotalValue() | number:'1.1-6'}} ETH</p>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="executeBtn">
+	          <div class="row">
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="placeBuyOrder()">EXECUTE</button>
+	            </div>
+	            <div class="col-md-6">
+	              <button class="sign-publish-portfolio-button" (click)="isBuySummaryModalVisible = false" >CANCEL</button>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</form>
